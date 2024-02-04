@@ -7,11 +7,20 @@
 
 @font-face {
     font-family: 'OpenSansItalic';
-    src: url('assets/fonts/Open_Sans/OpenSans-Italic-VariableFont_wdth\,wght.ttf') format('truetype');
+    src: url('assets/fonts/Open_Sans/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
 }
+
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: OpenSans; }
 
 
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// * {
+//     box-sizing: border-box;
+//   }
