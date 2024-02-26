@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.user).subscribe(
         (data:boolean) => {
           if (data) {
-            this.router.navigate(['/destination']);
+            this.router.navigate(['/preferences/destination']);
           }
         }
       );
