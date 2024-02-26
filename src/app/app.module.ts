@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from './material.module';
+import { PreferencesModule } from './components/preferences/preferences.module';
 
 
 
@@ -15,7 +16,7 @@ import { MaterialModule } from './material.module';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +26,8 @@ import { MaterialModule } from './material.module';
     FormsModule,
     ReactiveFormsModule,
 
-    MaterialModule
+    MaterialModule,
+      PreferencesModule
 
   ],
   providers: [],
