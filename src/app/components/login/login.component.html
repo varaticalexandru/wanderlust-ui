@@ -1,12 +1,12 @@
 <mat-card>
-    <mat-card-title class="my-4">
+    <mat-card-title class="title">
         Login
     </mat-card-title>
 
     <mat-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="submit()">
             <p>
-                <mat-form-field>
+                <mat-form-field class="email-field">
                     <mat-label>Email</mat-label>
                     <input matInput type="text" placeholder="Ex. pat@example.com" formControlName="email" [errorStateMatcher]="matcher">
                     <mat-error *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
@@ -19,7 +19,7 @@
             </p>
 
             <p>
-                <mat-form-field>
+                <mat-form-field class="password-field">
                     <mat-label>Password</mat-label>
                     <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher">
                     <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
