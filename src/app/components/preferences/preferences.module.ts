@@ -21,7 +21,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     FlexLayoutModule,
 
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class PreferencesModule { }

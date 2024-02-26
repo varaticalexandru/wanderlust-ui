@@ -5,8 +5,7 @@
 }
 
 .mat-form-field {
-  width: 100%;
-  min-width: 700px;
+  width: 80%;
 }
 
 mat-card-title,
@@ -16,19 +15,8 @@ mat-card-content {
   width: 100%;
 }
 
-.button {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .title {
-  // bold
   font-weight: bold;
-}
-
-.email-field,
-.password-field {
-  min-width: 600px;
 }
 
 :host {
@@ -37,18 +25,13 @@ mat-card-content {
   margin: 100px 0px;
 }
 
-.mat-form-field {
-  width: 100%;
-  min-width: 700px;
-}
-
 mat-card {
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Add a prominent shadow */
-  transition: box-shadow 0.3s ease; /* Add smooth transition on hover */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+  transition: box-shadow 0.3s ease; 
 }
 
 mat-card:hover {
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 mat-card-title,
@@ -66,6 +49,12 @@ mat-card-title {
 .button {
   display: flex;
   justify-content: flex-end;
+  margin: 20px 0px;
+}
+
+button {
+  font-size: 1.2em;
+  padding: 20px 60px;
 }
 
 .title {
