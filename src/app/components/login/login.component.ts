@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { UserLogin } from '../../models/user-login';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,7 @@ export class LoginComponent implements OnInit {
  
   hide: boolean = true;
   loginForm!: FormGroup;
-  email!: string;
-  password!: string;
+  user!: UserLogin;
   error: boolean = false;
   matcher = new MyErrorStateMatcher();
 
@@ -38,7 +38,16 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.loginForm.value);
+    if (this.loginForm.valid) {
+      this.user = this.loginForm.value;
+      this.loginService.login(this.user).subscribe(
+        (data:boolean) => {
+          if (data) {
+            this.router.navigate(['/destination']);
+          }
+        }
+      );
+    }
   }
 }
 
