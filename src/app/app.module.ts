@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from './material.module';
-import { PreferencesModule } from './components/preferences/preferences.module';
 
 
 
@@ -27,7 +26,6 @@ import { PreferencesModule } from './components/preferences/preferences.module';
     ReactiveFormsModule,
 
     MaterialModule,
-      PreferencesModule
 
   ],
   providers: [],
