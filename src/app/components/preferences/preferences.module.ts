@@ -7,12 +7,14 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PopularDestinationComponent } from './destination/popular-destination/popular-destination.component';
 
 
 
 @NgModule({
   declarations: [
     DestinationComponent,
+    PopularDestinationComponent,
   ],
   imports: [
     CommonModule,
