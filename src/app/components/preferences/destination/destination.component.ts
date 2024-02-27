@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatIconRegistry } from '@angular/material/icon';
+import { Router } from '@angular/router';
+import { UserDestination } from 'src/app/models/user-destination';
 
 @Component({
   selector: 'app-destination',
@@ -7,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DestinationComponent implements OnInit{
 
+  destination!: UserDestination;
 
   destinations:any = [
       {"city": "Istanbul", "image": "https://via.placeholder.com/150"},
@@ -18,6 +23,8 @@ export class DestinationComponent implements OnInit{
   ];
 
   constructor(
+    private router: Router,
+    matIconRegistry: MatIconRegistry,
 
   ) {
 
@@ -25,6 +32,10 @@ export class DestinationComponent implements OnInit{
 
   ngOnInit(): void {
       
+  }
+
+  initDestinationForm() {
+   
   }
 
 
