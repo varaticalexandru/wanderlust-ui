@@ -1,3 +1,4 @@
-export interface UserDestination {
-    name: string;
+export interface Destination {
+    city: string;
+    country: string;
 }
