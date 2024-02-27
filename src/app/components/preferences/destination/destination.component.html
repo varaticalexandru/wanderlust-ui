@@ -3,50 +3,48 @@
         <mat-card-title class="title">
             Where do you want to go?
         </mat-card-title>
-    
+
         <mat-card-content>
             <mat-form-field appearance="fill" class="search-field">
                 <mat-label>Search for a city or town</mat-label>
-                <input matInput [(ngModel)]="destination" />
+                <input matInput [(ngModel)]="searchTerm" (input)="search(searchTerm)"/>
                 <mat-icon matPrefix>search</mat-icon>
             </mat-form-field>
         </mat-card-content>
+
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">City</th>
+                <th scope="col">Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let destination of destinations | searchFilter: searchTerm; index as i">
+                <td scope="row">{{ destination.city }} </td>
+                <td scope="row">{{ destination.country }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+
     </mat-card>
-    
-    
-    
+
+
+
     <mat-card class="destinations-card">
         <mat-card-title class="title">
             Popular destinations
         </mat-card-title>
-        
-        
+
+
         <div class="popular-destinations">
-            <app-popular-destination [name]="'Las Vegas'"
-                [image]="'https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/34/2d/28/caption.jpg'"></app-popular-destination>
-        
-            <app-popular-destination [name]="'New York'"
-                [image]="'https://cdn.britannica.com/61/93061-050-99147DCE/Statue-of-Liberty-Island-New-York-Bay.jpg'"></app-popular-destination>
-        
-            <app-popular-destination [name]="'Los Angeles'"
-                [image]="'https://www.introducinglosangeles.com/f/estados-unidos/los-angeles/guia/los-angeles-m.jpg'"></app-popular-destination>
-        
-            <app-popular-destination [name]="'San Francisco'"
-                [image]="'https://www.planetware.com/photos-large/USCA/california-san-francisco-golden-gate-bridge.jpg'"></app-popular-destination>
-        
-            <app-popular-destination [name]="'San Diego'"
-                [image]="'https://www.tripsavvy.com/thmb/XIx0gfr_i-ay7XLKJRXakT6FS2M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/sunset-at-la-jolla-cove-1278353139-583584d99afb438a9889e8d381b836ed.jpg'"></app-popular-destination>
-        
-            <app-popular-destination [name]="'Chicago'"
-                [image]="'https://cdn.britannica.com/59/94459-050-DBA42467/Skyline-Chicago.jpg'"></app-popular-destination>
-            
             <app-popular-destination 
-                [name]="'Miami'"
-                [image]="'https://www.planetware.com/photos-large/USFL/florida-miami-south-beach.jpg'"></app-popular-destination>
-
-            
-
-
+                *ngFor="let destination of popularDestinations" 
+                [name]="destination.name"
+                [image]="destination.image">
+            </app-popular-destination>
         </div>
     </mat-card>
 </div>
