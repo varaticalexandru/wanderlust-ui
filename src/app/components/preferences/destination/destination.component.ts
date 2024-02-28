@@ -109,10 +109,4 @@ export class DestinationComponent implements OnInit {
     this.searchTerm = searchTerm.toLowerCase();
   }
 
-  // filterItems() {
-  //   this.filteredDestinations = this.destinations.filter(
-  //     (destination) => destination.city.toLowerCase().includes(this.searchTerm) || destination.country.toLowerCase().includes(this.searchTerm)
-  //   );
-  // }
-
 }
