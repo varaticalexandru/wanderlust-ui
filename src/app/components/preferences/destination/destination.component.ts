@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PopularDestination } from 'src/app/models/popular-destination';
 import { Destination } from 'src/app/models/user-destination';
 import { SearchFilterPipe } from '../pipes/search-filter.pipe';
+import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
 
 @Component({
   selector: 'app-destination',
@@ -19,7 +20,7 @@ export class DestinationComponent implements OnInit {
 
   constructor(
     private router: Router,
-
+    private destinationService: SearchDestinationService
   ) {
 
   }
@@ -105,8 +106,14 @@ export class DestinationComponent implements OnInit {
     ];
   }
 
-  search(searchTerm: string) {
-    this.searchTerm = searchTerm.toLowerCase();
+  search() {
+    let term = this.searchTerm.toLowerCase();
+
+    this.destinationService.searchDestinations(term).subscribe((data: any) => {
+      console.log(data);
+    });
+
+
   }
 
 }
