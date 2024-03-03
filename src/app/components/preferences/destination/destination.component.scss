@@ -1,19 +1,9 @@
-.search-toolbar {
-    justify-content: center;
-    padding: 1rem;
-}
-
-.search-container {
+.search-bar {
     display: flex;
     flex-direction: row;
-    max-width: 600px;
-    width: 100%;
+    justify-content: center;
+    // align-items: center;
 }
-
-.search-field {
-    flex: 1;
-}
-
 
 
 .popular-destinations {
@@ -21,7 +11,7 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 20px 0px;
+    margin: 0px 0px;
 }
 
 app-popular-destination {
@@ -33,7 +23,7 @@ app-popular-destination {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0px;
+    margin: 40px 0px;
     font-size: 2em;
 
 }
@@ -55,12 +45,23 @@ mat-card:hover {
 
 .search-field {
     min-width: 60vw;
+    max-width: fit-content;
 }
 
 .mat-card-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.search {
+    display: flex;
+}
+
+button {
+    margin-left: 10px;
+    margin-top: 10px;
+    max-width: 100px;
 }
 
 
@@ -73,5 +74,10 @@ mat-card:hover {
 @media (max-width: 600px) {
     .popular-destinations {
         flex-direction: column;
+    }
+    .search-bar {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
     }
 }
