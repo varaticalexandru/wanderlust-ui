@@ -4,12 +4,13 @@
             Where do you want to go?
         </mat-card-title>
 
-        <mat-card-content>
+        <mat-card-content class="search-bar">
             <mat-form-field appearance="fill" class="search-field">
                 <mat-label>Search for a city or town</mat-label>
-                <input matInput [(ngModel)]="searchTerm" (input)="search(searchTerm)"/>
+                <input matInput [(ngModel)]="searchTerm"/>
                 <mat-icon matPrefix>search</mat-icon>
             </mat-form-field>
+            <button mat-raised-button color="primary" (click)="search()">Search</button>
         </mat-card-content>
 
 
