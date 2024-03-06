@@ -7,30 +7,22 @@
         <mat-card-content class="search-bar">
             <mat-form-field appearance="fill" class="search-field">
                 <mat-label>Search for a city or town</mat-label>
-                <input matInput [(ngModel)]="searchTermString" (input)="search(searchTermString)"/>
+                <input matInput [(ngModel)]="searchTermString" (input)="search(searchTermString)" />
                 <mat-icon matPrefix>search</mat-icon>
             </mat-form-field>
         </mat-card-content>
 
 
-        <!-- results -->
+        <div class="search-results" *ngIf="(destinations$ | async) as destinations">
+            <app-search-result-card 
+                *ngFor="let destination of destinations.data"
+                [destination]="{city: destination.name, country: getCountryName(destination.address.countryCode)}">
+            </app-search-result-card>
+        </div>
 
-        <ng-container>
-            <div *ngIf="(destinations$ | async) as destinations">
-                <div *ngFor="let destination of destinations.data">
-                    <h3 matLine>{{destination.name}} : {{getCountryName(destination.address.countryCode)}}</h3>
-                </div>
-            </div>
-        </ng-container>
-
-        
 
 
     </mat-card>
-
-
-   
-
 
 
     <mat-card class="destinations-card">
@@ -40,9 +32,7 @@
 
 
         <div class="popular-destinations">
-            <app-popular-destination 
-                *ngFor="let destination of popularDestinations" 
-                [name]="destination.name"
+            <app-popular-destination *ngFor="let destination of popularDestinations" [name]="destination.name"
                 [image]="destination.image">
             </app-popular-destination>
         </div>
