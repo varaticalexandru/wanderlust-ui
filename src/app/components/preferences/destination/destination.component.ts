@@ -20,6 +20,11 @@ export class DestinationComponent implements OnInit {
   destinations: Array<Destination> = [];
   popularDestinations: PopularDestination[] = [];
 
+  destination: Destination = {
+    city: 'New York',
+    country: 'United States of America'
+  };
+
 
   readonly destinations$ = this.searchTerm.pipe(
     liveSearch((term: string) => this.destinationService.searchDestinations(term))
@@ -57,7 +62,7 @@ export class DestinationComponent implements OnInit {
   search(searchTerm: string) {
     let normalizedTerm = searchTerm.trim().toLowerCase();
 
-    normalizedTerm !== '' && normalizedTerm.length > 3  ? this.searchTerm.next(normalizedTerm) : null;
+    normalizedTerm !== '' && normalizedTerm.length >= 3  ? this.searchTerm.next(normalizedTerm) : null;
   }
 
   getCountryName(code: string): string {
