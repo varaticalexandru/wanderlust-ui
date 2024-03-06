@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PopularDestination } from 'src/app/models/popular-destination';
 import { Destination } from 'src/app/models/user-destination';
-import { SearchFilterPipe } from '../pipes/search-filter.pipe';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
+import { Subject, debounce, debounceTime, distinctUntilChanged, empty, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-destination',
@@ -13,10 +13,18 @@ import { SearchDestinationService } from 'src/app/services/search/search-destina
 })
 export class DestinationComponent implements OnInit {
 
-  searchTerm: string = '';
-  filteredDestinations: Destination[] = [];
+  searchTermString: string = '';
+  private searchTerm = new Subject<string>();
   destinations: Array<Destination> = [];
   popularDestinations: PopularDestination[] = [];
+
+
+  // TODO: extract the logic into a generic liveSearch operator
+  readonly destinations$ = this.searchTerm.pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    switchMap(term => this.destinationService.searchDestinations(term))
+  );
 
   constructor(
     private router: Router,
@@ -26,9 +34,9 @@ export class DestinationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initDestinations();
     this.initPopularDestinations();
   }
+
   initPopularDestinations() {
     this.popularDestinations = [
       { "name": "Las Vegas", "image": "https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/34/2d/28/caption.jpg" },
@@ -41,79 +49,13 @@ export class DestinationComponent implements OnInit {
     ];
   }
 
-  initDestinations() {
-    this.destinations = [
-      {
-        "country": "United States",
-        "city": "New York"
-      },
-      {
-        "country": "United States",
-        "city": "Los Angeles"
-      },
-      {
-        "country": "United States",
-        "city": "Chicago"
-      },
-      {
-        "country": "Canada",
-        "city": "Toronto"
-      },
-      {
-        "country": "Canada",
-        "city": "Vancouver"
-      },
-      {
-        "country": "Canada",
-        "city": "Montreal"
-      },
-      {
-        "country": "United Kingdom",
-        "city": "London"
-      },
-      {
-        "country": "United Kingdom",
-        "city": "Edinburgh"
-      },
-      {
-        "country": "United Kingdom",
-        "city": "Manchester"
-      },
-      {
-        "country": "Australia",
-        "city": "Sydney"
-      },
-      {
-        "country": "Australia",
-        "city": "Melbourne"
-      },
-      {
-        "country": "Australia",
-        "city": "Brisbane"
-      },
-      {
-        "country": "Japan",
-        "city": "Tokyo"
-      },
-      {
-        "country": "Japan",
-        "city": "Kyoto"
-      },
-      {
-        "country": "Japan",
-        "city": "Osaka"
-      },
-    ];
-  }
-
-  search() {
-    let term = this.searchTerm.toLowerCase();
-
-    this.destinationService.searchDestinations(term).subscribe((data: any) => {
-      console.log(data);
-    });
 
 
+
+  search(searchTerm: string) {
+    let normalizedTerm = searchTerm.trim().toLowerCase();
+
+    normalizedTerm !== '' && normalizedTerm.length > 3  ? this.searchTerm.next(normalizedTerm) : null;
   }
 
 }

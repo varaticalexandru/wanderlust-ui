@@ -7,30 +7,30 @@
         <mat-card-content class="search-bar">
             <mat-form-field appearance="fill" class="search-field">
                 <mat-label>Search for a city or town</mat-label>
-                <input matInput [(ngModel)]="searchTerm"/>
+                <input matInput [(ngModel)]="searchTermString" (input)="search(searchTermString)"/>
                 <mat-icon matPrefix>search</mat-icon>
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="search()">Search</button>
+            <button mat-raised-button color="primary" (click)="search(searchTermString)">Search</button>
         </mat-card-content>
 
 
-        <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">City</th>
-                <th scope="col">Country</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let destination of destinations | searchFilter: searchTerm; index as i">
-                <td scope="row">{{ destination.city }} </td>
-                <td scope="row">{{ destination.country }}</td>
-            </tr>
-            </tbody>
-        </table>
+        <!-- results -->
+
+        <ng-container>
+            <div *ngIf="(destinations$ | async) as destinations">
+                <div *ngFor="let destination of destinations.data">
+                    <h3 matLine>{{destination.name}} : {{destination.address.countryCode}}</h3>
+                </div>
+            </div>
+        </ng-container>
+
+        
 
 
     </mat-card>
+
+
+   
 
 
 
