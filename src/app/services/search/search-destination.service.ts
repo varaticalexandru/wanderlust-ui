@@ -23,7 +23,7 @@ export class SearchDestinationService {
     });
    }
 
-  searchDestinations(searchTerm: string): Observable<any> {
+  searchDestinations(searchTerm: string): Observable<AmadeusDestinations> {
     let options = {
       headers: new HttpHeaders().append('Authorization', `${this.token_type} ${this.token}`),
       params: new HttpParams().append('keyword', searchTerm).append('max', this.max_results)

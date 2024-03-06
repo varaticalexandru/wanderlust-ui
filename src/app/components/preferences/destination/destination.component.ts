@@ -5,6 +5,7 @@ import { PopularDestination } from 'src/app/models/popular-destination';
 import { Destination } from 'src/app/models/user-destination';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
 import { Subject, debounce, debounceTime, distinctUntilChanged, empty, switchMap } from 'rxjs';
+import { liveSearch } from 'src/app/utils/operators/live-search';
 
 @Component({
   selector: 'app-destination',
@@ -13,17 +14,14 @@ import { Subject, debounce, debounceTime, distinctUntilChanged, empty, switchMap
 })
 export class DestinationComponent implements OnInit {
 
-  searchTermString: string = '';
   private searchTerm = new Subject<string>();
+  searchTermString: string = '';
   destinations: Array<Destination> = [];
   popularDestinations: PopularDestination[] = [];
 
 
-  // TODO: extract the logic into a generic liveSearch operator
   readonly destinations$ = this.searchTerm.pipe(
-    debounceTime(300),
-    distinctUntilChanged(),
-    switchMap(term => this.destinationService.searchDestinations(term))
+    liveSearch((term: string) => this.destinationService.searchDestinations(term))
   );
 
   constructor(
