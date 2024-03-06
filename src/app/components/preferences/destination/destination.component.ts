@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { PopularDestination } from 'src/app/models/popular-destination';
 import { Destination } from 'src/app/models/user-destination';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
-import { Subject, debounce, debounceTime, distinctUntilChanged, empty, switchMap } from 'rxjs';
+import { Subject, debounce, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { liveSearch } from 'src/app/utils/operators/live-search';
+import { CountryMappingService } from 'src/app/services/country-mapping/country-mapping.service'; 
 
 @Component({
   selector: 'app-destination',
@@ -24,9 +25,12 @@ export class DestinationComponent implements OnInit {
     liveSearch((term: string) => this.destinationService.searchDestinations(term))
   );
 
+  countryMapping$ = this.countryMappingService;
+
   constructor(
     private router: Router,
-    private destinationService: SearchDestinationService
+    private destinationService: SearchDestinationService,
+    private countryMappingService: CountryMappingService
   ) {
 
   }
@@ -54,6 +58,10 @@ export class DestinationComponent implements OnInit {
     let normalizedTerm = searchTerm.trim().toLowerCase();
 
     normalizedTerm !== '' && normalizedTerm.length > 3  ? this.searchTerm.next(normalizedTerm) : null;
+  }
+
+  getCountryName(code: string): string {
+    return this.countryMappingService.getCountryNameByCode(code);
   }
 
 }
