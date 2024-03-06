@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PopularDestinationComponent } from './destination/popular-destination/popular-destination.component';
-import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { SearchFilterPipe } from '../../pipes/search-filter.pipe';
 
 
 
