@@ -19,19 +19,17 @@ export class CountryMappingService {
 
     let options = { responseType: 'text' as 'text'};
      
-    this.http.get('src\\assets\\files\\ISO_3166-1_alpha-2_country_codes.csv', options).pipe(
-      map((csvData: any) => {
-        let countryMap = new Map<string, string>();
+    this.http.get('assets\\files\\ISO_3166-1_alpha-2_country_codes.csv', options).subscribe(
+      (csvData: any) => {
         let lines = csvData.split('\n');
         lines.forEach((line: string) => {
           // skip header
           if (line.startsWith('Alpha-2 code')) return;
           let parts = line.split(',');
-          countryMap.set(parts[0], parts[1]);
+          this.countryMappings.set(parts[0], parts[1]);
         });
-        this.countryMappings = countryMap;
-      })
-    );
+      }
+    )
 
   }
 
