@@ -1,8 +1,12 @@
 export const environment = {
-    production: true,
+    production: false,
     amadeus: {
         api_key: '',
         api_secret: '',
-        token_url: ''
+        auth_url: '',
+        search_destination_url: ''
+    },
+    localStorage: {
+        country_codes_path: ''
     }
 };
