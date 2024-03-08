@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { AmadeusAuthService } from '../amadeus-auth/amadeus-auth.service';
 import { AmadeusDestinations } from 'src/app/models/amadeus-destinations';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchDestinationService {
 
-  BASE_URL = 'https://test.api.amadeus.com/v1/reference-data/locations/cities';
   token = '';
   token_type = 'Bearer';
   max_results = '10';
@@ -29,7 +29,7 @@ export class SearchDestinationService {
       params: new HttpParams().append('keyword', searchTerm).append('max', this.max_results)
     };
 
-    return this.http.get<AmadeusDestinations>(this.BASE_URL, options).pipe(
+    return this.http.get<AmadeusDestinations>(environment.amadeus.search_destination_url, options).pipe(
       catchError((error: any) => {
         console.error('Error searching destinations: ', error);
         // throw error;
