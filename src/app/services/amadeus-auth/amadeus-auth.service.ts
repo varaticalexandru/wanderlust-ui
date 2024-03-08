@@ -23,7 +23,7 @@ export class AmadeusAuthService {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
     };
 
-    return this.http.post(environment.amadeus.token_url, body.toString(), options);
+    return this.http.post(environment.amadeus.auth_url, body.toString(), options);
   }
 
 }
