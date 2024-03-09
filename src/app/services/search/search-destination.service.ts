@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { AmadeusAuthService } from '../amadeus-auth/amadeus-auth.service';
-import { AmadeusDestinations } from 'src/app/models/amadeus-destinations';
+import { AmadeusDestinations } from 'src/app/models/amadeus/amadeus-destinations';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,16 +10,24 @@ import { environment } from 'src/environments/environment';
 })
 export class SearchDestinationService {
 
-  token = '';
-  token_type = 'Bearer';
-  max_results = '10';
+  max_results = 10;
+  token: string = '';
+  token_type: string = '';
 
   constructor(
     private http: HttpClient,
     private amadeusAuth: AmadeusAuthService,
   ) {
-    amadeusAuth.getAuthToken().subscribe((data: any) => {
-      this.token = data.access_token;
+    this.amadeusAuth.token$.subscribe({
+      next: (token: string) => {
+        this.token = token;
+      }
+    });
+
+    this.amadeusAuth.token_type$.subscribe({
+      next: (token_type: string) => {
+        this.token_type = token_type;
+      }
     });
    }
 
