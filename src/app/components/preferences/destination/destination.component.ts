@@ -7,6 +7,8 @@ import { SearchDestinationService } from 'src/app/services/search/search-destina
 import { Subject, debounce, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { liveSearch } from 'src/app/utils/operators/live-search';
 import { CountryMappingService } from 'src/app/services/country-mapping/country-mapping.service'; 
+import { PopularDestinationsService } from 'src/app/services/popular-destinations/popular-destinations.service';
+import { AmadeusAuthService } from 'src/app/services/amadeus-auth/amadeus-auth.service';
 
 @Component({
   selector: 'app-destination',
@@ -34,8 +36,10 @@ export class DestinationComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private amadeusAuthService: AmadeusAuthService,
     private destinationService: SearchDestinationService,
-    private countryMappingService: CountryMappingService
+    private countryMappingService: CountryMappingService,
+    private popularDestinationsService: PopularDestinationsService
   ) {
 
   }
