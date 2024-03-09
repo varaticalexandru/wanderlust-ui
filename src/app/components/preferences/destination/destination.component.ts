@@ -9,6 +9,7 @@ import { liveSearch } from 'src/app/utils/operators/live-search';
 import { CountryMappingService } from 'src/app/services/country-mapping/country-mapping.service'; 
 import { PopularDestinationsService } from 'src/app/services/popular-destinations/popular-destinations.service';
 import { AmadeusAuthService } from 'src/app/services/amadeus-auth/amadeus-auth.service';
+import { PopularDestinations } from 'src/app/models/amadeus/amadeus-popular-destinations';
 
 @Component({
   selector: 'app-destination',
@@ -20,13 +21,7 @@ export class DestinationComponent implements OnInit {
   private searchTerm = new Subject<string>();
   searchTermString: string = '';
   destinations: Array<Destination> = [];
-  popularDestinations: PopularDestination[] = [];
-
-  destination: Destination = {
-    city: 'New York',
-    country: 'United States of America'
-  };
-
+  popularDestinations!: PopularDestinations;
 
   readonly destinations$ = this.searchTerm.pipe(
     liveSearch((term: string) => this.destinationService.searchDestinations(term))
@@ -45,19 +40,25 @@ export class DestinationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initPopularDestinations();
+    // this.initPopularDestinations();
+    this.popularDestinationsService.popularDestinations$.subscribe({
+      next: (popularDestinations: PopularDestinations) => {
+        this.popularDestinations = popularDestinations;
+        console.log(popularDestinations);
+      }
+    });
   }
 
   initPopularDestinations() {
-    this.popularDestinations = [
-      { "name": "Las Vegas", "image": "https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/34/2d/28/caption.jpg" },
-      { "name": "New York", "image": "https://cdn.britannica.com/61/93061-050-99147DCE/Statue-of-Liberty-Island-New-York-Bay.jpg" },
-      { "name": "Los Angeles", "image": "https://www.introducinglosangeles.com/f/estados-unidos/los-angeles/guia/los-angeles-m.jpg" },
-      { "name": "San Francisco", "image": "https://www.planetware.com/photos-large/USCA/california-san-francisco-golden-gate-bridge.jpg" },
-      { "name": "San Diego", "image": "https://www.tripsavvy.com/thmb/XIx0gfr_i-ay7XLKJRXakT6FS2M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/sunset-at-la-jolla-cove-1278353139-583584d99afb438a9889e8d381b836ed.jpg" },
-      { "name": "Chicago", "image": "https://cdn.britannica.com/59/94459-050-DBA42467/Skyline-Chicago.jpg" },
-      { "name": "Miami", "image": "https://www.planetware.com/photos-large/USFL/florida-miami-south-beach.jpg" },
-    ];
+    // this.popularDestinations = [
+    //   { "name": "Las Vegas", "image": "https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/34/2d/28/caption.jpg" },
+    //   { "name": "New York", "image": "https://cdn.britannica.com/61/93061-050-99147DCE/Statue-of-Liberty-Island-New-York-Bay.jpg" },
+    //   { "name": "Los Angeles", "image": "https://www.introducinglosangeles.com/f/estados-unidos/los-angeles/guia/los-angeles-m.jpg" },
+    //   { "name": "San Francisco", "image": "https://www.planetware.com/photos-large/USCA/california-san-francisco-golden-gate-bridge.jpg" },
+    //   { "name": "San Diego", "image": "https://www.tripsavvy.com/thmb/XIx0gfr_i-ay7XLKJRXakT6FS2M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/sunset-at-la-jolla-cove-1278353139-583584d99afb438a9889e8d381b836ed.jpg" },
+    //   { "name": "Chicago", "image": "https://cdn.britannica.com/59/94459-050-DBA42467/Skyline-Chicago.jpg" },
+    //   { "name": "Miami", "image": "https://www.planetware.com/photos-large/USFL/florida-miami-south-beach.jpg" },
+    // ];
   }
 
 
