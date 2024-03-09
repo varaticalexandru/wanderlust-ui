@@ -25,17 +25,12 @@ export class PopularDestinationsService {
     private amadeusAuth: AmadeusAuthService
   ) { 
 
-    amadeusAuth.token$.subscribe({
-      next: (token: string) => {
-        this.token = token;
+    amadeusAuth.token_data$.subscribe({
+      next: (token_data: any) => {
+        this.token = token_data.token;
+        this.token_type = token_data.token_type;
       }
     });
-
-    amadeusAuth.token_type$.subscribe({
-      next: (token_type: string) => {
-        this.token_type = token_type;
-      }
-    })
   }
 
   getPopularDestinations(): Observable<PopularDestinations> {

@@ -8,24 +8,13 @@ import { environment } from 'src/environments/environment';
 })
 export class AmadeusAuthService {
 
-  private token = new BehaviorSubject<string>('');
-  token$ = this.token.asObservable();
-
-  private token_type = new BehaviorSubject<string>('');
-  token_type$ = this.token_type.asObservable();
+  private token_data = new BehaviorSubject<string>('');
+  token_data$ = this.token_data.asObservable();
 
   constructor(
     private http: HttpClient
   ) {
-    this.getAuthToken().subscribe({
-      next: (data: any) => {
-        this.token = data.access_token;
-        this.token_type = data.token_type;
-      },
-      error: (error: any) => {
-        console.error('Error getting Amadeus auth token: ', error);
-      }
-    });
+    
   }
 
   getAuthToken(): Observable<any> {
