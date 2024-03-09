@@ -1,23 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AmadeusAuthService } from './services/amadeus-auth/amadeus-auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   constructor(
     private amadeusAuthService: AmadeusAuthService
-  ) {
-    amadeusAuthService.getAuthToken().subscribe({
-      next: (data: any) => {
-        amadeusAuthService.token_data$ = data;
-        console.log('Amadeus auth token data: ', data);
-      },
-      error: (error: any) => {
-        console.error('Error getting Amadeus auth token: ', error);
-      }
-    });
+  ) {}
+
+  ngOnInit() {
+    this.amadeusAuthService.token_data$.subscribe({});
+  }
+
+  ngOnDestroy() {
+    
   }
 }
