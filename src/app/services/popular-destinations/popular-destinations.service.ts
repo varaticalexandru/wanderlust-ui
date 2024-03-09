@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, catchError, shareReplay, switchMap, take, tap } from 'rxjs';
 import { PopularDestinations } from 'src/app/models/amadeus/amadeus-popular-destinations';
 import { environment } from 'src/environments/environment';
 import { AmadeusAuthService } from '../amadeus-auth/amadeus-auth.service';
@@ -10,27 +10,35 @@ import { AmadeusAuthService } from '../amadeus-auth/amadeus-auth.service';
 })
 export class PopularDestinationsService {
 
+
+  private popularDestinations = new ReplaySubject<PopularDestinations>(1);
+  popularDestinations$ = this.popularDestinations.asObservable();
+
   token: string = '';
   token_type: string = '';
   max = 20;
   origin_city_code = 'FRA';
   year_offset = 3;
   period = `${new Date().getFullYear() - this.year_offset}` + '-' + `${new Date().getMonth() + 1}`.padStart(2, '0');
-  limit = 20;
+  page_limit = 20;
+  page_offset = 0;
   sort = 'analytics.travelers.score';
 
 
   constructor(
     private http: HttpClient,
     private amadeusAuth: AmadeusAuthService
-  ) { 
-
-    amadeusAuth.token_data$.subscribe({
-      next: (token_data: any) => {
-        this.token = token_data.token;
+  ) {
+    this.amadeusAuth.token_data$.pipe(
+      switchMap(token_data => {
+        this.token = token_data.access_token;
         this.token_type = token_data.token_type;
-      }
-    });
+
+        return this.getPopularDestinations();
+      }),
+      tap(popularDestinations => this.popularDestinations.next(popularDestinations)),
+      shareReplay(1)
+    ).subscribe();
   }
 
   getPopularDestinations(): Observable<PopularDestinations> {
@@ -41,7 +49,8 @@ export class PopularDestinationsService {
         .append('max', '10')
         .append('period', this.period)
         .append('sort', this.sort)
-        .append('limit', this.limit),
+        .append('page[limit]', this.page_limit)
+        .append('page[offset]', this.page_offset)
     }
 
     return this.http.get<PopularDestinations>(environment.amadeus.popular_destinations_url, options).pipe(
