@@ -20,7 +20,7 @@ export class SearchDestinationService {
   ) {
     this.amadeusAuth.token_data$.subscribe({
       next: (token_data: any) => {
-        this.token = token_data.token;
+        this.token = token_data.access_token;
         this.token_type = token_data.token_type;
       }
     });
