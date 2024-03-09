@@ -18,15 +18,10 @@ export class SearchDestinationService {
     private http: HttpClient,
     private amadeusAuth: AmadeusAuthService,
   ) {
-    this.amadeusAuth.token$.subscribe({
-      next: (token: string) => {
-        this.token = token;
-      }
-    });
-
-    this.amadeusAuth.token_type$.subscribe({
-      next: (token_type: string) => {
-        this.token_type = token_type;
+    this.amadeusAuth.token_data$.subscribe({
+      next: (token_data: any) => {
+        this.token = token_data.token;
+        this.token_type = token_data.token_type;
       }
     });
    }
