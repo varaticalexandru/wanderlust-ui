@@ -9,7 +9,8 @@ export const environment = {
         airport_search_url: ''
     },
     pixabay: {
-        api_key: ''
+        api_key: '',
+        fetch_media_url: ''
     },
     localStorage: {
         country_codes_path: ''
