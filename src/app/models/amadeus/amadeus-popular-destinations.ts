@@ -1,11 +1,11 @@
 export interface PopularDestinations {
-    meta?: {
+    meta: {
         count: number;
         links: {
             self: string;
         };
     },
-    data?: {
+    data: {
         type: string;
         destination: string
         subType: string;
