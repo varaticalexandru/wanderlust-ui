@@ -16,7 +16,7 @@ export class PopularDestinationsService {
 
   token: string = '';
   token_type: string = '';
-  max = 20;
+  max = 6;
   origin_city_code = 'FRA';
   year_offset = 3;
   period = `${new Date().getFullYear() - this.year_offset}` + '-' + `${new Date().getMonth() + 1}`.padStart(2, '0');
@@ -46,7 +46,7 @@ export class PopularDestinationsService {
       headers: new HttpHeaders().append('Authorization', `${this.token_type} ${this.token}`),
       params: new HttpParams()
         .append('originCityCode', this.origin_city_code)
-        .append('max', '10')
+        .append('max', this.max)
         .append('period', this.period)
         .append('sort', this.sort)
         .append('page[limit]', this.page_limit)
