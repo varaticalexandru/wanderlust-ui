@@ -21,6 +21,7 @@ export class AmadeusAuthService {
     this.subscription = this.getAuthToken().subscribe({
       next: (token_data: any) => {
         this.token_data.next(token_data);
+        console.log(token_data);
       },
       error: (error: any) => {
         console.error('Error getting Amadeus auth token: ', error);
