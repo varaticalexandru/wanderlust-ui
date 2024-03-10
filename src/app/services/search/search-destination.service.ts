@@ -2,24 +2,27 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { AmadeusAuthService } from '../amadeus-auth/amadeus-auth.service';
-import { AmadeusDestinations } from 'src/app/models/amadeus-destinations';
+import { AmadeusDestinations } from 'src/app/models/amadeus/amadeus-destinations';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchDestinationService {
 
-  BASE_URL = 'https://test.api.amadeus.com/v1/reference-data/locations/cities';
-  token = '';
-  token_type = 'Bearer';
-  max_results = '10';
+  max_results = 10;
+  token: string = '';
+  token_type: string = '';
 
   constructor(
     private http: HttpClient,
     private amadeusAuth: AmadeusAuthService,
   ) {
-    amadeusAuth.getAuthToken().subscribe((data: any) => {
-      this.token = data.access_token;
+    this.amadeusAuth.token_data$.subscribe({
+      next: (token_data: any) => {
+        this.token = token_data.access_token;
+        this.token_type = token_data.token_type;
+      }
     });
    }
 
@@ -29,7 +32,7 @@ export class SearchDestinationService {
       params: new HttpParams().append('keyword', searchTerm).append('max', this.max_results)
     };
 
-    return this.http.get<AmadeusDestinations>(this.BASE_URL, options).pipe(
+    return this.http.get<AmadeusDestinations>(environment.amadeus.search_destination_url, options).pipe(
       catchError((error: any) => {
         console.error('Error searching destinations: ', error);
         // throw error;

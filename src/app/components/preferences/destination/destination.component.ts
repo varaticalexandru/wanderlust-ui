@@ -4,9 +4,14 @@ import { Router } from '@angular/router';
 import { PopularDestination } from 'src/app/models/popular-destination';
 import { Destination } from 'src/app/models/user-destination';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
-import { Subject, debounce, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { Observable, Subject, debounce, debounceTime, distinctUntilChanged, forkJoin, mergeMap, switchMap } from 'rxjs';
 import { liveSearch } from 'src/app/utils/operators/live-search';
-import { CountryMappingService } from 'src/app/services/country-mapping/country-mapping.service'; 
+import { CountryMappingService } from 'src/app/services/country-mapping/country-mapping.service';
+import { PopularDestinationsService } from 'src/app/services/popular-destinations/popular-destinations.service';
+import { AmadeusAuthService } from 'src/app/services/amadeus-auth/amadeus-auth.service';
+import { PopularDestinations } from 'src/app/models/amadeus/amadeus-popular-destinations';
+import { AirportCityMappingService } from 'src/app/services/airport-city-mapping/airport-city-mapping.service';
+import { Airports } from 'src/app/models/amadeus/amadeus-airports';
 
 @Component({
   selector: 'app-destination',
@@ -18,13 +23,7 @@ export class DestinationComponent implements OnInit {
   private searchTerm = new Subject<string>();
   searchTermString: string = '';
   destinations: Array<Destination> = [];
-  popularDestinations: PopularDestination[] = [];
-
-  destination: Destination = {
-    city: 'New York',
-    country: 'United States of America'
-  };
-
+  popularDestinations!: PopularDestinations;
 
   readonly destinations$ = this.searchTerm.pipe(
     liveSearch((term: string) => this.destinationService.searchDestinations(term))
@@ -34,35 +33,39 @@ export class DestinationComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private amadeusAuthService: AmadeusAuthService,
     private destinationService: SearchDestinationService,
-    private countryMappingService: CountryMappingService
+    private countryMappingService: CountryMappingService,
+    private popularDestinationsService: PopularDestinationsService,
+    private airportCityMappingService: AirportCityMappingService
   ) {
 
   }
 
   ngOnInit(): void {
-    this.initPopularDestinations();
+
+
+    this.popularDestinationsService.popularDestinations$.pipe(
+      mergeMap((popularDestinations: PopularDestinations) => {
+
+        const destinationNames$: Observable<Airports>[] = popularDestinations.data.map((destination:any) =>
+          this.airportCityMappingService.getAirportDetailsByCode(destination.destination)
+        );
+
+        return forkJoin(destinationNames$);
+      })
+    ).subscribe({
+      next: (destinations: Airports[]) => {
+        console.log(destinations);
+      }
+    })
   }
-
-  initPopularDestinations() {
-    this.popularDestinations = [
-      { "name": "Las Vegas", "image": "https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/34/2d/28/caption.jpg" },
-      { "name": "New York", "image": "https://cdn.britannica.com/61/93061-050-99147DCE/Statue-of-Liberty-Island-New-York-Bay.jpg" },
-      { "name": "Los Angeles", "image": "https://www.introducinglosangeles.com/f/estados-unidos/los-angeles/guia/los-angeles-m.jpg" },
-      { "name": "San Francisco", "image": "https://www.planetware.com/photos-large/USCA/california-san-francisco-golden-gate-bridge.jpg" },
-      { "name": "San Diego", "image": "https://www.tripsavvy.com/thmb/XIx0gfr_i-ay7XLKJRXakT6FS2M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/sunset-at-la-jolla-cove-1278353139-583584d99afb438a9889e8d381b836ed.jpg" },
-      { "name": "Chicago", "image": "https://cdn.britannica.com/59/94459-050-DBA42467/Skyline-Chicago.jpg" },
-      { "name": "Miami", "image": "https://www.planetware.com/photos-large/USFL/florida-miami-south-beach.jpg" },
-    ];
-  }
-
-
 
 
   search(searchTerm: string) {
     let normalizedTerm = searchTerm.trim().toLowerCase();
 
-    normalizedTerm !== '' && normalizedTerm.length >= 3  ? this.searchTerm.next(normalizedTerm) : null;
+    normalizedTerm !== '' && normalizedTerm.length >= 3 ? this.searchTerm.next(normalizedTerm) : null;
   }
 
   getCountryName(code: string): string {
