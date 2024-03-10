@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class CountryMappingService {
 
     let options = { responseType: 'text' as 'text'};
      
-    this.http.get('assets\\files\\ISO_3166-1_alpha-2_country_codes.csv', options).subscribe(
+    this.http.get(environment.localStorage.country_codes_path, options).subscribe(
       (csvData: any) => {
         let lines = csvData.split('\n');
         lines.forEach((line: string) => {
