@@ -12,7 +12,7 @@ export class MediaService {
   image_type = 'photo';
   orientation = 'horizontal';
   category = 'places'; // alternative: 'travel'
-  per_page = 5;
+  per_page = 3;
 
   constructor(
     private http: HttpClient
@@ -23,7 +23,6 @@ export class MediaService {
 
     let options = {
       params: new HttpParams()
-        .append('key', environment.pixabay.api_key)
         .append('q', query)
         .append('image_type', this.image_type)
         .append('orientation', this.orientation)
