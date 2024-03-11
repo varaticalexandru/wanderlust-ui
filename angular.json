@@ -73,7 +73,8 @@
               "browserTarget": "wanderlust-frontend:build:production"
             },
             "development": {
-              "browserTarget": "wanderlust-frontend:build:development"
+              "browserTarget": "wanderlust-frontend:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
