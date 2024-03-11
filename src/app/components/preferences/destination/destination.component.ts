@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PopularDestination } from 'src/app/models/popular-destination';
 import { Destination } from 'src/app/models/user-destination';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
-import { Observable, Subject, debounce, debounceTime, distinctUntilChanged, forkJoin, mergeMap, switchMap } from 'rxjs';
+import { Observable, Subject, forkJoin, map, mergeMap } from 'rxjs';
 import { liveSearch } from 'src/app/utils/operators/live-search';
 import { CountryMappingService } from 'src/app/services/country-mapping/country-mapping.service';
 import { PopularDestinationsService } from 'src/app/services/popular-destinations/popular-destinations.service';
@@ -12,6 +11,9 @@ import { AmadeusAuthService } from 'src/app/services/amadeus-auth/amadeus-auth.s
 import { PopularDestinations } from 'src/app/models/amadeus/amadeus-popular-destinations';
 import { AirportCityMappingService } from 'src/app/services/airport-city-mapping/airport-city-mapping.service';
 import { Airports } from 'src/app/models/amadeus/amadeus-airports';
+import { Medias } from 'src/app/models/pixabay/medias';
+import { MediaService } from 'src/app/services/media/media.service';
+import { toPascalCase } from 'src/app/utils/to-pascal-case';
 
 @Component({
   selector: 'app-destination',
@@ -23,7 +25,7 @@ export class DestinationComponent implements OnInit {
   private searchTerm = new Subject<string>();
   searchTermString: string = '';
   destinations: Array<Destination> = [];
-  popularDestinations!: PopularDestinations;
+  popularDestinations$!: Observable<PopularDestination[]>;
 
   readonly destinations$ = this.searchTerm.pipe(
     liveSearch((term: string) => this.destinationService.searchDestinations(term))
@@ -37,28 +39,37 @@ export class DestinationComponent implements OnInit {
     private destinationService: SearchDestinationService,
     private countryMappingService: CountryMappingService,
     private popularDestinationsService: PopularDestinationsService,
-    private airportCityMappingService: AirportCityMappingService
+    private airportCityMappingService: AirportCityMappingService,
+    private mediaService: MediaService
   ) {
 
   }
 
   ngOnInit(): void {
 
+    this.popularDestinations$ = this.popularDestinationsService.popularDestinations$.pipe(
+      mergeMap((popularDestinations: PopularDestinations): Observable<Airports[]> => {
 
-    this.popularDestinationsService.popularDestinations$.pipe(
-      mergeMap((popularDestinations: PopularDestinations) => {
-
-        const destinationNames$: Observable<Airports>[] = popularDestinations.data.map((destination:any) =>
+        const destinationNames$: Observable<Airports>[] = popularDestinations.data.map((destination: any) =>
           this.airportCityMappingService.getAirportDetailsByCode(destination.destination)
         );
 
         return forkJoin(destinationNames$);
-      })
-    ).subscribe({
-      next: (destinations: Airports[]) => {
-        console.log(destinations);
-      }
-    })
+      }),
+      mergeMap((destinations: Airports[]): Observable<PopularDestination[]> => {
+
+        const destinationsImages$: Observable<PopularDestination>[] = destinations.map((destination: Airports) =>
+          this.mediaService.fetchMediaByQuery(destination.data[0].address.cityName).pipe(
+            map((medias: Medias): PopularDestination => ({
+              name: toPascalCase(destination.data[0].address.cityName),
+              image: medias.hits[0].webformatURL
+            }))
+          )
+        );
+
+        return forkJoin(destinationsImages$);
+      }));
+
   }
 
 
