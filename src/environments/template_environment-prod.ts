@@ -8,6 +8,10 @@ export const environment = {
         popular_destinations_url: '',
         airport_search_url: ''
     },
+    pixabay: {
+        api_key: '',
+        fetch_media_url: ''
+    },
     localStorage: {
         country_codes_path: ''
     }
