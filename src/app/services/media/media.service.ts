@@ -11,8 +11,8 @@ export class MediaService {
 
   image_type = 'photo';
   orientation = 'horizontal';
-  category = 'places'; // alternative: 'travel'
-  per_page = 3;
+  category = 'travel';
+  per_page = 10;
 
   constructor(
     private http: HttpClient
