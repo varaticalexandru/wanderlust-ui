@@ -28,6 +28,7 @@ import { SearchResultCardComponent } from './destination/search-result-card/sear
     FlexLayoutModule,
 
     MaterialModule,
-  ]
+  ],
+  bootstrap: [DestinationComponent]
 })
 export class PreferencesModule { }

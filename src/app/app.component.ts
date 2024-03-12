@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmadeusAuthService } from './services/amadeus-auth/amadeus-auth.service';
+// import { AmadeusAuthService } from './services/amadeus-auth/amadeus-auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -10,11 +10,11 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit {
 
   constructor(
-    private amadeusAuthService: AmadeusAuthService
+    // private amadeusAuthService: AmadeusAuthService
   ) {}
 
   ngOnInit() {
-    this.amadeusAuthService.token_data$.subscribe({});
+    // this.amadeusAuthService.token_data$.subscribe({});
   }
 
   ngOnDestroy() {
