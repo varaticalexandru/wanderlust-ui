@@ -13,7 +13,8 @@ import { AirportCityMappingService } from 'src/app/services/airport-city-mapping
 import { Airports } from 'src/app/models/amadeus/amadeus-airports';
 import { Medias } from 'src/app/models/pixabay/medias';
 import { MediaService } from 'src/app/services/media/media.service';
-import { toPascalCase } from 'src/app/utils/to-pascal-case';
+import { toTitleCase } from 'src/app/utils/to-title-case';
+import { randomInt } from 'src/app/utils/random-int';
 
 @Component({
   selector: 'app-destination',
@@ -60,10 +61,13 @@ export class DestinationComponent implements OnInit {
 
         const destinationsImages$: Observable<PopularDestination>[] = destinations.map((destination: Airports) =>
           this.mediaService.fetchMediaByQuery(destination.data[0].address.cityName).pipe(
-            map((medias: Medias): PopularDestination => ({
-              name: toPascalCase(destination.data[0].address.cityName),
-              image: medias.hits[0].webformatURL
-            }))
+            map((medias: Medias): PopularDestination => {
+              const randomIndex = randomInt(medias.hits.length);
+              return {
+                name: toTitleCase(destination.data[0].address.cityName),
+                image: medias.hits[randomIndex].webformatURL
+              }
+            })
           )
         );
 
