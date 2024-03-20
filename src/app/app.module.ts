@@ -11,9 +11,6 @@ import { FailedAuthComponent } from './components/login/failed-auth/failed-auth.
 import { HttpClientModule } from '@angular/common/http';
 
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,12 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
 
-    MaterialModule,
-
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-
+export class AppModule {
 }
