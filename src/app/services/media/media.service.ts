@@ -12,7 +12,7 @@ export class MediaService {
   image_type = 'photo';
   orientation = 'horizontal';
   category = 'travel';
-  per_page = 10;
+  per_page = 3;
 
   constructor(
     private http: HttpClient
