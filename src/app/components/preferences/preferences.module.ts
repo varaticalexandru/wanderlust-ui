@@ -29,6 +29,6 @@ import { SearchResultCardComponent } from './destination/search-result-card/sear
 
     MaterialModule,
   ],
-  bootstrap: [DestinationComponent]
+  bootstrap: []
 })
 export class PreferencesModule { }
