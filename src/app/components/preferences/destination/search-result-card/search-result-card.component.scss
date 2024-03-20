@@ -5,7 +5,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.2s ease-in-out;
     transition: transform 0.2s ease-in-out;
+    color: #4d4d4d;
     cursor: pointer;
+}
+
+mat-icon {
+    color: #4169E1;
 }
 
 .result-container:hover {
@@ -28,7 +33,11 @@
 }
 
 .city {
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1.3em;
+    font-weight: 700;
     margin-top: 10px;
+}
+
+.country {
+    font-weight: 400;
 }
