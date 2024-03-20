@@ -1,5 +1,6 @@
 .example-card {
-    max-width: 200px;
+    max-width: 300px;
+    min-width: 300px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -26,11 +27,19 @@ mat-card img{
     height: 150px;
   }
 
-.image-name {
+.content {
+    display: flex;
     text-align: center;
-    margin-top: 10px;
-    font-size: larger;
-    font-weight: bold;
-    color: #333;
+    justify-content: center;
+    padding: 10px;
 }
 
+.city {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.country {
+    color: #333;
+    margin-bottom: 0;
+}
