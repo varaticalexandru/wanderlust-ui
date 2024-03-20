@@ -16,7 +16,7 @@ export class PopularDestinationsService {
 
   token: string = '';
   token_type: string = '';
-  max = 4;
+  max = 20;
   origin_city_code = 'FRA';
   year_offset = 3;
   period = `${new Date().getFullYear() - this.year_offset}` + '-' + `${new Date().getMonth() + 1}`.padStart(2, '0');

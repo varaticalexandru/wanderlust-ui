@@ -1,4 +1,5 @@
 export interface PopularDestination {
-    name: string;
+    cityName: string;
+    countryName: string;
     image: string;
 }
