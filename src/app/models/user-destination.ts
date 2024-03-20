@@ -1,4 +1,4 @@
 export interface Destination {
-    city: string;
-    country: string;
+    cityName: string;
+    countryName: string;
 }

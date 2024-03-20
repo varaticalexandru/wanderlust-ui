@@ -9,5 +9,4 @@ import { Destination } from 'src/app/models/user-destination';
 export class SearchResultCardComponent {
 
   @Input() destination!: Destination;
-
 }
