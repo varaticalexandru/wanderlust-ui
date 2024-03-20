@@ -6,6 +6,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.2s ease-in-out; 
     transition: transform 0.2s ease-in-out;
+    color: #4d4d4d;
     cursor: pointer;
 }
 
@@ -35,11 +36,14 @@ mat-card img{
 }
 
 .city {
-    font-weight: bold;
+    font-size: 1.1em;
+    font-weight: 700;
     margin-bottom: 0;
 }
 
 .country {
+    font-size: 1.1em;
+    font-weight: 400;
     color: #333;
     margin-bottom: 0;
 }
