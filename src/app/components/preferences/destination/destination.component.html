@@ -14,13 +14,13 @@
 
 
         <div class="search-results" *ngIf="(destinations$ | async) as destinations">
-            <app-search-result-card 
-                *ngFor="let destination of destinations.data"
-                [destination]="{city: destination.name, country: getCountryName(destination.address.countryCode)}">
+            <app-search-result-card *ngFor="let destination of destinations"
+                [destination]="{ cityName: destination.cityName, countryName: destination.countryName }"
+                (click)="handleDestinationSelect(destination)"
+                [class.selected]="selectedDestination && isEqual(destination, selectedDestination)"
+            >
             </app-search-result-card>
         </div>
-
-
 
     </mat-card>
 
@@ -32,10 +32,14 @@
 
 
         <div class="popular-destinations" *ngIf="(popularDestinations$ | async) as popularDestinations">
-            <app-popular-destination *ngFor="let destination of popularDestinations" [name]="destination.name"
-                [image]="destination.image">
-            </app-popular-destination>
+            <app-popular-destination-card *ngFor="let popularDestination of popularDestinations" 
+                [popularDestination]="{ cityName: popularDestination.cityName, countryName: popularDestination.countryName, image: popularDestination.image }"
+                [class.selected]="selectedDestination && isEqual(popularDestination, selectedDestination)"
+                (click)="handleDestinationSelect(popularDestination)"
+            >
+            </app-popular-destination-card>
         </div>
+
     </mat-card>
 </div>
 
