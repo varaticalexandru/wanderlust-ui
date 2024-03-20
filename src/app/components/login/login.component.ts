@@ -48,13 +48,14 @@ export class LoginComponent implements OnInit {
       this.user = this.loginForm.value;
       this.loginService.login(this.user).subscribe(
         (data: boolean) => {
+
+          this.isLoading = false;
+
           if (data) {
             this.router.navigate(['/preferences/destination']);
           }
           else {
             this.error = true;
-            this.isLoading = false;
-
             this.dialog.open(FailedAuthComponent);
           }
         }
