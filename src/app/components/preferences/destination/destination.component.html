@@ -47,7 +47,7 @@
     </mat-card>
 
     <div class="button">
-        <button type="submit" [disabled]="!selectedDestination" mat-raised-button color="primary" class="large-button">Next</button>
+        <button (click)="next()" type="submit" [disabled]="!selectedDestination" mat-raised-button color="primary" class="large-button">Next</button>
     </div>
 </div>
 
