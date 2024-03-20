@@ -30,7 +30,7 @@ export class PopularDestinationsService {
     private amadeusAuth: AmadeusAuthService
   ) {
     this.amadeusAuth.token_data$.pipe(
-      switchMap(token_data => {
+      switchMap((token_data: any): Observable<PopularDestinations> => {
         this.token = token_data.access_token;
         this.token_type = token_data.token_type;
 

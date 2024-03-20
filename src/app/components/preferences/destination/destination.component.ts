@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { PopularDestination } from 'src/app/models/popular-destination';
 import { Destination } from 'src/app/models/user-destination';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
-import { Observable, Subject, forkJoin, map, mergeMap, of, switchMap } from 'rxjs';
+import { Observable, Subject, forkJoin, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { liveSearch } from 'src/app/utils/operators/live-search';
 import { CountryMappingService } from 'src/app/services/country-mapping/country-mapping.service';
 import { PopularDestinationsService } from 'src/app/services/popular-destinations/popular-destinations.service';
@@ -31,16 +31,21 @@ export class DestinationComponent implements OnInit {
   popularDestinations$!: Observable<PopularDestination[]>;
   selectedDestination!: Destination;
   popularDestinationsNumber: number = 3;
+  isLoading: boolean;
 
   readonly destinations$ = this.searchTerm.pipe(
     liveSearch((term: string) => this.destinationService.searchDestinations(term)),
     switchMap((destinations: AmadeusDestinations): Observable<Destination[]> => {
-      return of(destinations.data.map(destination => {
+      
+      return destinations.data ?
+      of(destinations.data.map(destination => {
         return {
           cityName: destination.name,
           countryName: this.getCountryName(destination.address.countryCode)
         };
-      }));
+
+      })) : of([]);
+    
     })
   );
 
@@ -55,13 +60,14 @@ export class DestinationComponent implements OnInit {
     private mediaService: MediaService
   ) {
 
+    this.isLoading = true;
   }
 
   ngOnInit(): void {
 
     this.popularDestinations$ = this.popularDestinationsService.popularDestinations$.pipe(
-      mergeMap((popularDestinations: PopularDestinations): Observable<Airports[]> => {
 
+      mergeMap((popularDestinations: PopularDestinations): Observable<Airports[]> => {
         const randomPopularDestinations = getRandomElements(popularDestinations.data, this.popularDestinationsNumber);
         const destinationNames$: Observable<Airports>[] = randomPopularDestinations.map(
           (destination: any) =>
@@ -86,7 +92,9 @@ export class DestinationComponent implements OnInit {
         });
 
         return forkJoin(destinationsImages$);
-      }));
+      }),
+      tap((popularDestinations: PopularDestination[]) => this.isLoading = false)
+      );
 
   }
 
@@ -106,8 +114,6 @@ export class DestinationComponent implements OnInit {
       cityName: destination.cityName,
       countryName: destination.countryName
     };
-
-    console.log(`selected: ${this.selectedDestination.cityName}, ${this.selectedDestination.countryName}`);
   }
 
   isEqual(dest1: any, dest2: any): boolean {
