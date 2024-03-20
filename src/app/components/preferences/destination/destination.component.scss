@@ -1,3 +1,16 @@
+.open-sans-400 {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+  }
+
+  mat-icon {
+    color: #191970;
+  }
+
 .search-bar {
     display: flex;
     flex-direction: row;

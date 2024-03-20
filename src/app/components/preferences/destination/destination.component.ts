@@ -120,4 +120,8 @@ export class DestinationComponent implements OnInit {
     return dest1.countryName == dest2.countryName &&
            dest1.cityName == dest2.cityName;
   }
+
+  next() {
+    this.router.navigate(['/preferences/period']);
+  }
 }

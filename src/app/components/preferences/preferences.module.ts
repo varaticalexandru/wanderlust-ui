@@ -10,6 +10,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PopularDestinationCardComponent } from './destination/popular-destination-card/popular-destination-card.component';
 import { SearchFilterPipe } from '../../pipes/search-filter.pipe';
 import { SearchResultCardComponent } from './destination/search-result-card/search-result-card.component';
+import { PeriodComponent } from './period/period.component';
+
+import { IgxDateRangePickerModule } from 'igniteui-angular';
+
+import { HammerModule } from '@angular/platform-browser';
 
 
 
@@ -19,6 +24,7 @@ import { SearchResultCardComponent } from './destination/search-result-card/sear
     PopularDestinationCardComponent,
     SearchFilterPipe,
     SearchResultCardComponent,
+    PeriodComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +32,8 @@ import { SearchResultCardComponent } from './destination/search-result-card/sear
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    IgxDateRangePickerModule,
+    HammerModule,
 
     MaterialModule,
   ],
