@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { DateRange } from 'igniteui-angular';
+import { Router, RouterOutlet } from '@angular/router';
+import { DateRange, IgxDateRangePickerComponent, IgxLabelDirective, IgxHintDirective } from 'igniteui-angular';
 import { differenceInDays } from 'src/app/utils/distance-in-days';
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-period',
-  templateUrl: './period.component.html',
-  styleUrls: ['./period.component.scss']
+    selector: 'app-period',
+    templateUrl: './period.component.html',
+    styleUrls: ['./period.component.scss'],
+    standalone: true,
+    imports: [MatCard, MatCardTitle, MatCardContent, IgxDateRangePickerComponent, FormsModule, IgxLabelDirective, NgIf, IgxHintDirective, RouterOutlet]
 })
 export class PeriodComponent implements OnInit {
 

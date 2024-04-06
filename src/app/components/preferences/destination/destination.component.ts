@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { PopularDestination } from 'src/app/models/popular-destination';
 import { Destination } from 'src/app/models/user-destination';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
@@ -17,11 +17,23 @@ import { toSentenceTitleCase, toTitleCase } from 'src/app/utils/to-title-case';
 import { randomInt } from 'src/app/utils/random-int';
 import { getRandomElements } from 'src/app/utils/random-arr-elements'
 import { AmadeusDestinations } from 'src/app/models/amadeus/amadeus-destinations';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { PopularDestinationCardComponent } from './popular-destination-card/popular-destination-card.component';
+import { SearchResultCardComponent } from './search-result-card/search-result-card.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field';
+import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
 
 @Component({
-  selector: 'app-destination',
-  templateUrl: './destination.component.html',
-  styleUrls: ['./destination.component.scss']
+    selector: 'app-destination',
+    templateUrl: './destination.component.html',
+    styleUrls: ['./destination.component.scss'],
+    standalone: true,
+    imports: [MatCard, MatCardTitle, MatCardContent, MatFormField, MatLabel, MatInput, FormsModule, MatIcon, MatPrefix, NgIf, NgFor, SearchResultCardComponent, PopularDestinationCardComponent, MatCardFooter, MatProgressBar, MatButton, RouterOutlet, AsyncPipe]
 })
 export class DestinationComponent implements OnInit {
 

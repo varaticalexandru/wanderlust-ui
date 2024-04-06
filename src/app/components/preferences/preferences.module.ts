@@ -19,24 +19,21 @@ import { HammerModule } from '@angular/platform-browser';
 
 
 @NgModule({
-  declarations: [
-    DestinationComponent,
-    PopularDestinationCardComponent,
-    SearchFilterPipe,
-    SearchResultCardComponent,
-    PeriodComponent,
-  ],
-  imports: [
-    CommonModule,
-    PreferencesRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    IgxDateRangePickerModule,
-    HammerModule,
-
-    MaterialModule,
-  ],
-  bootstrap: []
+    imports: [
+        CommonModule,
+        PreferencesRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        IgxDateRangePickerModule,
+        HammerModule,
+        MaterialModule,
+        DestinationComponent,
+        PopularDestinationCardComponent,
+        SearchFilterPipe,
+        SearchResultCardComponent,
+        PeriodComponent,
+    ],
+    bootstrap: []
 })
 export class PreferencesModule { }

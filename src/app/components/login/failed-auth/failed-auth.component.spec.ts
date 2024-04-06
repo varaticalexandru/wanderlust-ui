@@ -8,8 +8,8 @@ describe('FailedAuthComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FailedAuthComponent]
-    });
+    imports: [FailedAuthComponent]
+});
     fixture = TestBed.createComponent(FailedAuthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
