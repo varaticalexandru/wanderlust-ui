@@ -1,9 +1,36 @@
-<div>
-    <igx-date-range-picker
-        class="open-sans-400" 
-        [(ngModel)]="range"
-        [mode]="'dialog'"
-    ></igx-date-range-picker>
+<div class="mat-card-container">
+    <mat-card class="period-card">
+        <mat-card-title class="period-title">
+            When do you want to travel?
+        </mat-card-title>
+
+        <mat-card-content>
+            <div class="range-picker-container">
+                <igx-date-range-picker 
+                    [(ngModel)]="range"
+                    #dateRangePicker="ngModel"
+                    (valueChange)="onRangeChange($event)"
+                    required
+                    class="open-sans-400" 
+                    [mode]="'dialog'"
+                    [displayMonthsCount]="2"
+                    [hideOutsideDays]="false" 
+                    displayFormat="shortDate"
+                    [minValue]="minDate"
+                    [maxValue]="maxDate"
+                    [placeholder]="'Depart on - Return on'"
+                >
+                    <label igxLabel>Travel interval</label>
+                    <igx-hint *ngIf="dateRangePicker.invalid && (dateRangePicker.dirty || dateRangePicker.touched)">
+                        Please choose start and end date!
+                    </igx-hint>
+                    <igx-hint *ngIf="!isRangeValid && (dateRangePicker.dirty || dateRangePicker.touched)">
+                        The interval should span maximum 7 days.
+                    </igx-hint>
+                </igx-date-range-picker>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>
 
 
