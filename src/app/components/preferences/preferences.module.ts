@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PreferencesRoutingModule } from './preferences-routing.module';
 import { DestinationComponent } from './destination/destination.component';
-import { MaterialModule } from 'src/app/material.module';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -20,20 +20,19 @@ import { HammerModule } from '@angular/platform-browser';
 
 @NgModule({
     imports: [
-        CommonModule,
-        PreferencesRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FlexLayoutModule,
-        IgxDateRangePickerModule,
-        HammerModule,
-        MaterialModule,
-        DestinationComponent,
-        PopularDestinationCardComponent,
-        SearchFilterPipe,
-        SearchResultCardComponent,
-        PeriodComponent,
-    ],
+    CommonModule,
+    PreferencesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    IgxDateRangePickerModule,
+    HammerModule,
+    DestinationComponent,
+    PopularDestinationCardComponent,
+    SearchFilterPipe,
+    SearchResultCardComponent,
+    PeriodComponent,
+],
     bootstrap: []
 })
 export class PreferencesModule { }
