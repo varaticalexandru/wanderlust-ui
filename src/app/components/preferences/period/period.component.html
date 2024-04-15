@@ -7,7 +7,7 @@
         <mat-card-content>
             <div class="range-picker-container">
 
-                <igx-calendar #igxcalendar selection="range" [monthsViewNumber]="2" [showWeekNumbers]="true"
+                <igx-calendar #igxcalendar selection="range" [monthsViewNumber]="monthsViewNumber" [showWeekNumbers]="true"
                     [weekStart]="1" [locale]="'EN'"
                     [formatOptions]="{ day: 'numeric', month: 'long', weekday: 'short', year: 'numeric' }"
                     [formatViews]="{ day: true, month: true, year: true }" [hideOutsideDays]="true"
@@ -22,10 +22,10 @@
 
             <div class="date-input">
                 <mat-form-field class="example-full-width">
-                    <mat-label>Departure date</mat-label>
+                    <mat-label>Start date</mat-label>
                     <input type="date" matInput #startDateCtrl [(ngModel)]="range.start" readonly required
                         [errorStateMatcher]="matcher">
-                    <mat-icon matPrefix [class.error-label]="!isRangeValid || isRangeEmpty">flight_takeoff</mat-icon>
+                    <mat-icon matPrefix [class.error]="!isRangeValid || isRangeEmpty">event</mat-icon>
                     <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
                     @if (isRangeEmpty) {
                     <mat-error>Please choose a start date.</mat-error>
@@ -33,10 +33,10 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">
-                    <mat-label>Arrival date</mat-label>
+                    <mat-label>End date</mat-label>
                     <input type="date" matInput #endDateCtrl [(ngModel)]="range.end" required readonly
                         [errorStateMatcher]="matcher">
-                    <mat-icon matPrefix [class.error-label]="!isRangeValid || isRangeEmpty">flight_landing</mat-icon>
+                    <mat-icon matPrefix [class.error]="!isRangeValid || isRangeEmpty">event_busy</mat-icon>
                     <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
                     @if (isRangeEmpty) {
                     <mat-error>Please choose an end date.</mat-error>
