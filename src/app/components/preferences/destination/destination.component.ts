@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { PopularDestination } from 'src/app/models/popular-destination';
 import { Destination } from 'src/app/models/user-destination';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
@@ -17,11 +17,42 @@ import { toSentenceTitleCase, toTitleCase } from 'src/app/utils/to-title-case';
 import { randomInt } from 'src/app/utils/random-int';
 import { getRandomElements } from 'src/app/utils/random-arr-elements'
 import { AmadeusDestinations } from 'src/app/models/amadeus/amadeus-destinations';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { PopularDestinationCardComponent } from './popular-destination-card/popular-destination-card.component';
+import { SearchResultCardComponent } from './search-result-card/search-result-card.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field';
+import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
 
 @Component({
   selector: 'app-destination',
   templateUrl: './destination.component.html',
-  styleUrls: ['./destination.component.scss']
+  styleUrls: ['./destination.component.scss'],
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardTitle,
+    MatCardContent,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    FormsModule,
+    MatIcon,
+    MatPrefix,
+    NgIf,
+    NgFor,
+    SearchResultCardComponent,
+    PopularDestinationCardComponent,
+    MatCardFooter,
+    MatProgressBar,
+    MatButton,
+    RouterOutlet,
+    AsyncPipe
+  ]
 })
 export class DestinationComponent implements OnInit {
 
@@ -36,20 +67,20 @@ export class DestinationComponent implements OnInit {
   readonly destinations$ = this.searchTerm.pipe(
     liveSearch((term: string) => this.destinationService.searchDestinations(term)),
     switchMap((destinations: AmadeusDestinations): Observable<Destination[]> => {
-      
-      return destinations.data ?
-      of(destinations.data.map(destination => {
-        return {
-          cityName: destination.name,
-          countryName: this.getCountryName(destination.address.countryCode)
-        };
 
-      })) : of([]);
-    
+      return destinations.data ?
+        of(destinations.data.map(destination => {
+          return {
+            cityName: destination.name,
+            countryName: this.getCountryName(destination.address.countryCode)
+          };
+
+        })) : of([]);
+
     })
   );
 
-  
+
   constructor(
     private router: Router,
     private amadeusAuthService: AmadeusAuthService,
@@ -94,7 +125,7 @@ export class DestinationComponent implements OnInit {
         return forkJoin(destinationsImages$);
       }),
       tap((popularDestinations: PopularDestination[]) => this.isLoading = false)
-      );
+    );
 
   }
 
@@ -118,7 +149,7 @@ export class DestinationComponent implements OnInit {
 
   isEqual(dest1: any, dest2: any): boolean {
     return dest1.countryName == dest2.countryName &&
-           dest1.cityName == dest2.cityName;
+      dest1.cityName == dest2.cityName;
   }
 
   next() {

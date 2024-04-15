@@ -1,9 +1,54 @@
-<div>
-    <igx-date-range-picker
-        class="open-sans-400" 
-        [(ngModel)]="range"
-        [mode]="'dialog'"
-    ></igx-date-range-picker>
+<div class="mat-card-container">
+    <mat-card class="period-card">
+        <mat-card-title class="period-title">
+            When do you want to travel?
+        </mat-card-title>
+
+        <mat-card-content>
+            <div class="range-picker-container">
+
+                <igx-calendar #igxcalendar selection="range" [monthsViewNumber]="2" [showWeekNumbers]="true"
+                    [weekStart]="1" [locale]="'EN'"
+                    [formatOptions]="{ day: 'numeric', month: 'long', weekday: 'short', year: 'numeric' }"
+                    [formatViews]="{ day: true, month: true, year: true }" [hideOutsideDays]="true"
+                    [disabledDates]="disabledDates" (selected)="handleDateSelection($event)">
+
+                </igx-calendar>
+
+                @if (!isRangeEmpty && !isRangeValid) {
+                <igx-hint class="error-label">The interval should span &nbsp;<strong>at most 7 days.</strong></igx-hint>
+                }
+            </div>
+
+            <div class="date-input">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Departure date</mat-label>
+                    <input type="date" matInput #startDateCtrl [(ngModel)]="range.start" readonly required
+                        [errorStateMatcher]="matcher">
+                    <mat-icon matPrefix [class.error-label]="!isRangeValid || isRangeEmpty">flight_takeoff</mat-icon>
+                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                    @if (isRangeEmpty) {
+                    <mat-error>Please choose a start date.</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Arrival date</mat-label>
+                    <input type="date" matInput #endDateCtrl [(ngModel)]="range.end" required readonly
+                        [errorStateMatcher]="matcher">
+                    <mat-icon matPrefix [class.error-label]="!isRangeValid || isRangeEmpty">flight_landing</mat-icon>
+                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                    @if (isRangeEmpty) {
+                    <mat-error>Please choose an end date.</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="button">
+        <button (click)="next()" type="submit" [disabled]="isRangeEmpty || !isRangeValid" mat-raised-button color="primary" class="large-button">Next</button>
+    </div>
 </div>
 
 

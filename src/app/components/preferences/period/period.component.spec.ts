@@ -8,8 +8,8 @@ describe('PeriodComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PeriodComponent]
-    });
+    imports: [PeriodComponent]
+});
     fixture = TestBed.createComponent(PeriodComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
