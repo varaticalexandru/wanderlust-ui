@@ -29,11 +29,30 @@ import { MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field'
 import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
 
 @Component({
-    selector: 'app-destination',
-    templateUrl: './destination.component.html',
-    styleUrls: ['./destination.component.scss'],
-    standalone: true,
-    imports: [MatCard, MatCardTitle, MatCardContent, MatFormField, MatLabel, MatInput, FormsModule, MatIcon, MatPrefix, NgIf, NgFor, SearchResultCardComponent, PopularDestinationCardComponent, MatCardFooter, MatProgressBar, MatButton, RouterOutlet, AsyncPipe]
+  selector: 'app-destination',
+  templateUrl: './destination.component.html',
+  styleUrls: ['./destination.component.scss'],
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardTitle,
+    MatCardContent,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    FormsModule,
+    MatIcon,
+    MatPrefix,
+    NgIf,
+    NgFor,
+    SearchResultCardComponent,
+    PopularDestinationCardComponent,
+    MatCardFooter,
+    MatProgressBar,
+    MatButton,
+    RouterOutlet,
+    AsyncPipe
+  ]
 })
 export class DestinationComponent implements OnInit {
 
@@ -48,20 +67,20 @@ export class DestinationComponent implements OnInit {
   readonly destinations$ = this.searchTerm.pipe(
     liveSearch((term: string) => this.destinationService.searchDestinations(term)),
     switchMap((destinations: AmadeusDestinations): Observable<Destination[]> => {
-      
-      return destinations.data ?
-      of(destinations.data.map(destination => {
-        return {
-          cityName: destination.name,
-          countryName: this.getCountryName(destination.address.countryCode)
-        };
 
-      })) : of([]);
-    
+      return destinations.data ?
+        of(destinations.data.map(destination => {
+          return {
+            cityName: destination.name,
+            countryName: this.getCountryName(destination.address.countryCode)
+          };
+
+        })) : of([]);
+
     })
   );
 
-  
+
   constructor(
     private router: Router,
     private amadeusAuthService: AmadeusAuthService,
@@ -106,7 +125,7 @@ export class DestinationComponent implements OnInit {
         return forkJoin(destinationsImages$);
       }),
       tap((popularDestinations: PopularDestination[]) => this.isLoading = false)
-      );
+    );
 
   }
 
@@ -130,7 +149,7 @@ export class DestinationComponent implements OnInit {
 
   isEqual(dest1: any, dest2: any): boolean {
     return dest1.countryName == dest2.countryName &&
-           dest1.cityName == dest2.cityName;
+      dest1.cityName == dest2.cityName;
   }
 
   next() {
