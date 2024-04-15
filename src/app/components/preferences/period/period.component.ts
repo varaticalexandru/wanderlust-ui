@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { DateRange, IgxDateRangePickerComponent, IgxLabelDirective, IgxHintDirective, IgxPickerClearComponent, IgxIconComponent, IgxPickerToggleComponent, IgxCalendarComponent, IgxCalendarModule, IgxDateRangeStartComponent, IgxDateRangeEndComponent, IgxOverlayOutletDirective, DateRangeDescriptor, DateRangeType } from 'igniteui-angular';
 import { NgClass, NgIf } from '@angular/common';
@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { daysNumberInRange } from 'src/app/utils/distance-in-days';
 import { MatButton } from '@angular/material/button';
+import { Subscription, debounceTime, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-period',
@@ -42,9 +43,10 @@ import { MatButton } from '@angular/material/button';
       MatButton
     ]
 })
-export class PeriodComponent implements OnInit, AfterViewInit {
+export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
 
   matcher: ErrorStateMatcher = new MyErrorStateMatcher();
+  resizeSubscription: Subscription;
 
   range!: DateRange;
   startDate!: Date;
@@ -54,6 +56,7 @@ export class PeriodComponent implements OnInit, AfterViewInit {
   isRangeEmpty!: boolean;
   isRangeValid!: boolean;
   disabledDates!: Array<DateRangeDescriptor>;
+  monthsViewNumber!: number;
 
   @ViewChild('igxcalendar')
   calendar!: IgxCalendarComponent;
@@ -61,9 +64,10 @@ export class PeriodComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router
   ) {
+    this.monthsViewNumber = window.innerWidth < 600 ? 1 : 2;
     this.startDate = new Date();
     this.endDate = new Date();
-    this.isRangeValid = true;
+    this.isRangeValid = false;
     this.isRangeEmpty = true;
     this.minDate = new Date();
     this.maxDate = new Date();
@@ -76,12 +80,22 @@ export class PeriodComponent implements OnInit, AfterViewInit {
       { type: DateRangeType.Before, dateRange: [this.minDate] },
       { type: DateRangeType.After, dateRange: [this.maxDate] }
     ];
+    this.resizeSubscription = fromEvent(window, 'resize')
+      .pipe(debounceTime(500))
+      .subscribe((event: any) => {
+        this.monthsViewNumber = event.target.innerWidth < 600 ? 1 : 2;
+      })
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    if (this.resizeSubscription)
+      this.resizeSubscription.unsubscribe();
   }
 
   handleDateSelection(event: Date | Date[]) {
