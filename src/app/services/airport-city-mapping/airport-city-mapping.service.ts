@@ -3,7 +3,7 @@ import { AmadeusAuthService } from '../amadeus-auth/amadeus-auth.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, catchError, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Airports } from 'src/app/models/amadeus/amadeus-airports';
+import { Airports } from 'src/app/models/amadeus/amadeus-airports.model';
 
 @Injectable({
   providedIn: 'root'

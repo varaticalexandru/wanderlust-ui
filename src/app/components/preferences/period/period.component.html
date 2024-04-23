@@ -1,6 +1,6 @@
 <div class="mat-card-container">
     <mat-card class="period-card">
-        <mat-card-title class="period-title">
+        <mat-card-title class="period-title open-sans-400">
             When do you want to travel?
         </mat-card-title>
 
@@ -46,7 +46,11 @@
         </mat-card-content>
     </mat-card>
 
-    <div class="button">
+    <div class="buttons">
+        <button (click)="back()" mat-raised-button color="basic" class="large-button">
+            Back
+        </button>
+
         <button (click)="next()" type="submit" [disabled]="isRangeEmpty || !isRangeValid" mat-raised-button color="primary" class="large-button">Next</button>
     </div>
 </div>
