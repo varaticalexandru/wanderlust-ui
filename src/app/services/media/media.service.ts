@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
-import { Medias } from 'src/app/models/pixabay/medias';
+import { Medias } from 'src/app/models/pixabay/medias.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

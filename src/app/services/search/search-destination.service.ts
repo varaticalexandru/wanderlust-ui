@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { AmadeusAuthService } from '../amadeus-auth/amadeus-auth.service';
-import { AmadeusDestinations } from 'src/app/models/amadeus/amadeus-destinations';
+import { AmadeusDestinations } from 'src/app/models/amadeus/amadeus-destinations.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

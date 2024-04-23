@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Destination } from 'src/app/models/user-destination';
+import { Destination } from 'src/app/models/user-destination.model';
 import { MatIcon } from '@angular/material/icon';
 import { MatCard, MatCardContent } from '@angular/material/card';
 
