@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject, Subject, catchError, shareReplay, switchMap, take, tap } from 'rxjs';
-import { PopularDestinations } from 'src/app/models/amadeus/amadeus-popular-destinations';
+import { PopularDestinations } from 'src/app/models/amadeus/amadeus-popular-destinations.model';
 import { environment } from 'src/environments/environment';
 import { AmadeusAuthService } from '../amadeus-auth/amadeus-auth.service';
 
