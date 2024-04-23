@@ -1,0 +1,13 @@
+<div class="survey-question">
+    <div class="question" [innerHTML]="surveyQuestion.question"></div>
+
+    <div class="answers">
+        @for (answer of surveyQuestion.answers; track answer) {
+            <button mat-raised-button class="answer" color="basic" (click)="handleClick(surveyQuestion, answer)"
+                    [class.selected]="selectedAnswer === answer"
+            >
+                {{ answer }}
+            </button>
+        }
+    </div>
+</div>
