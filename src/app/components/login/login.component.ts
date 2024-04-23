@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormsMo
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login/login.service';
-import { UserLogin } from '../../models/user-login';
+import { UserLogin } from '../../models/user-login.model';
 import { MatDialog } from '@angular/material/dialog';
 import { FailedAuthComponent } from './failed-auth/failed-auth.component';
 import { MatProgressBar } from '@angular/material/progress-bar';
