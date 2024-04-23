@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { PopularDestination } from 'src/app/models/popular-destination';
-import { Destination } from 'src/app/models/user-destination';
+import { PopularDestination } from 'src/app/models/popular-destination.model';
+import { Destination } from 'src/app/models/user-destination.model';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
 import { Observable, Subject, forkJoin, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { liveSearch } from 'src/app/utils/operators/live-search';
 import { CountryMappingService } from 'src/app/services/country-mapping/country-mapping.service';
 import { PopularDestinationsService } from 'src/app/services/popular-destinations/popular-destinations.service';
 import { AmadeusAuthService } from 'src/app/services/amadeus-auth/amadeus-auth.service';
-import { PopularDestinations } from 'src/app/models/amadeus/amadeus-popular-destinations';
+import { PopularDestinations } from 'src/app/models/amadeus/amadeus-popular-destinations.model';
 import { AirportCityMappingService } from 'src/app/services/airport-city-mapping/airport-city-mapping.service';
-import { Airports } from 'src/app/models/amadeus/amadeus-airports';
-import { Medias } from 'src/app/models/pixabay/medias';
+import { Airports } from 'src/app/models/amadeus/amadeus-airports.model';
+import { Medias } from 'src/app/models/pixabay/medias.model';
 import { MediaService } from 'src/app/services/media/media.service';
 import { toSentenceTitleCase, toTitleCase } from 'src/app/utils/to-title-case';
 import { randomInt } from 'src/app/utils/random-int';
 import { getRandomElements } from 'src/app/utils/random-arr-elements'
-import { AmadeusDestinations } from 'src/app/models/amadeus/amadeus-destinations';
+import { AmadeusDestinations } from 'src/app/models/amadeus/amadeus-destinations.model';
 import { MatButton } from '@angular/material/button';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { PopularDestinationCardComponent } from './popular-destination-card/popular-destination-card.component';
@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field';
 import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
+import { PreferencesService } from 'src/app/services/preferences/preferences.service';
 
 @Component({
   selector: 'app-destination',
@@ -88,7 +89,8 @@ export class DestinationComponent implements OnInit {
     private countryMappingService: CountryMappingService,
     private popularDestinationsService: PopularDestinationsService,
     private airportCityMappingService: AirportCityMappingService,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private preferencesService: PreferencesService
   ) {
 
     this.isLoading = true;
@@ -152,7 +154,12 @@ export class DestinationComponent implements OnInit {
       dest1.cityName == dest2.cityName;
   }
 
+  back() {
+
+  }
+
   next() {
+    this.preferencesService.setPreference('destination', this.selectedDestination);
     this.router.navigate(['/preferences/period']);
   }
 }
