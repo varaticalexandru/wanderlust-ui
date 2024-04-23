@@ -12,6 +12,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { daysNumberInRange } from 'src/app/utils/distance-in-days';
 import { MatButton } from '@angular/material/button';
 import { Subscription, debounceTime, fromEvent } from 'rxjs';
+import { PreferencesService } from 'src/app/services/preferences/preferences.service';
 
 @Component({
   selector: 'app-period',
@@ -62,9 +63,10 @@ export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
   calendar!: IgxCalendarComponent;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private preferencesService: PreferencesService
   ) {
-    this.monthsViewNumber = window.innerWidth < 600 ? 1 : 2;
+    this.monthsViewNumber = window.innerWidth < 800 ? 1 : 2;
     this.startDate = new Date();
     this.endDate = new Date();
     this.isRangeValid = false;
@@ -83,7 +85,7 @@ export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
     this.resizeSubscription = fromEvent(window, 'resize')
       .pipe(debounceTime(500))
       .subscribe((event: any) => {
-        this.monthsViewNumber = event.target.innerWidth < 600 ? 1 : 2;
+        this.monthsViewNumber = event.target.innerWidth < 800 ? 1 : 2;
       })
   }
 
@@ -100,7 +102,6 @@ export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
 
   handleDateSelection(event: Date | Date[]) {
     const selectedDates: Date[] = event as Date[];
-    console.log(selectedDates);
     const offset = selectedDates[0]?.getTimezoneOffset();
 
     if (selectedDates.length === 1) {
@@ -119,21 +120,23 @@ export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.isRangeEmpty = selectedDates.length === 0 ? true : false;
     this.isRangeValid = !this.isRangeEmpty && selectedDates.length <= 7;
-
-    console.log("start: " + this.range.start);
-    console.log("end: " + this.range.end);
-    console.log("isRangeValid: " + this.isRangeValid);
-    console.log("isRangeEmpty: " + this.isRangeEmpty);
   }
 
 
   isRangeInvalid(): boolean {
-    console.log("isRangeInvalid(): " + (daysNumberInRange(new Date(this.range.start), new Date(this.range.end)) > 7));
     return daysNumberInRange(new Date(this.range.start), new Date(this.range.end)) > 7;
   }
 
   next() {
+    this.preferencesService.setPreference('period', {
+      'startDate': this.range.start as Date,
+      'endDate': this.range.end as Date
+    });
+    this.router.navigate(['/preferences/companion']);
+  }
 
+  back() {
+    this.router.navigate(['/preferences/destination'])
   }
 
 }
