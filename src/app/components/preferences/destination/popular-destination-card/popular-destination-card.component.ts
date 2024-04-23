@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PopularDestination } from 'src/app/models/popular-destination';
+import { PopularDestination } from 'src/app/models/popular-destination.model';
 import { MatCard, MatCardImage } from '@angular/material/card';
 
 @Component({
