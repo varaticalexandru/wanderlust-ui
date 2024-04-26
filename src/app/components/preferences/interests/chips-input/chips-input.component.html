@@ -1,0 +1,22 @@
+<mat-form-field class="custom-interests">
+    <mat-label>Other interests</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Enter your interests">
+      @for (option of options; track option) {
+        <mat-chip-row
+          (removed)="remove(option)"
+          [editable]="true"
+          (edited)="edit(option, $event)"
+          [aria-description]="'press enter to edit ' + option">
+          {{ option }}
+          <button matChipRemove [attr.aria-label]="'remove ' + option">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      }
+      <input placeholder="New interest..."
+             [matChipInputFor]="chipGrid"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)"/>
+    </mat-chip-grid>
+  </mat-form-field>
