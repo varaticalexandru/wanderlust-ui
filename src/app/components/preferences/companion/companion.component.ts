@@ -62,12 +62,8 @@ export class CompanionComponent implements OnInit {
     this.preferencesService.setPreference('companion', this.selectedCompanion.title);
     this.preferencesService.setPreference('pets', this.questionAnswerMap.get('pets') as boolean);
     this.preferencesService.setPreference('children', this.questionAnswerMap.get('children') as boolean);
-    
-    this.preferencesService.getPreferences().subscribe(
-      (preferences: Preferences) => {
-          console.log(preferences);
-      }
-    )
+
+    this.router.navigate(['/preferences/interests']);
   }
 
   back() {
