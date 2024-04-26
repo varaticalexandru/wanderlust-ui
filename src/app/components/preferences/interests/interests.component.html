@@ -1,0 +1,25 @@
+<div class="mat-card-container">
+    <mat-card class="interests-card">
+        <mat-card-title class="interests-title open-sans-400">
+            How do you want to spend your time ?
+        </mat-card-title>
+
+        <mat-card-content>
+            <app-chips [options]="interests"></app-chips>
+
+            <app-chips-input [options]="customInterests"></app-chips-input>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="buttons">
+        <button (click)="back()" mat-raised-button color="basic" class="large-button">
+            Back
+        </button>
+
+        <button (click)="next()" type="submit" [disabled]="false" mat-raised-button color="primary" class="large-button">Next</button>
+    </div>
+
+</div>
+
+
+<router-outlet></router-outlet>
