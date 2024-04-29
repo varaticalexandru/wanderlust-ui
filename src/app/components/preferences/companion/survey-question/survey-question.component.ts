@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { QuestionAnswer, SurveyQuestion } from 'src/app/models/survey-question.model';
+import { HighlightPipe } from 'src/app/pipes/highlight/highlight.pipe';
 
 @Component({
   selector: 'app-survey-question',
   standalone: true,
   imports: [
-    MatButtonModule
+    MatButtonModule,
+    HighlightPipe
   ],
   templateUrl: './survey-question.component.html',
   styleUrl: './survey-question.component.scss'

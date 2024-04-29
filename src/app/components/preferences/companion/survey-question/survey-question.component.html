@@ -1,5 +1,6 @@
 <div class="survey-question">
-    <div class="question" [innerHTML]="surveyQuestion.question"></div>
+    <div class="question" [innerHTML]="surveyQuestion.question | highlight:['children', 'pets']">
+    </div>
 
     <div class="answers">
         @for (answer of surveyQuestion.answers; track answer) {

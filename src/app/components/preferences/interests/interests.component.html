@@ -5,7 +5,7 @@
         </mat-card-title>
 
         <mat-card-content>
-            <app-chips [options]="interests"></app-chips>
+            <app-chips [options]="interests" (selectionChange)="updateSelection($event)"></app-chips>
 
             <app-chips-input [options]="customInterests"></app-chips-input>
         </mat-card-content>
