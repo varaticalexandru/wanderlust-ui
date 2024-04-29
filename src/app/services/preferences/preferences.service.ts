@@ -13,7 +13,7 @@ export class PreferencesService {
   
   constructor() { }
 
-  setPreference(key: string, value: Destination | Period | string | boolean) {
+  setPreference(key: string, value: Destination | Period | string | boolean | Array<string>) {
     this.preferences.next({ ...this.preferences.value, [key]: value });
   }
 
