@@ -27,18 +27,26 @@ import { ChipsInputComponent } from './chips-input/chips-input.component';
 export class InterestsComponent implements OnInit {
 
   interests!: Array<string>;
+  selectedInterests!: Array<string>;
   customInterests!: Array<string>;
+  mergedInterests!: Array<string>;
   
   constructor(
     private router: Router,
     private preferencesService: PreferencesService
   ) {
     this.interests = interests;
+    this.selectedInterests = [];
     this.customInterests = [];
+    this.mergedInterests = [];
   }
 
   ngOnInit(): void {
 
+  }
+
+  updateSelection($event: any) {
+    this.selectedInterests = $event as Array<string>;
   }
 
   back() {
@@ -46,13 +54,17 @@ export class InterestsComponent implements OnInit {
   }
 
   next() {
+    this.mergedInterests = this.selectedInterests.concat(this.customInterests.filter((option) => this.selectedInterests.indexOf(option) < 0));
+    this.preferencesService.setPreference('interests', this.mergedInterests);
+
     this.preferencesService.getPreferences().subscribe(
       (preferences: Preferences) => {
         console.log(preferences);
       }
     )
-    
   }
+
+
 
 
 }
