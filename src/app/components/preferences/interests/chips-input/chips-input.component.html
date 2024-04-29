@@ -3,20 +3,26 @@
     <mat-chip-grid #chipGrid aria-label="Enter your interests">
       @for (option of options; track option) {
         <mat-chip-row
+          highlighted="true"
           (removed)="remove(option)"
           [editable]="true"
           (edited)="edit(option, $event)"
-          [aria-description]="'press enter to edit ' + option">
+          [aria-description]="'press enter to edit ' + option"
+          color="primary"
+        >
           {{ option }}
           <button matChipRemove [attr.aria-label]="'remove ' + option">
             <mat-icon>cancel</mat-icon>
           </button>
         </mat-chip-row>
       }
-      <input placeholder="New interest..."
+      <input
+             placeholder="New interest..."
              [matChipInputFor]="chipGrid"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              [matChipInputAddOnBlur]="addOnBlur"
-             (matChipInputTokenEnd)="add($event)"/>
+             (matChipInputTokenEnd)="add($event)"
+      />
+      <mat-icon matIconSuffix>add</mat-icon>
     </mat-chip-grid>
   </mat-form-field>

@@ -7,5 +7,5 @@ export interface Preferences {
     companion?: string,
     pets?: boolean,
     children?: boolean,
-    interests?: any
+    interests?: Array<string>
 }

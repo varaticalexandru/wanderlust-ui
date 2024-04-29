@@ -66,4 +66,8 @@ export class ChipsInputComponent {
     }
   }
 
+  getSelectedOptions(): Array<string> {
+    return this.options;
+  }
+
 }
