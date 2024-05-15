@@ -5,7 +5,6 @@ export let interests: Array<string> = [
     "Vineyards and Breweries",
     "Pubs and Bars",
     "Street Food Markets",
-    "Cooking Classes",
     "Food Tours",
   
     // Cultural and Historical
@@ -18,6 +17,7 @@ export let interests: Array<string> = [
     "Spiritual Sites",
     "Archaeological Sites",
     "Cultural Workshops",
+    "Cinema",
   
     // Nature and Outdoors
     "Nature Reserves",
