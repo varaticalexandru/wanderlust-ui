@@ -8,11 +8,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { FailedAuthComponent } from './failed-auth/failed-auth.component';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatButton } from '@angular/material/button';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatSuffix, MatError } from '@angular/material/form-field';
 import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -21,6 +23,7 @@ import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/m
     styleUrls: ['./login.component.scss'],
     standalone: true,
     imports: [
+        CommonModule,
         MatCard,
         MatCardTitle,
         MatCardContent,
