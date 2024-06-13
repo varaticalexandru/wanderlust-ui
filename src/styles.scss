@@ -1,95 +1,72 @@
-@use '@angular/material' as mat;
-@use '@angular/material-experimental' as matx;
+@use "@angular/material" as mat;
+@use "@angular/material-experimental" as matx;
 
 @use "igniteui-angular/theming" as *;
 
 @include core();
 @include indigo-light-theme($light-indigo-palette);
 
-//   $custom-calendar-theme: calendar-theme(
-//     $header-background: #3F51B5, 
-//     $content-background: #F5F5F5,
-//     $header-text-color: #FFFFFF, 
-//     $date-current-text-color: #536DFE, 
-//     $picker-arrow-color: #303F9F, 
-//     $date-selected-text-color: #FFFFFF, 
-//     $date-current-bg-color: #C5CAE9, 
-//     $picker-arrow-hover-color: #C5CAE9, 
-//     $year-current-text-color: #536DFE, 
-//     $year-hover-text-color: #3F51B5, 
-//     $month-current-text-color: #536DFE, 
-//     $month-hover-text-color: #3F51B5, 
-//     $picker-text-color: #303F9F, 
-//     $picker-text-hover-color: #536DFE 
-//   );
-
-// @include css-vars($custom-calendar-theme);
-
-
-$m3-dark-theme: matx.define-theme((
-  color: (
-    theme-type: dark,
-    primary: matx.$m3-blue-palette,
-    tertiary: matx.$m3-blue-palette,
+$m3-dark-theme: matx.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: matx.$m3-blue-palette,
+      tertiary: matx.$m3-blue-palette,
+    ),
   )
-));
+);
 
-$m3-light-theme: matx.define-theme((
-  color: (
-    primary: matx.$m3-blue-palette,
-    tertiary: matx.$m3-blue-palette,
-    )
-));
+$m3-light-theme: matx.define-theme(
+  (
+    color: (
+      primary: matx.$m3-blue-palette,
+      tertiary: matx.$m3-blue-palette,
+    ),
+  )
+);
 
-.dark-theme {
-  @include mat.all-component-themes($m3-dark-theme);
-}
+// .dark-theme {
+//   @include mat.all-component-themes($m3-dark-theme);
+// }
 
 .light-theme {
   @include mat.all-component-themes($m3-light-theme);
 }
 
-
 @font-face {
-    font-family: 'Open Sans';
-    src: url('assets/fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+  font-family: "Open Sans";
+  src: url("assets/fonts/OpenSans-VariableFont_wdth,wght.ttf")
+    format("truetype");
 }
 
 @font-face {
-    font-family: 'Open Sans Italic';
-    src: url('assets/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+  font-family: "Open Sans Italic";
+  src: url("assets/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf")
+    format("truetype");
 }
 
 .open-sans-400 {
-    font-family: "Open Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
-
 
 html,
 body {
-    height: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: "Open Sans";
+  height: 100%;
 }
 
-body {
-    margin: 0;
-    font-family: 'Open Sans';
+.map-container {
+  border-radius: 20px !important;
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.2) !important;
+  transition: box-shadow 0.3s ease;
 }
 
-
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-html,
-body {
-    height: 100%;
+.map-container:hover {
+  box-shadow: 0px 8px 20px rgba(5, 2, 179, 0.3) !important;
 }
-
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-// * {
-//     box-sizing: border-box;
-//   }

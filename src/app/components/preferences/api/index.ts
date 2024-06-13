@@ -1,0 +1,1 @@
+export { PREFERENCES_ROUTES } from "./routes";

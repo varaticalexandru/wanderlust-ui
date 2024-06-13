@@ -58,6 +58,7 @@ export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
   isRangeValid!: boolean;
   disabledDates!: Array<DateRangeDescriptor>;
   monthsViewNumber!: number;
+  dailyRecommendationsNumber!: number;
 
   @ViewChild('igxcalendar')
   calendar!: IgxCalendarComponent;
@@ -74,6 +75,7 @@ export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
     this.minDate = new Date();
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.minDate.getFullYear() + 1);
+    this.dailyRecommendationsNumber = 5;
     this.range = {
       start: this.startDate,
       end: this.endDate
@@ -132,6 +134,9 @@ export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
       'startDate': this.range.start as Date,
       'endDate': this.range.end as Date
     });
+
+    this.preferencesService.setPreference('dailyRecommendationsNumber', this.dailyRecommendationsNumber);
+
     this.router.navigate(['/preferences/companion']);
   }
 

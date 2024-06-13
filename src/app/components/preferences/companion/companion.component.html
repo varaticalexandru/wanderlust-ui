@@ -1,46 +1,72 @@
 <div class="mat-card-container open-sans-400">
-    <mat-card class="companion-card">
-        <mat-card-title class="companion-title open-sans-400">
-            Who's traveling with you ?
-        </mat-card-title>
+  <mat-card class="companion-card">
+    <mat-card-title class="companion-title open-sans-400">
+      Who's traveling with you ? 👪
+    </mat-card-title>
 
-
-        <div class="companions">
-            @for (companion of companions; track companion.title) {
-                <app-companion-card 
-                    [companion]="companion"
-                    (click)="handleCompanionClick(companion)"
-                    [class.selected]="selectedCompanion && selectedCompanion == companion"
-                
-                ></app-companion-card>
-            }
-        </div>
-
-        <div class="questionnaire">
-            @for (question of questionnaire; track $index) {
-                <app-survey-question [surveyQuestion]="question" (answerSelected)="handleAnswerSelected($event)">
-                </app-survey-question>
-            }
-        </div>
-
-
-    </mat-card>
-
-    <div class="buttons">
-        <button (click)="back()" mat-raised-button color="basic"
-            class="large-button">
-            Back
-        </button>
-
-        <button (click)="next()" type="submit" 
-                [disabled]="!selectedCompanion || questionAnswerMap.get('pets') == undefined || questionAnswerMap.get('children') == undefined" 
-                mat-raised-button 
-                color="primary"
-                class="large-button">
-            Next
-        </button>
+    <div class="companions">
+      @for (companion of companions; track companion.title) {
+      <app-companion-card
+        [companion]="companion"
+        (click)="handleCompanionClick(companion)"
+        [class.selected]="selectedCompanion && selectedCompanion == companion"
+      ></app-companion-card>
+      }
     </div>
+
+    <div class="questionnaire">
+      @for (question of questionnaire; track $index) {
+      <app-survey-question
+        [surveyQuestion]="question"
+        (answerSelected)="handleAnswerSelected($event)"
+      >
+      </app-survey-question>
+      }
+    </div>
+  </mat-card>
 </div>
 
+<div class="mat-card-container open-sans-400">
+  <mat-card class="companion-card price-card">
+    <mat-card-title class="companion-title open-sans-400">
+      What is your budget ? 💵
+    </mat-card-title>
+
+    <div class="companions">
+      @for (priceLevel of priceLevels; track priceLevel.value) {
+      <app-budget-card
+        [priceLevel]="priceLevel"
+        (click)="handlePriceClick(priceLevel)"
+        [class.selected]="
+          selectedPriceLevel && selectedPriceLevel == priceLevel
+        "
+      >
+      </app-budget-card>
+      }
+    </div>
+  </mat-card>
+</div>
+
+<div class="buttons">
+  <button (click)="back()" mat-raised-button color="basic" class="large-button">
+    Back
+  </button>
+
+  <button
+    (click)="next()"
+    type="submit"
+    [disabled]="
+      !selectedCompanion ||
+      questionAnswerMap.get('pets') == undefined ||
+      questionAnswerMap.get('children') == undefined ||
+      !selectedPriceLevel
+    "
+    mat-raised-button
+    color="primary"
+    class="large-button"
+  >
+    Next
+  </button>
+</div>
 
 <router-outlet></router-outlet>

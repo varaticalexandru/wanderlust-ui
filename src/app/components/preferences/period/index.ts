@@ -1,0 +1,1 @@
+export { PeriodComponent } from "./period.component";

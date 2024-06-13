@@ -1,0 +1,1 @@
+export { CompanionComponent } from "./companion.component";

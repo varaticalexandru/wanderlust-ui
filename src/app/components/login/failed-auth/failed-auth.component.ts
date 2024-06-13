@@ -7,7 +7,13 @@ import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } fr
     templateUrl: './failed-auth.component.html',
     styleUrls: ['./failed-auth.component.scss'],
     standalone: true,
-    imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatButton, MatDialogClose]
+    imports: [
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatButton,
+        MatDialogClose
+    ]
 })
 export class FailedAuthComponent {
 

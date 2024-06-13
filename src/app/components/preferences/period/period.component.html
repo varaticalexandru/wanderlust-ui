@@ -1,59 +1,129 @@
 <div class="mat-card-container">
-    <mat-card class="period-card">
-        <mat-card-title class="period-title open-sans-400">
-            When do you want to travel ?
-        </mat-card-title>
+  <mat-card class="period-card">
+    <mat-card-title class="period-title open-sans-400">
+      When do you want to travel ? 📆
+    </mat-card-title>
 
-        <mat-card-content>
-            <div class="range-picker-container">
+    <mat-card-content>
+      <div class="range-picker-container">
+        <igx-calendar
+          #igxcalendar
+          selection="range"
+          [monthsViewNumber]="monthsViewNumber"
+          [showWeekNumbers]="true"
+          [weekStart]="1"
+          [locale]="'EN'"
+          [formatOptions]="{
+            day: 'numeric',
+            month: 'long',
+            weekday: 'short',
+            year: 'numeric'
+          }"
+          [formatViews]="{ day: true, month: true, year: true }"
+          [hideOutsideDays]="true"
+          [disabledDates]="disabledDates"
+          (selected)="handleDateSelection($event)"
+        >
+        </igx-calendar>
 
-                <igx-calendar #igxcalendar selection="range" [monthsViewNumber]="monthsViewNumber" [showWeekNumbers]="true"
-                    [weekStart]="1" [locale]="'EN'"
-                    [formatOptions]="{ day: 'numeric', month: 'long', weekday: 'short', year: 'numeric' }"
-                    [formatViews]="{ day: true, month: true, year: true }" [hideOutsideDays]="true"
-                    [disabledDates]="disabledDates" (selected)="handleDateSelection($event)">
+        @if (!isRangeEmpty && !isRangeValid) {
+        <igx-hint class="error-label"
+          >The interval should span &nbsp;<strong
+            >at most 7 days.</strong
+          ></igx-hint
+        >
+        }
+      </div>
 
-                </igx-calendar>
+      <div class="date-input">
+        <mat-form-field class="example-full-width">
+          <mat-label>Start date</mat-label>
+          <input
+            type="date"
+            matInput
+            #startDateCtrl
+            [(ngModel)]="range.start"
+            readonly
+            required
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matPrefix [class.error]="!isRangeValid || isRangeEmpty"
+            >event</mat-icon
+          >
+          <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+          @if (isRangeEmpty) {
+          <mat-error>Please choose a start date.</mat-error>
+          }
+        </mat-form-field>
 
-                @if (!isRangeEmpty && !isRangeValid) {
-                <igx-hint class="error-label">The interval should span &nbsp;<strong>at most 7 days.</strong></igx-hint>
-                }
-            </div>
+        <mat-form-field class="example-full-width">
+          <mat-label>End date</mat-label>
+          <input
+            type="date"
+            matInput
+            #endDateCtrl
+            [(ngModel)]="range.end"
+            required
+            readonly
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matPrefix [class.error]="!isRangeValid || isRangeEmpty"
+            >event_busy</mat-icon
+          >
+          <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+          @if (isRangeEmpty) {
+          <mat-error>Please choose an end date.</mat-error>
+          }
+        </mat-form-field>
+      </div>
 
-            <div class="date-input">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Start date</mat-label>
-                    <input type="date" matInput #startDateCtrl [(ngModel)]="range.start" readonly required
-                        [errorStateMatcher]="matcher">
-                    <mat-icon matPrefix [class.error]="!isRangeValid || isRangeEmpty">event</mat-icon>
-                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
-                    @if (isRangeEmpty) {
-                    <mat-error>Please choose a start date.</mat-error>
-                    }
-                </mat-form-field>
+      <div class="daily-recommendations-number-container">
+        <mat-form-field class="full-width">
+          <mat-label>Daily recommendations number</mat-label>
+          <input
+            required
+            matInput
+            type="number"
+            min="1"
+            max="10"
+            [(ngModel)]="dailyRecommendationsNumber"
+            #recNum="ngModel"
+          />
+          <mat-icon matSuffix>card_travel</mat-icon>
+          @if ((recNum.touched ||
+          recNum.dirty) &&
+          recNum.errors?.required) {
+          <mat-error
+            >Please choose the desired number of recommendations per
+            day.</mat-error
+          >
+          }
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-                <mat-form-field class="example-full-width">
-                    <mat-label>End date</mat-label>
-                    <input type="date" matInput #endDateCtrl [(ngModel)]="range.end" required readonly
-                        [errorStateMatcher]="matcher">
-                    <mat-icon matPrefix [class.error]="!isRangeValid || isRangeEmpty">event_busy</mat-icon>
-                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
-                    @if (isRangeEmpty) {
-                    <mat-error>Please choose an end date.</mat-error>
-                    }
-                </mat-form-field>
-            </div>
-        </mat-card-content>
-    </mat-card>
+  <div class="buttons">
+    <button
+      (click)="back()"
+      mat-raised-button
+      color="basic"
+      class="large-button"
+    >
+      Back
+    </button>
 
-    <div class="buttons">
-        <button (click)="back()" mat-raised-button color="basic" class="large-button">
-            Back
-        </button>
-
-        <button (click)="next()" type="submit" [disabled]="isRangeEmpty || !isRangeValid" mat-raised-button color="primary" class="large-button">Next</button>
-    </div>
+    <button
+      (click)="next()"
+      type="submit"
+      [disabled]="isRangeEmpty || !isRangeValid || recNum.hasError('required')"
+      mat-raised-button
+      color="primary"
+      class="large-button"
+    >
+      Next
+    </button>
+  </div>
 </div>
-
 
 <router-outlet></router-outlet>

@@ -29,6 +29,10 @@ mat-card {
     padding-bottom: 20px;
 }
 
+.price-card {
+    padding-bottom: 50px;
+}
+
 .companion-title {
     font-weight: bold;
     display: flex;
@@ -42,6 +46,7 @@ mat-card {
     display: flex;
     justify-content: space-between;
     margin: 20px 40px 40px;
+    padding-bottom: 40px;
 }
 
 button {
@@ -67,9 +72,7 @@ mat-card:hover {
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
+    gap: 40px;
 }
 
-app-companion-card {
-    margin: 20px;
-}
 
