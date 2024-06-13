@@ -14,10 +14,10 @@ import {
   SurveyQuestion,
 } from 'src/app/models/survey-question.model';
 import { questionnaire } from 'src/app/data/companion-questionnaire.data';
-import { priceLevels } from 'src/app/data/budget.data';
+import { budgets } from 'src/app/data/budget.data';
 import { BudgetCardComponent } from './budget-card/budget-card.component';
 import { KeyValuePipe } from '@angular/common';
-import { Budget } from 'src/app/models/price-level.model';
+import { Budget } from 'src/app/models/budget.model';
 
 @Component({
   selector: 'app-companion',
@@ -51,7 +51,7 @@ export class CompanionComponent implements OnInit {
   ) {
     this.companions = companions;
     this.questionnaire = questionnaire;
-    this.budgets = priceLevels;
+    this.budgets = budgets;
   }
 
   ngOnInit(): void {}
@@ -67,8 +67,8 @@ export class CompanionComponent implements OnInit {
     );
   }
 
-  handlePriceClick(priceLevel: Budget) {
-    this.selectedBudget = priceLevel; 
+  handleBudgetClick(budget: Budget) {
+    this.selectedBudget = budget; 
   }
 
   next() {
