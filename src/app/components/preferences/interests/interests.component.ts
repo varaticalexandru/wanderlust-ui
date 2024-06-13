@@ -8,7 +8,9 @@ import { interests } from 'src/app/data/interests.data';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { ChipsInputComponent } from './chips-input/chips-input.component';
-
+import { CategoryInterests } from 'src/app/models/interests.model';
+import { MatDividerModule } from '@angular/material/divider';
+import { InterestSelection } from 'src/app/models/itinerary.model';
 
 @Component({
   selector: 'app-interests',
@@ -19,34 +21,34 @@ import { ChipsInputComponent } from './chips-input/chips-input.component';
     ChipsComponent,
     MatChipsModule,
     MatButton,
-    ChipsInputComponent
+    ChipsInputComponent,
+    MatDividerModule,
   ],
   templateUrl: './interests.component.html',
-  styleUrl: './interests.component.scss'
+  styleUrl: './interests.component.scss',
 })
 export class InterestsComponent implements OnInit {
-
-  interests!: Array<string>;
-  selectedInterests!: Array<string>;
+  selectedInterests = new Map<number, Array<string>>();
+  plainSelectedInterests!: Array<string>;
   customInterests!: Array<string>;
   mergedInterests!: Array<string>;
-  
+  interests!: Array<CategoryInterests>;
+
   constructor(
     private router: Router,
     private preferencesService: PreferencesService
   ) {
     this.interests = interests;
-    this.selectedInterests = [];
     this.customInterests = [];
     this.mergedInterests = [];
+    this.plainSelectedInterests = [];
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  updateSelection($event: any) {
-    this.selectedInterests = $event as Array<string>;
+  updateSelection(interestSelection: InterestSelection) {
+    
+    this.selectedInterests.set(interestSelection.ordinal, interestSelection.selectedOptions);
   }
 
   back() {
@@ -54,17 +56,23 @@ export class InterestsComponent implements OnInit {
   }
 
   next() {
-    this.mergedInterests = this.selectedInterests.concat(this.customInterests.filter((option) => this.selectedInterests.indexOf(option) < 0));
+
+    this.selectedInterests.forEach((value: Array<string>, key: number, map) => {
+      value.forEach(interest => this.plainSelectedInterests.push(interest.slice(2).trim()))
+    })
+
+    this.mergedInterests = this.plainSelectedInterests.concat(
+      this.customInterests.filter(
+        (customInterest) => this.plainSelectedInterests.indexOf(customInterest) < 0 
+      )
+    );
+
+    this.mergedInterests = this.mergedInterests.filter(
+      (interest, index, self) => self.findIndex((t) => t.toLowerCase() === interest.toLowerCase()) === index
+    );
+
     this.preferencesService.setPreference('interests', this.mergedInterests);
 
-    this.preferencesService.getPreferences().subscribe(
-      (preferences: Preferences) => {
-        console.log(preferences);
-      }
-    )
+    this.router.navigate(['/itinerary']);
   }
-
-
-
-
 }

@@ -1,12 +1,12 @@
 import { SurveyQuestion } from "../models/survey-question.model";
 
-export let questionnaire: Array<SurveyQuestion> = [
+export const questionnaire: Array<SurveyQuestion> = [
     {
-        question: 'Are you traveling with pets ?',
+        question: 'Are you traveling with pets ? 🐾',
         answers: ['Yes', 'No']
       },
       {
-        question: 'Are you traveling with children ?',
+        question: 'Are you traveling with children ? 👶',
         answers: ['Yes', 'No']
       }
 ];

@@ -1,0 +1,16 @@
+<mat-card class="budget-card">
+
+    <mat-card-content class="budget-content">
+        <div class="icon-container">
+            @for (level of levels; track $index) {
+                <img class="price-icon" mat-card-image [src]="dollar_svg_path" [alt]="priceLevel.name">
+            }
+        </div>
+
+        <div class="title-container">
+            <p class="title">{{ priceLevel.name }}</p>
+        </div>
+    </mat-card-content>
+
+
+</mat-card>

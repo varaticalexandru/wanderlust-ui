@@ -9,16 +9,16 @@ import { Destination } from 'src/app/models/user-destination.model';
 })
 export class PreferencesService {
 
-  private preferences = new BehaviorSubject<Preferences>( {} );
+  private preferences!: Preferences;
   
   constructor() { }
 
-  setPreference(key: string, value: Destination | Period | string | boolean | Array<string>) {
-    this.preferences.next({ ...this.preferences.value, [key]: value });
+  setPreference(key: string, value: Destination | Period | string | boolean | Array<string> | number) {
+    this.preferences = { ...this.preferences, [key]: value };
   }
 
-  getPreferences() : Observable<Preferences> {
-    return this.preferences.asObservable();
+  getPreferences() : Preferences {
+    return this.preferences;
   }
 
 }

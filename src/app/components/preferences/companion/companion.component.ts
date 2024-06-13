@@ -9,8 +9,15 @@ import { CompanionCardComponent } from './companion-card/companion-card.componen
 import { PreferencesService } from 'src/app/services/preferences/preferences.service';
 import { Preferences } from 'src/app/models/preferences.model';
 import { SurveyQuestionComponent } from './survey-question/survey-question.component';
-import { QuestionAnswer, SurveyQuestion } from 'src/app/models/survey-question.model';
+import {
+  QuestionAnswer,
+  SurveyQuestion,
+} from 'src/app/models/survey-question.model';
 import { questionnaire } from 'src/app/data/companion-questionnaire.data';
+import { priceLevels } from 'src/app/data/budget.data';
+import { BudgetCardComponent } from './budget-card/budget-card.component';
+import { KeyValuePipe } from '@angular/common';
+import { PriceLevel } from 'src/app/models/price-level.model';
 
 @Component({
   selector: 'app-companion',
@@ -23,17 +30,20 @@ import { questionnaire } from 'src/app/data/companion-questionnaire.data';
     MatIconModule,
     MatButtonModule,
     CompanionCardComponent,
-    SurveyQuestionComponent
+    SurveyQuestionComponent,
+    BudgetCardComponent,
+    KeyValuePipe,
   ],
   templateUrl: './companion.component.html',
-  styleUrl: './companion.component.scss'
+  styleUrl: './companion.component.scss',
 })
 export class CompanionComponent implements OnInit {
-  
   companions!: Array<Companion>;
   selectedCompanion!: Companion;
-  questionAnswerMap = new Map<string, boolean>;
+  selectedPriceLevel!: PriceLevel;
+  questionAnswerMap = new Map<string, boolean>();
   questionnaire!: Array<SurveyQuestion>;
+  priceLevels: Array<PriceLevel>;
 
   constructor(
     private router: Router,
@@ -41,11 +51,10 @@ export class CompanionComponent implements OnInit {
   ) {
     this.companions = companions;
     this.questionnaire = questionnaire;
+    this.priceLevels = priceLevels;
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   handleCompanionClick(companion: Companion) {
     this.selectedCompanion = companion;
@@ -53,15 +62,35 @@ export class CompanionComponent implements OnInit {
 
   handleAnswerSelected(answer: QuestionAnswer) {
     this.questionAnswerMap.set(
-      (answer.question as string).includes('pets') ? 'pets' : 'children', 
-      answer.answer === "Yes" ? true : false
-    );    
+      (answer.question as string).includes('pets') ? 'pets' : 'children',
+      answer.answer === 'Yes' ? true : false
+    );
+  }
+
+  handlePriceClick(priceLevel: PriceLevel) {
+    this.selectedPriceLevel = priceLevel; 
   }
 
   next() {
-    this.preferencesService.setPreference('companion', this.selectedCompanion.title);
-    this.preferencesService.setPreference('pets', this.questionAnswerMap.get('pets') as boolean);
-    this.preferencesService.setPreference('children', this.questionAnswerMap.get('children') as boolean);
+    this.preferencesService.setPreference(
+      'companion',
+      this.selectedCompanion.title
+    );
+    this.preferencesService.setPreference(
+      'pets',
+      this.questionAnswerMap.get('pets') as boolean
+    );
+    this.preferencesService.setPreference(
+      'children',
+      this.questionAnswerMap.get('children') as boolean
+    );
+    this.preferencesService.setPreference(
+      'priceLevel',
+      this.selectedPriceLevel.name
+    );
+
+    console.log(this.preferencesService.getPreferences());
+    
 
     this.router.navigate(['/preferences/interests']);
   }
@@ -69,5 +98,4 @@ export class CompanionComponent implements OnInit {
   back() {
     this.router.navigate(['/preferences/period']);
   }
-
 }
