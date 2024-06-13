@@ -1,5 +1,7 @@
-  <mat-chip-listbox multiple="true" aria-label="Interests selection">
-    @for (option of options; let i = $index; track i) {
-      <mat-chip-option (selectionChange)="onSelectionChange(i)">{{ option }}</mat-chip-option>
-    }
+<mat-chip-listbox multiple="true" aria-label="Interests selection">
+  @for (option of options; let i = $index; track i) {
+  <mat-chip-option class="large-chip" (selectionChange)="onSelectionChange(i)">{{
+    option
+  }}</mat-chip-option>
+  }
 </mat-chip-listbox>
