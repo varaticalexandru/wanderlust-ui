@@ -1,0 +1,18 @@
+<div class="container">
+    <app-summary
+        [tripLength]="tripLength"
+        [text]="text"
+        [destination]="destination"
+    ></app-summary>
+
+    <app-daily
+        [dayPlan]="dayPlan"
+        [color]="'#c22eff'"
+    ></app-daily>
+
+   
+</div>
+
+<div class="save-button-container">
+    <button class="save-button" mat-raised-button color="primary">Save itinerary</button>
+</div>
