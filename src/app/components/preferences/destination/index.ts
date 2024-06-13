@@ -1,0 +1,1 @@
+export { DestinationComponent } from "./destination.component";
