@@ -1,0 +1,57 @@
+<mat-card class="daily open-sans-400">
+  <mat-card-header>
+    <mat-card-title class="day-title open-sans-400"> Day {{ dayPlan.day }} </mat-card-title>
+    <svg
+      class="color-icon"
+      fill="currentColor"
+      [attr.fill]="color"
+      version="1.1"
+      id="Capa_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="80px"
+      height="30px"
+      viewBox="0 0 71.236 35.619"
+      xml:space="preserve"
+    >
+      <g>
+        <path
+          d="M71.236,14.826v5.965c0,2.027-2.642,3.668-5.666,3.668H5.666C3.024,24.458,0,22.818,0,20.791v-5.965
+      c0-2.022,2.643-3.666,5.666-3.666h56.57C68.594,11.16,71.236,12.802,71.236,14.826z"
+        />
+      </g>
+    </svg>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="description day-description">
+      {{ dayPlan.description }}
+    </div>
+
+    <mat-stepper
+      (selectedIndexChange)="recommendationClick($event)"
+      class="stepper open-sans-400"
+      orientation="vertical"
+      linear="false"
+      #stepper
+    >
+      @for (recommendation of dayPlan.recommendations; track $index) {
+      <mat-step completed="false" class="step">
+        <ng-template matStepLabel>
+          <span class="stepper-title">{{ recommendation.name }}</span>
+        </ng-template>
+        <div class="description">
+          {{ recommendation.description }}
+        </div>
+        <!-- <div class="place-overview-container">
+            <gmpx-place-overview [place]="recommendation.id">
+              <gmpx-place-directions-button slot="action">
+                Directions
+              </gmpx-place-directions-button>
+            </gmpx-place-overview>
+          </div> -->
+      </mat-step>
+      }
+    </mat-stepper>
+  </mat-card-content>
+</mat-card>
