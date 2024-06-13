@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
+import { InterestSelection } from 'src/app/models/itinerary.model';
 
 @Component({
   selector: 'app-chips',
@@ -13,12 +14,15 @@ import { MatChipsModule } from '@angular/material/chips';
 export class ChipsComponent {
   
   @Input()
+  ordinal!: number;
+
+  @Input()
   options!: Array<string>;
 
   selectedOptions!: Array<string>;
 
   @Output()
-  selectionChange = new EventEmitter<Array<string>>;
+  selectionChange = new EventEmitter<InterestSelection>;
 
   constructor() {
     this.selectedOptions = [];
@@ -34,8 +38,11 @@ export class ChipsComponent {
       let slice_idx = this.selectedOptions.indexOf(arrayOption);
       this.selectedOptions.splice(slice_idx, 1);
     }
-
-    this.selectionChange.emit(this.selectedOptions);
+    
+    this.selectionChange.emit({
+      ordinal: this.ordinal,
+      selectedOptions: this.selectedOptions
+    });
   }
 
   getSelectedOptions(): Array<string> {
