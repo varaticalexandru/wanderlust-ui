@@ -51,6 +51,17 @@ igx-calendar:hover {
     margin-top: 40px;
 }
 
+.daily-recommendations-number-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.full-width {
+    width: 80%;
+}
+
 .error {
     color: #ba1a1a;
 }
