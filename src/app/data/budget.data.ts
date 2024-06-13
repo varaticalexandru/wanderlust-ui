@@ -1,6 +1,6 @@
-import { PriceLevel } from '../models/price-level.model';
+import { Budget } from '../models/price-level.model';
 
-export const priceLevels: Array<PriceLevel> = [
+export const priceLevels: Array<Budget> = [
   {
     value: 1,
     name: 'Low',

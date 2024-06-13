@@ -17,7 +17,7 @@ import { questionnaire } from 'src/app/data/companion-questionnaire.data';
 import { priceLevels } from 'src/app/data/budget.data';
 import { BudgetCardComponent } from './budget-card/budget-card.component';
 import { KeyValuePipe } from '@angular/common';
-import { PriceLevel } from 'src/app/models/price-level.model';
+import { Budget } from 'src/app/models/price-level.model';
 
 @Component({
   selector: 'app-companion',
@@ -40,10 +40,10 @@ import { PriceLevel } from 'src/app/models/price-level.model';
 export class CompanionComponent implements OnInit {
   companions!: Array<Companion>;
   selectedCompanion!: Companion;
-  selectedPriceLevel!: PriceLevel;
+  selectedBudget!: Budget;
   questionAnswerMap = new Map<string, boolean>();
   questionnaire!: Array<SurveyQuestion>;
-  priceLevels: Array<PriceLevel>;
+  budgets: Array<Budget>;
 
   constructor(
     private router: Router,
@@ -51,7 +51,7 @@ export class CompanionComponent implements OnInit {
   ) {
     this.companions = companions;
     this.questionnaire = questionnaire;
-    this.priceLevels = priceLevels;
+    this.budgets = priceLevels;
   }
 
   ngOnInit(): void {}
@@ -67,8 +67,8 @@ export class CompanionComponent implements OnInit {
     );
   }
 
-  handlePriceClick(priceLevel: PriceLevel) {
-    this.selectedPriceLevel = priceLevel; 
+  handlePriceClick(priceLevel: Budget) {
+    this.selectedBudget = priceLevel; 
   }
 
   next() {
@@ -85,8 +85,8 @@ export class CompanionComponent implements OnInit {
       this.questionAnswerMap.get('children') as boolean
     );
     this.preferencesService.setPreference(
-      'priceLevel',
-      this.selectedPriceLevel.name
+      'budget',
+      this.selectedBudget.name
     );
 
     console.log(this.preferencesService.getPreferences());
