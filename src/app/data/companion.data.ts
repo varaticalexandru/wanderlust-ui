@@ -1,6 +1,6 @@
 import { Companion } from "..\\models\\companion.model";
 
-export let companions: Array<Companion> = [
+export const companions: Array<Companion> = [
     {
         title: 'Solo',
         image: "assets\\media\\person_FILL0_wght400_GRAD0_opsz24.svg"
