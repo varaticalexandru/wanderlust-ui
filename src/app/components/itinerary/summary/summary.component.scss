@@ -1,0 +1,36 @@
+.open-sans-400 {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+.summary-card {
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    padding: 40px;
+}
+
+.summary-card:hover {
+    box-shadow: 0px 8px 20px rgba(5, 2, 179, 0.3);
+}
+
+.text {
+    margin-top: 10px;
+    margin-top: 20px;
+    font-size: 1.3em;
+    // font-weight: bolder;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+.title {
+    font-size: 1.9em;
+    font-weight: bolder;
+}
