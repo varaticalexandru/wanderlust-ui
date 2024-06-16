@@ -1,4 +1,11 @@
 export interface Itinerary {
+  id?: string;
+  placeId?: string;
+  name?: string;
+  companion?: string;
+  children?: boolean;
+  pets?: boolean;
+  budget?: string;
   cityName: string;
   countryName: string;
   latitude: number;
@@ -6,10 +13,13 @@ export interface Itinerary {
   tripLength: number;
   startDate: string;
   endDate: string;
-  priceLevel: string;
   dailyRecommendationsNumber: number;
   summary: string;
   schedule: Array<DailyPlan>;
+}
+
+export interface ItineraryList {
+  itineraries: Array<Itinerary>
 }
 
 export interface DailyPlan {
