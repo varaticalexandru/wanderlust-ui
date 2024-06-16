@@ -41,7 +41,7 @@ export class AirportCityMappingService {
         .append('keyword', airportCode)
     }
 
-    return this.http.get<Airports>(environment.amadeus.airport_search_url, options); 
+    return this.http.get<Airports>(environment.amadeus.airport_search_uri, options); 
 
 
   }
