@@ -5,5 +5,5 @@ export const ITINERARY_ROUTES: Routes = [
     {
         path: "",
         component: ItineraryComponent 
-    }
+    },
 ]

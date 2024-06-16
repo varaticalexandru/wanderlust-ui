@@ -1,0 +1,1 @@
+export { ItineraryCardComponent } from './itinerary-card.component'
