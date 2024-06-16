@@ -1,0 +1,25 @@
+<div class="container">
+  <h1 mat-dialog-title class="full-width">
+    Itinerary <strong>deletion </strong> ❌
+  </h1>
+  <div mat-dialog-content class="content">
+    Confirm deleting itinerary
+    <i
+      ><strong>{{ data.itinerary.name }}</strong></i
+    >?
+  </div>
+
+  <div mat-dialog-actions class="actions">
+    <button
+      mat-stroked-button
+      mat-dialog-close
+      color="primary"
+      (click)="onCancelClick()"
+    >
+      Cancel
+    </button>
+    <button mat-stroked-button color="warn" (click)="onDeleteClick()">
+      Delete
+    </button>
+  </div>
+</div>
