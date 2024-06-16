@@ -32,7 +32,7 @@ export class SearchDestinationService {
       params: new HttpParams().append('keyword', searchTerm).append('max', this.max_results)
     };
 
-    return this.http.get<AmadeusDestinations>(environment.amadeus.search_destination_url, options).pipe(
+    return this.http.get<AmadeusDestinations>(environment.amadeus.search_destination_uri, options).pipe(
       catchError((error: any) => {
         console.error('Error searching destinations: ', error);
         // throw error;
