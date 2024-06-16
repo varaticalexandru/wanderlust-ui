@@ -1,0 +1,45 @@
+<mat-card class="itineraries-container-card open-sans-400">
+  <mat-card-content class="content-container">
+    <div class="left-container">
+      <img
+        mat-card-image
+        [src]="image"
+        [alt]="itinerary.cityName + ' ' + itinerary.countryName"
+      />
+    </div>
+
+    <div class="right-container">
+      <div class="itinerary-name">📝 {{ itinerary.name }}</div>
+      <div class="itinerary-data">
+        <div>📍 {{ itinerary.cityName }}</div>
+        <div>🌍 {{ itinerary.countryName }}</div>
+        <div>📅 {{ itinerary.startDate }}</div>
+        <div>📅 {{ itinerary.endDate }}</div>
+        <div>🕒 {{ itinerary.tripLength }} day(s)</div>
+        @if (evaluateLogicalValue(itinerary.children)) {
+        <div>👶 Children</div>
+        } 
+        @if (evaluateLogicalValue(itinerary.pets)) {
+        <div>🐾 Pets</div>
+        }
+        <div>💰 {{ itinerary.budget }}</div>
+        <div>👥 {{ itinerary.companion }}</div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+  </mat-card-content>
+
+  <mat-card-actions class="actions-container">
+    <button mat-raised-button color="link" (click)="handleViewItineraryClick()">
+      View
+    </button>
+    <button
+      mat-stroked-button
+      color="warn"
+      (click)="handleDeleteItineraryClick()"
+    >
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>
