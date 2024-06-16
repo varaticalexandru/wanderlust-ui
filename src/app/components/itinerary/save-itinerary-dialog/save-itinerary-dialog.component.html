@@ -1,0 +1,25 @@
+<div class="container">
+  <h1 mat-dialog-title class="full-width">New <strong>Itinerary</strong></h1>
+  <div mat-dialog-content>
+    <mat-form-field class="full-width">
+      <mat-label>New itinerary's name</mat-label>
+      <input matInput [(ngModel)]="itineraryName" #name="ngModel" required />
+      <mat-icon matIconSuffix>label_important</mat-icon>
+      @if ((name.touched || name.dirty) && name.errors?.required) {
+      <mat-error>Please choose a name for your new itinerary.</mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="cancel()">CANCEL</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="save()"
+      [disabled]="name.hasError('required')"
+    >
+      SAVE
+    </button>
+  </div>
+</div>
