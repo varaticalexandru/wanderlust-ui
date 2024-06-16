@@ -7,7 +7,6 @@ import { Companion } from 'src/app/models/companion.model';
 import { companions } from 'src/app/data/companion.data';
 import { CompanionCardComponent } from './companion-card/companion-card.component';
 import { PreferencesService } from 'src/app/services/preferences/preferences.service';
-import { Preferences } from 'src/app/models/preferences.model';
 import { SurveyQuestionComponent } from './survey-question/survey-question.component';
 import {
   QuestionAnswer,
