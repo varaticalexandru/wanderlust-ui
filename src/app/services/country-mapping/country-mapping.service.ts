@@ -20,7 +20,7 @@ export class CountryMappingService {
 
     let options = { responseType: 'text' as 'text'};
      
-    this.http.get(environment.localStorage.country_codes_path, options).subscribe(
+    this.http.get(environment.staticResources.country_codes_path, options).subscribe(
       (csvData: any) => {
         let lines = csvData.split('\n');
         lines.forEach((line: string) => {
