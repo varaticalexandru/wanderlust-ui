@@ -45,7 +45,7 @@
         (recommendation of dailyPlan.recommendations; track recommendation.id) {
         <map-advanced-marker
           [content]="recommendation.content"
-          [position]="convertToLatLngLiteral(recommendation.location)"
+          [position]="_convertToLatLngLiteral(recommendation.location)"
           #markerElem="mapAdvancedMarker"
           (mapClick)="openInfoWindow(markerElem, recommendation)"
         ></map-advanced-marker>
@@ -54,12 +54,12 @@
         <map-info-window #infoWindow></map-info-window>
       </google-map>
     </div>
-
   </div>
-
 </div>
 
 <div class="save-container">
-  <button class="save-btn" mat-raised-button color="primary">Save itinerary</button>
+  <button class="save-btn" mat-raised-button color="primary" [disabled]="false" (click)="saveItinerary()">
+    Save itinerary
+  </button>
 </div>
 }
