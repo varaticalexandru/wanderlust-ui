@@ -8,6 +8,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'preferences', loadChildren: () => import('src/app/components/preferences/api/index').then(m => m.PREFERENCES_ROUTES) },
     { path: 'itinerary', loadChildren: () => import('src/app/components/itinerary/api/index').then(m => m.ITINERARY_ROUTES) },
+    { path: 'itineraries', loadChildren: () => import('src/app/components/itinerary-list/api/index').then(m => m.ITINERARY_LIST_ROUTES)},
 
     { path: 'test', component: TestComponent },
 
