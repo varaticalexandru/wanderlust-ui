@@ -1,0 +1,1 @@
+export { ItineraryComponent } from "./itinerary.component";
