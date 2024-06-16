@@ -53,7 +53,7 @@ export class PopularDestinationsService {
         .append('page[offset]', this.page_offset)
     }
 
-    return this.http.get<PopularDestinations>(environment.amadeus.popular_destinations_url, options).pipe(
+    return this.http.get<PopularDestinations>(environment.amadeus.popular_destinations_uri, options).pipe(
       catchError((error: any) => {
         console.error('Error searching destinations: ', error);
         // throw error;
