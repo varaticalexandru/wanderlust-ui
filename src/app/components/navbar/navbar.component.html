@@ -1,0 +1,63 @@
+<mat-toolbar color="primary open-sans-400" class="navbar">
+  <span class="app-logo-name" routerLink="/home">
+    <img
+      class="app-logo"
+      src="assets/media/app_logo.png"
+      alt="Logo"
+      class="logo"
+    />
+    <span class="app-name">Wanderlust</span>
+  </span>
+  <span class="spacer"></span>
+  <nav class="nav-links">
+    <a class="open-sans-400" mat-raised-button routerLink="/home">
+      <mat-icon>home</mat-icon>Home</a
+    >
+    <a class="open-sans-400" mat-raised-button routerLink="/itineraries"
+      ><mat-icon>list</mat-icon> My Itineraries</a
+    >
+    <a class="open-sans-400" mat-raised-button routerLink="/preferences"
+      ><mat-icon>add_circle_outline</mat-icon> New Itinerary</a
+    >
+  </nav>
+  <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" position="end" class="sidenav">
+    <mat-nav-list>
+      <a
+        class="open-sans-400"
+        mat-list-item
+        routerLink="/home"
+        (click)="sidenav.close()"
+      >
+        <mat-icon>home</mat-icon>
+        <span class="open-sans-400">Home</span>
+      </a>
+      <a
+        class="open-sans-400"
+        mat-list-item
+        routerLink="/preferences"
+        (click)="sidenav.close()"
+      >
+        <mat-icon>add_circle_outline</mat-icon>
+        <span class="open-sans-400">New Itinerary</span>
+      </a>
+      <a
+        class="open-sans-400"
+        mat-list-item
+        routerLink="/itineraries"
+        (click)="sidenav.close()"
+      >
+        <mat-icon>list</mat-icon>
+        <span class="open-sans-400">My Itineraries</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content #sidenavContent class="sidenav-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
