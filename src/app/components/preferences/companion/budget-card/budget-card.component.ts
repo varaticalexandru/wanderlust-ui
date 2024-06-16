@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Budget } from 'src/app/models/price-level.model';
+import { Budget } from 'src/app/models/budget.model';
 
 @Component({
   selector: 'app-budget-card',
@@ -10,14 +10,14 @@ import { Budget } from 'src/app/models/price-level.model';
   styleUrl: './budget-card.component.scss',
 })
 export class BudgetCardComponent implements OnInit {
-  @Input() priceLevel!: Budget;
+  @Input() budget!: Budget;
   levels!: Array<number>;
   dollar_svg_path = 'assets\\media\\Dollar_Sign.svg';
 
   constructor() {}
 
   ngOnInit(): void {
-    this.levels = Array(this.priceLevel.value)
+    this.levels = Array(this.budget.value)
       .fill(null)
       .map((x, i) => i);
   }
