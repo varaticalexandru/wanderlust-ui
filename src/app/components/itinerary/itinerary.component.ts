@@ -4,7 +4,6 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  Renderer2,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -29,24 +28,32 @@ import {
   Location,
   Recommendation,
 } from 'src/app/models/itinerary.model';
-import { Observable, forkJoin, map, mergeMap } from 'rxjs';
+import {
+  Observable,
+  ObservableInput,
+  forkJoin,
+  map,
+  mergeMap,
+  of,
+  switchMap,
+} from 'rxjs';
 import { SummaryComponent } from './summary/summary.component';
 import { AsyncPipe } from '@angular/common';
 import { DailyComponent } from './daily/daily.component';
 import { TextSearchService } from 'src/app/services/google-maps/text-search/text-search.service';
-import {
-  Place,
-  PlaceDetailsResponse,
-} from 'src/app/models/google-maps/places-details.model';
+import { PlaceDetailsResponse } from 'src/app/models/google-maps/places-details.model';
 import '@googlemaps/extended-component-library/api_loader.js';
 import { environment } from 'src/environments/environment';
 import '@googlemaps/extended-component-library/place_overview.js';
 import '@googlemaps/extended-component-library/place_building_blocks/place_directions_button.js';
-import { svg_string } from 'src/app/data/location-pin.data';
 import { SvgService } from 'src/app/services/svg/svg.service';
-import { ThemePalette } from '@angular/material/core';
 import { DayColorSvgCompositeMap } from 'src/app/models/svg.model';
 import { daysNumberInRange } from 'src/app/utils/distance-in-days';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { SaveItineraryDialogComponent } from './save-itinerary-dialog/save-itinerary-dialog.component';
+import { Router } from '@angular/router';
+import { convertToLatLngLiteral, getBounds } from 'src/app/utils/maps-utils';
 
 @Component({
   selector: 'app-itinerary',
@@ -63,6 +70,7 @@ import { daysNumberInRange } from 'src/app/utils/distance-in-days';
     SummaryComponent,
     DailyComponent,
     AsyncPipe,
+    MatDialogModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './itinerary.component.html',
@@ -83,6 +91,8 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   _placeDetails: Array<Recommendation> = [];
   dayColorSvgStringMap!: DayColorSvgCompositeMap;
 
+  _convertToLatLngLiteral = convertToLatLngLiteral;
+
   center!: google.maps.LatLngLiteral;
 
   options: google.maps.MapOptions = {
@@ -100,7 +110,10 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
     private preferencesService: PreferencesService,
     private itineraryService: ItineraryService,
     private textSearchService: TextSearchService,
-    private svgService: SvgService
+    private svgService: SvgService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -128,12 +141,12 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
       itinerary?.schedule?.forEach((dailyPlan) =>
         dailyPlan?.recommendations.forEach((recommendation) => {
           this.markers.push(
-            this.convertToLatLngLiteral(recommendation.location)
+            convertToLatLngLiteral(recommendation.location)
           );
         })
       );
 
-      if (this.map) this.map.fitBounds(this.getBounds(this.markers));
+      if (this.map) this.map.fitBounds(getBounds(this.markers));
     });
   }
 
@@ -141,10 +154,34 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.preferencesService.getPreferences();
   }
 
+  loadDestinationPlaceId(
+    cityName: string,
+    countryName: string
+  ): Observable<PlaceDetailsResponse> {
+    const placeDetailsReq = {
+      textQuery: `${cityName}, ${countryName}`,
+      pageSize: this.page_size,
+    };
+
+    return this.textSearchService.fetchPlaceDetailsByQuery(placeDetailsReq);
+  }
+
   loadItineraryWithDetails(): Observable<Itinerary> {
     return this.itineraryService
-      .fetchItineraryByPreferences(this.preferences)
+      .generateItineraryByPreferences(this.preferences)
       .pipe(
+        switchMap((itinerary: Itinerary): Observable<Itinerary> => {
+          return this.loadDestinationPlaceId(
+            itinerary.cityName,
+            itinerary.countryName
+          ).pipe(
+            map((placeDetails: PlaceDetailsResponse) => {
+              itinerary.placeId = placeDetails.places[0].id;
+              console.log(itinerary);
+              return itinerary;
+            })
+          );
+        }),
         mergeMap((itinerary: Itinerary): Observable<Itinerary> => {
           const detailsRequests$: Observable<PlaceDetailsResponse>[] =
             itinerary.schedule.flatMap((dailyPlan) =>
@@ -184,11 +221,6 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
                 );
               });
 
-              itinerary.schedule.forEach((dailyPlan: DailyPlan, i: number) => {
-                dailyPlan.recommendations.forEach(
-                  (recommendation: Recommendation) => {}
-                );
-              });
               this._itinerary = itinerary;
               console.log(itinerary);
               return itinerary;
@@ -198,42 +230,8 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
       );
   }
 
-  getBounds(
-    markers: Array<google.maps.LatLngLiteral>
-  ): google.maps.LatLngBoundsLiteral {
-    if (markers.length === 0) {
-      // throw new Error("Cannot calculate bounds of an empty array");
-      return { north: 0, south: 0, east: 0, west: 0 };
-    }
+  
 
-    let north = markers[0].lat;
-    let south = markers[0].lat;
-    let east = markers[0].lng;
-    let west = markers[0].lng;
-
-    for (const marker of markers) {
-      north = north = Math.max(north, marker.lat);
-      south = south = Math.min(south, marker.lat);
-      east = east = Math.max(east, marker.lng);
-      west = west = Math.min(west, marker.lng);
-    }
-
-    const bounds = {
-      north: north,
-      south: south,
-      east: east,
-      west: west,
-    };
-
-    return bounds;
-  }
-
-  convertToLatLngLiteral(location: Location): google.maps.LatLngLiteral {
-    return {
-      lat: location.latitude,
-      lng: location.longitude,
-    };
-  }
 
   openInfoWindow(marker: MapAdvancedMarker, recommendation: Recommendation) {
     const containerDiv = document.createElement('div');
@@ -262,7 +260,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   focusOnMarker(recommendation: Recommendation): void {
     console.log('FOCUSED');
 
-    const markerPosition = this.convertToLatLngLiteral(recommendation.location);
+    const markerPosition = convertToLatLngLiteral(recommendation.location);
     this.map.panTo(markerPosition);
     this.zoom = 16;
   }
@@ -276,5 +274,34 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getColor(day: number): string {
     return this.dayColorSvgStringMap.dayColorMap[day] as string;
+  }
+
+  saveItinerary() {
+    const dialogRef = this.dialog.open(SaveItineraryDialogComponent, {
+      maxWidth: '1200px',
+      maxHeight: '800px',
+      width: '800px',
+      height: '250px',
+      data: {
+        itinerary: this._itinerary,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result.trim() !== '') {
+        this._itinerary.name = result;
+        this.itineraryService
+          .createItinerary(this._itinerary)
+          .subscribe((itinerary: Itinerary) => {
+            console.log(itinerary);
+            this.snackBar.open('Itinerary saved successfully ✅', 'Close', {
+              duration: 5000,
+              politeness: 'assertive',
+            });
+
+            this.router.navigate(['/itineraries']);
+          });
+      }
+    });
   }
 }
