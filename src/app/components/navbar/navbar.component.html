@@ -19,6 +19,12 @@
     <a class="open-sans-400" mat-raised-button routerLink="/preferences"
       ><mat-icon>add_circle_outline</mat-icon> New Itinerary</a
     >
+    <a
+      class="logout-button open-sans-400"
+      mat-raised-button
+      (click)="logout()"
+      ><mat-icon>exit_to_app</mat-icon> Log out</a
+    >
   </nav>
   <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
     <mat-icon>menu</mat-icon>
@@ -54,6 +60,15 @@
       >
         <mat-icon>list</mat-icon>
         <span class="open-sans-400">My Itineraries</span>
+      </a>
+      <a
+        class="open-sans-400 logout-button"
+        mat-list-item
+        (click)="logout()"
+        (click)="sidenav.close()"
+      >
+        <mat-icon>exit_to_app</mat-icon>
+        <span class="open-sans-400">Log out</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>

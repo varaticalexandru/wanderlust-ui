@@ -47,6 +47,10 @@
   .nav-links {
     display: flex;
 
+    .logout-button {
+      color: rgb(255, 0, 0);
+    }
+
     a {
       color: #2930cc;
       text-decoration: none;
