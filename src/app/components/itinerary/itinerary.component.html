@@ -1,9 +1,18 @@
-<!-- <gmpx-api-loader
-  [key]="api_key"
-  solution-channel="GMP_GCC_placeoverview_v1_xl"
-/> -->
+@if (isLoading) {
+<div class="spinner-container">
+  <mat-progress-spinner
+    class="progress-spinner"
+    [color]="color"
+    [mode]="mode"
+    [value]="value"
+    [diameter]="diameter"
+    [strokeWidth]="strokeWidth"
+  >
+  </mat-progress-spinner>
 
-@if (itinerary$ | async; as itinerary) {
+  <div class="loading-text open-sans-400">{{ loadingStatus }}</div>
+</div>
+} @if (itinerary$ | async; as itinerary) {
 <mat-card class="header-card">
   <mat-card-header>
     <mat-card-title class="itinerary-title open-sans-400">
@@ -30,8 +39,6 @@
   </div>
 
   <div class="right-container">
-    <!-- <img [width]="width" height="height" class="map" src="../../../assets/media/map.png" alt="map"> -->
-
     <div class="gmap-container">
       <google-map
         class="gmap"
@@ -58,7 +65,13 @@
 </div>
 
 <div class="save-container">
-  <button class="save-btn" mat-raised-button color="primary" [disabled]="false" (click)="saveItinerary()">
+  <button
+    class="save-btn"
+    mat-raised-button
+    color="primary"
+    [disabled]="false"
+    (click)="saveItinerary()"
+  >
     Save itinerary
   </button>
 </div>

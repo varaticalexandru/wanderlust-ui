@@ -69,8 +69,9 @@ mat-card.header-card {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 40px;
   margin-bottom: 5px;
+  background-color: #efefff;
 }
 
 mat-card-title.itinerary-title {
@@ -105,7 +106,7 @@ mat-card-title.itinerary-title {
   .gmap-container {
     position: -webkit-sticky;
     position: sticky;
-    top: 160px;
+    top: 130px;
     height: 400px; 
     z-index: 100; 
   }
@@ -115,3 +116,18 @@ gmap-container .map-container {
   border-radius: 20px !important;
 }
 
+.spinner-container {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  gap: 20px;
+
+  .loading-text {
+    margin-top: 10px;
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+}
