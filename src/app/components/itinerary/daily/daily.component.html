@@ -1,6 +1,8 @@
 <mat-card class="daily open-sans-400">
   <mat-card-header>
-    <mat-card-title class="day-title open-sans-400"> Day {{ dayPlan.day }} </mat-card-title>
+    <mat-card-title class="day-title open-sans-400">
+      Day {{ dayPlan.day }}
+    </mat-card-title>
     <svg
       class="color-icon"
       fill="currentColor"
@@ -23,7 +25,7 @@
     </svg>
   </mat-card-header>
 
-  <mat-card-content>
+  <mat-card-content class="content">
     <div class="description day-description">
       {{ dayPlan.description }}
     </div>
@@ -43,13 +45,26 @@
         <div class="description">
           {{ recommendation.description }}
         </div>
-        <!-- <div class="place-overview-container">
-            <gmpx-place-overview [place]="recommendation.id">
-              <gmpx-place-directions-button slot="action">
-                Directions
-              </gmpx-place-directions-button>
-            </gmpx-place-overview>
-          </div> -->
+        <div class="place-overview-container">
+          <mat-accordion class="accordion">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title> More details </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <gmpx-place-overview [place]="recommendation.id">
+                <gmpx-place-directions-button slot="action">
+                  Directions
+                </gmpx-place-directions-button>
+              </gmpx-place-overview>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <!-- <gmpx-place-overview [place]="recommendation.id">
+            <gmpx-place-directions-button slot="action">
+              Directions
+            </gmpx-place-directions-button>
+          </gmpx-place-overview> -->
+        </div>
       </mat-step>
       }
     </mat-stepper>

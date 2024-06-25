@@ -1,7 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
-import { DailyPlan, Itinerary, Recommendation } from 'src/app/models/itinerary.model';
+import { DailyPlan, Recommendation } from 'src/app/models/itinerary.model';
+import { makeColorPale } from 'src/app/utils/colors';
+import {MatExpansionModule} from '@angular/material/expansion';
 import '@googlemaps/extended-component-library/place_overview.js';
 import '@googlemaps/extended-component-library/place_building_blocks/place_directions_button.js';
 
@@ -10,7 +12,8 @@ import '@googlemaps/extended-component-library/place_building_blocks/place_direc
   standalone: true,
   imports: [
     MatCardModule,
-    MatStepperModule  
+    MatStepperModule,
+    MatExpansionModule,
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
@@ -24,6 +27,8 @@ export class DailyComponent implements OnInit, OnDestroy {
   @Input() color!: string;
   
   @Output() recommendationClicked = new EventEmitter<Recommendation>;
+
+  makeColorPale = makeColorPale;
 
   constructor() {}
 
