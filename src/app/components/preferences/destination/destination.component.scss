@@ -10,6 +10,10 @@ mat-icon {
   color: #191970;
 }
 
+.search-card {
+  background-color: #efefff;
+}
+
 .search-bar {
   display: flex;
   flex-direction: row;
@@ -73,6 +77,7 @@ mat-card {
 .destinations-card {
   padding-bottom: 28px;
   margin-top: 0px;
+  background-color: #efefff;
 }
 
 mat-card:hover {
@@ -100,7 +105,7 @@ mat-card-footer {
 .buttons {
   display: flex;
   justify-content: space-between;
-  margin: 20px 40px 40px;
+  margin: 20px 40px 80px;
 }
 
 button {
@@ -128,4 +133,10 @@ button {
   .destination-card {
     margin: 5px;
   }
+}
+
+app-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
