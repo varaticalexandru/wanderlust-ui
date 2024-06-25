@@ -1,0 +1,98 @@
+Wanderlust Application README
+This project is a full-stack travel application built with Angular for the frontend and Spring Boot for the backend.
+
+Prerequisites
+Before getting started, ensure you have the following installed on your system:
+
+Node.js and npm (https://nodejs.org/en)
+Angular CLI ([invalid URL removed])
+Java Development Kit (JDK) (https://www.oracle.com/java/technologies/downloads/)
+Maven (https://maven.apache.org/download.cgi)
+MongoDB (https://www.mongodb.com/) (or access to a MongoDB instance)
+GitHub Links
+Frontend repository: https://github.com/krishnaacharyaa/wanderlust
+Backend repository: https://github.com/wanderlust-1-0/wanderlust-FE
+Frontend Setup
+Environment File
+
+Create a file named environment.ts in the src/environments directory.
+Paste the following content into the file, replacing placeholders with your actual API keys:
+export const backend_api = {
+  base_uri: "http://localhost:8000/api",
+  auth_uri: "http://localhost:8000/auth",
+};
+
+export const environment = {
+  production: false,
+  amadeus: {
+    api_key: 'YOUR_AMADEUS_API_KEY',
+    api_secret: 'YOUR_AMADEUS_API_SECRET',
+    auth_uri: 'https://test.api.amadeus.com/v1/security/oauth2/token', 
+    search_destination_uri: 'https://test.api.amadeus.com/v1/reference-data/locations/cities', 
+    popular_destinations_uri: 'https://test.api.amadeus.com/v1/travel/analytics/air-traffic/traveled',
+    airport_search_uri: 'https://test.api.amadeus.com/v1/reference-data/locations',
+  },
+  pixabay: {
+    api_key: 'YOUR_PIXABAY_API_KEY',
+    fetch_media_url: `${backend_api.base_uri}/pixabay/media`
+  },
+  staticResources: {
+    country_codes_path: 'assets\\files\\ISO_3166-1_alpha-2_country_codes.csv' 
+  },
+  googleMaps: {
+    api_key: 'YOUR_GOOGLE_MAPS_API_KEY',
+    search_text_uri: 'https://places.googleapis.com/v1/places:searchText',
+    place_details_uri: 'https://places.googleapis.com/v1',
+  },
+  openai: {
+    fetch_recommendations_uri: `${backend_api.base_uri}/recommendations`
+  },
+  itinerary: {
+    uri: `${backend_api.base_uri}/itineraries`
+  },
+  auth: {
+    login_uri: `${backend_api.auth_uri}/login`,
+    register_uri: `${backend_api.auth_uri}/register`,
+  }
+};
+
+Starting the Frontend Server
+
+Open a terminal in the project directory.
+Run the following commands:
+
+npm install
+ng serve
+
+This will start the frontend development server at http://localhost:4200.
+
+Backend Setup
+Environment File
+
+Create a file named .env in the root directory of your backend project.
+Paste the following content into the file, replacing placeholders with your actual credentials:
+
+PIXABAY_API_KEY=YOUR_PIXABAY_API_KEY
+
+OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+ASSISTANT_ID=YOUR_ASSISTANT_ID
+THREAD_ID=YOUR_THREAD_ID
+
+MONGO_URI=YOUR_MONGO_URI
+MONGO_DB=YOUR_MONGO_DB_NAME
+
+Starting the Backend Server
+
+Open a terminal in the project directory.
+Run the following commands:
+
+mvn clean install
+java -jar target/your-backend-app.jar
+
+This will start the backend server at http://localhost:8000.
+
+Running the Application
+Ensure MongoDB is running and accessible.
+Start the backend server following the instructions above.
+Start the frontend server following the instructions above.
+Access the application in your web browser at http://localhost:4200.
