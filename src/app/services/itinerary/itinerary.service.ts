@@ -32,26 +32,32 @@ export class ItineraryService {
 
   getAllItineraries(): Observable<ItineraryList> {
     return this.http.get<ItineraryList>(
-      environment.itinerary.url
+      environment.itinerary.uri
+    );
+  }
+
+  getItinerariesByUserId(userId: string): Observable<ItineraryList> {
+    return this.http.get<ItineraryList>(
+      `${environment.itinerary.uri}/user/${userId}`
     );
   }
 
   getItineraryById(id: string): Observable<Itinerary> {
     return this.http.get<Itinerary>(
-      `${environment.itinerary.url}/${id}`
+      `${environment.itinerary.uri}/${id}`
     );
   }
 
-  createItinerary(itinerary: Itinerary): Observable<Itinerary> {
+  createItineraryByUserId(userId: string, itinerary: Itinerary): Observable<Itinerary> {
     return this.http.post<Itinerary>(
-      environment.itinerary.url,
+      `${environment.itinerary.uri}/user/${userId}`,
       itinerary
     );
   }
 
   deleteItinerary(id: string): Observable<boolean> {
     return this.http.delete<boolean>(
-      `${environment.itinerary.url}/${id}`
+      `${environment.itinerary.uri}/${id}`
     );
   }
 
