@@ -24,7 +24,8 @@ export const appConfig: ApplicationConfig = {
       NgbModule,
       FormsModule,
       ReactiveFormsModule,
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
     ),
+    
   ],
 };
