@@ -19,10 +19,10 @@
     <a class="open-sans-400" mat-raised-button routerLink="/preferences"
       ><mat-icon>add_circle_outline</mat-icon> New Itinerary</a
     >
-    <a
-      class="logout-button open-sans-400"
-      mat-raised-button
-      (click)="logout()"
+    <a class="open-sans-400" mat-raised-button (click)="myProfile()"
+      ><mat-icon>person</mat-icon> My Profile </a
+    >
+    <a class="logout-button open-sans-400" mat-raised-button (click)="logout()"
       ><mat-icon>exit_to_app</mat-icon> Log out</a
     >
   </nav>
@@ -32,7 +32,13 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="over" position="end" class="sidenav">
+  <mat-sidenav
+    #sidenav
+    [opened]="false"
+    [mode]="'over'"
+    position="end"
+    class="sidenav"
+  >
     <mat-nav-list>
       <a
         class="open-sans-400"
@@ -40,8 +46,10 @@
         routerLink="/home"
         (click)="sidenav.close()"
       >
-        <mat-icon>home</mat-icon>
-        <span class="open-sans-400">Home</span>
+        <span class="entry">
+          <mat-icon>home</mat-icon>
+          <span class="open-sans-400">Home</span>
+        </span>
       </a>
       <a
         class="open-sans-400"
@@ -49,8 +57,10 @@
         routerLink="/preferences"
         (click)="sidenav.close()"
       >
-        <mat-icon>add_circle_outline</mat-icon>
-        <span class="open-sans-400">New Itinerary</span>
+        <span class="entry">
+          <mat-icon>add_circle_outline</mat-icon>
+          <span class="open-sans-400">New Itinerary</span>
+        </span>
       </a>
       <a
         class="open-sans-400"
@@ -58,8 +68,21 @@
         routerLink="/itineraries"
         (click)="sidenav.close()"
       >
-        <mat-icon>list</mat-icon>
-        <span class="open-sans-400">My Itineraries</span>
+        <span class="entry">
+          <mat-icon>list</mat-icon>
+          <span class="open-sans-400">My Itineraries</span>
+        </span>
+      </a>
+      <a
+        class="open-sans-400"
+        mat-list-item
+        routerLink="/profile"
+        (click)="sidenav.close()"
+      >
+        <span class="entry">
+          <mat-icon>person</mat-icon>
+          <span class="open-sans-400">My Profile</span>
+        </span>
       </a>
       <a
         class="open-sans-400 logout-button"
@@ -67,12 +90,15 @@
         (click)="logout()"
         (click)="sidenav.close()"
       >
-        <mat-icon>exit_to_app</mat-icon>
-        <span class="open-sans-400">Log out</span>
+        <span class="entry logout">
+          <mat-icon>exit_to_app</mat-icon>
+          <span class="open-sans-400">Log out</span>
+        </span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content #sidenavContent class="sidenav-content">
+    <!-- <h2>Content</h2> -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
