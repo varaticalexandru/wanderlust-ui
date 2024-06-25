@@ -1,26 +1,16 @@
 .footer {
     width: 100%;
     text-align: center;
+    justify-content: center;
     padding: 30px 0;
     background-color: rgba(63, 81, 181, 0.2);
     backdrop-filter: blur(10px);
     color: #2930cc;
   
-    h4 {
-      margin-bottom: 25px;
-      margin-top: 20px;
+    .footer-info {
       font-weight: 600;
     }
-  
-    .icons .fa-brands {
-      color: #2930cc;
-      margin: 0 13px;
-      cursor: pointer;
-      padding: 18px 0;
-      font-size: 28px;
-    }
-  
-    .fa-heart {
-      color: #2930cc;
-    }
+
+    
+
   }
