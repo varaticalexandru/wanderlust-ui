@@ -1,0 +1,230 @@
+<mat-card class="open-sans-400">
+  <div class="logo-container">
+    <img
+      class="app-logo"
+      src="assets/media/profile_icon.png"
+      alt="Logo"
+      class="logo"
+      width="200px"
+    />
+  </div>
+
+  <mat-card-title class="title open-sans-400"> My Profile </mat-card-title>
+
+  <mat-card-content>
+    <form [formGroup]="userForm" (ngSubmit)="submit()">
+      <p>
+        <mat-form-field class="firstName-field field" appearance="fill">
+          <mat-label>First name</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Ex. John"
+            formControlName="firstName"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error
+            *ngIf="
+              !userForm.controls['firstName'].hasError('required') &&
+              (userForm.controls['firstName'].hasError('minlength') ||
+                userForm.controls['firstName'].hasError('maxlength'))
+            "
+          >
+            First name must be <strong>between 2 and 50 </strong> characters
+          </mat-error>
+          <mat-error
+            *ngIf="userForm.controls['firstName'].hasError('required')"
+          >
+            First name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="lastName-field field" appearance="fill">
+          <mat-label>Last name</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Ex. Doe"
+            formControlName="lastName"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error
+            *ngIf="
+              !userForm.controls['lastName'].hasError('required') &&
+              (userForm.controls['lastName'].hasError('minlength') ||
+                userForm.controls['lastName'].hasError('maxlength'))
+            "
+          >
+            Last name must be <strong>between 2 and 50 characters</strong>
+          </mat-error>
+          <mat-error *ngIf="userForm.controls['lastName'].hasError('required')">
+            Last name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="email-field field" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="Ex. john@doe@gmail.com"
+            formControlName="email"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>alternate_email</mat-icon>
+          <mat-error
+            *ngIf="
+              userForm.controls['email'].hasError('email') &&
+              !userForm.controls['email'].hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+
+          <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              (!userForm.controls['email'].hasError('required') &&
+                !userForm.controls['email'].hasError('email') &&
+                userForm.controls['email'].hasError('minlength')) ||
+              userForm.controls['email'].hasError('maxlength')
+            "
+          >
+            Email must be <strong>between 3 and 320 </strong> characters
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-slide-toggle
+          [checked]="changePassword"
+          color="primary"
+          (change)="toggleChangePassword()"
+        >
+          Change password
+        </mat-slide-toggle>
+      </p>
+
+      @if (changePassword) {
+
+      <p>
+        <mat-form-field class="current-password-field field" appearance="fill">
+          <mat-label>Current Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="currentPassword"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error
+            *ngIf="userForm.controls['currentPassword'].hasError('required')"
+          >
+            Current password is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !userForm.controls['currentPassword'].hasError('required') &&
+              (userForm.controls['currentPassword'].hasError('minlength') ||
+                userForm.controls['currentPassword'].hasError('maxlength'))
+            "
+          >
+            Current password must be
+            <strong>between 8 and 50 </strong> characters
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="new-password-field field" appearance="fill">
+          <mat-label>New Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="newPassword"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error
+            *ngIf="userForm.controls['newPassword'].hasError('required')"
+          >
+            New password is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !userForm.controls['newPassword'].hasError('required') &&
+              (userForm.controls['newPassword'].hasError('minlength') ||
+                userForm.controls['newPassword'].hasError('maxlength'))
+            "
+          >
+            New password must be <strong>between 8 and 50 </strong> characters
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field
+          class="repeated-new-password-field field"
+          appearance="fill"
+        >
+          <mat-label>Repeated new password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="repeatedNewPassword"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error
+            *ngIf="
+              userForm.controls['repeatedNewPassword'].hasError('required')
+            "
+          >
+            Repeated new password is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !userForm.controls['repeatedNewPassword'].hasError('required') &&
+              (userForm.controls['repeatedNewPassword'].hasError('minlength') ||
+                userForm.controls['repeatedNewPassword'].hasError('maxlength'))
+            "
+          >
+            Repeated new password must be
+            <strong>between 8 and 50 </strong> characters
+          </mat-error>
+
+          <mat-error *ngIf="userForm.hasError('match_error')">
+            Passwords don't <strong> match </strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+      }
+
+      <div class="buttons-container">
+        <div class="button">
+          <button
+            type="submit"
+            [disabled]="!userForm.valid"
+            mat-raised-button
+            color="primary"
+            (click)="submit2()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<app-footer></app-footer>
+
+<router-outlet></router-outlet>
