@@ -11,6 +11,7 @@ import { ChipsInputComponent } from './chips-input/chips-input.component';
 import { CategoryInterests } from 'src/app/models/interests.model';
 import { MatDividerModule } from '@angular/material/divider';
 import { InterestSelection } from 'src/app/models/itinerary.model';
+import { FooterComponent } from '../../footer/footer.component';
 
 @Component({
   selector: 'app-interests',
@@ -23,6 +24,7 @@ import { InterestSelection } from 'src/app/models/itinerary.model';
     MatButton,
     ChipsInputComponent,
     MatDividerModule,
+    FooterComponent,
   ],
   templateUrl: './interests.component.html',
   styleUrl: './interests.component.scss',
