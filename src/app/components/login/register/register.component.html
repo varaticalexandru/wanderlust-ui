@@ -1,0 +1,202 @@
+<mat-card class="open-sans-400">
+  <div class="logo-container">
+    <img
+      class="app-logo"
+      src="assets/media/app_logo.png"
+      alt="Logo"
+      class="logo"
+      width="200px"
+    />
+  </div>
+
+  <mat-card-title class="title open-sans-400"> Sign up </mat-card-title>
+
+  <mat-card-content>
+    <form [formGroup]="registerForm" (ngSubmit)="submit()">
+      <p>
+        <mat-form-field class="firstName-field field" appearance="fill">
+          <mat-label>First name</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Ex. John"
+            formControlName="firstName"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error
+            *ngIf="
+              !registerForm.controls['firstName'].hasError('required') &&
+              (registerForm.controls['firstName'].hasError('minlength') ||
+                registerForm.controls['firstName'].hasError('maxlength'))
+            "
+          >
+            First name must be <strong>between 2 and 50 </strong> characters
+          </mat-error>
+          <mat-error
+            *ngIf="registerForm.controls['firstName'].hasError('required')"
+          >
+            First name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="lastName-field field" appearance="fill">
+          <mat-label>Last name</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Ex. Doe"
+            formControlName="lastName"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error
+            *ngIf="
+              !registerForm.controls['lastName'].hasError('required') &&
+              (registerForm.controls['lastName'].hasError('minlength') ||
+                registerForm.controls['lastName'].hasError('maxlength'))
+            "
+          >
+            Last name must be <strong>between 2 and 50 characters</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="registerForm.controls['lastName'].hasError('required')"
+          >
+            Last name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="email-field field" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="Ex. john@doe@gmail.com"
+            formControlName="email"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>alternate_email</mat-icon>
+          <mat-error
+            *ngIf="
+              registerForm.controls['email'].hasError('email') &&
+              !registerForm.controls['email'].hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+
+          <mat-error
+            *ngIf="registerForm.controls['email'].hasError('required')"
+          >
+            Email is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              (!registerForm.controls['email'].hasError('required') &&
+                !registerForm.controls['email'].hasError('email') &&
+                registerForm.controls['email'].hasError('minlength')) ||
+              registerForm.controls['email'].hasError('maxlength')
+            "
+          >
+            Email must be <strong>between 3 and 320 </strong> characters
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="password-field field" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error
+            *ngIf="registerForm.controls['password'].hasError('required')"
+          >
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !registerForm.controls['password'].hasError('required') &&
+              (registerForm.controls['password'].hasError('minlength') ||
+                registerForm.controls['password'].hasError('maxlength'))
+            "
+          >
+            Password must be <strong>between 8 and 50 </strong> characters
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="repeated-password-field field" appearance="fill">
+          <mat-label>Repeated password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="repeatedPassword"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error
+            *ngIf="
+              registerForm.controls['repeatedPassword'].hasError('required')
+            "
+          >
+            Repeated password is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !registerForm.controls['repeatedPassword'].hasError('required') &&
+              (registerForm.controls['repeatedPassword'].hasError(
+                'minlength'
+              ) ||
+                registerForm.controls['repeatedPassword'].hasError('maxlength'))
+            "
+          >
+            Repeated password must be
+            <strong>between 8 and 50 </strong> characters
+          </mat-error>
+
+          <mat-error *ngIf="registerForm.hasError('match_error')">
+            Passwords don't <strong>match </strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <div class="buttons-container">
+        <div class="button">
+          <button
+            type="submit"
+            [disabled]="!registerForm.valid"
+            mat-raised-button
+            color="primary"
+            (click)="submit2()"
+          >
+            Register
+          </button>
+        </div>
+        <div class="button">
+          <button
+            [disabled]="false"
+            mat-raised-button
+            color="link"
+            (click)="goToLogin()"
+          >
+            Go back to login
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<app-footer></app-footer>
+
+<router-outlet></router-outlet>
