@@ -3,7 +3,20 @@
   solution-channel="GMP_GCC_placeoverview_v1_xl"
 /> -->
 
-@if (itinerary$ | async; as itinerary) {
+@if (isLoading) {
+<div class="spinner-container">
+  <mat-progress-spinner
+    class="progress-spinner"
+    [color]="color"
+    [mode]="mode"
+    [value]="value"
+    [diameter]="diameter"
+    [strokeWidth]="strokeWidth"
+  >
+  </mat-progress-spinner>
+</div>
+
+} @if (itinerary$ | async; as itinerary) {
 <mat-card class="header-card">
   <mat-card-header>
     <mat-card-title class="itinerary-title open-sans-400">
@@ -69,3 +82,5 @@
   </button>
 </div>
 }
+
+<app-footer></app-footer>

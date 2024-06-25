@@ -9,6 +9,14 @@
 .header-card {
   margin-top: 40px;
   margin-bottom: 5px;
+  background-color: #efefff;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
 }
 
 mat-card {
@@ -116,3 +124,4 @@ mat-card-title.itinerary-title {
 gmap-container .map-container {
   border-radius: 20px !important;
 }
+

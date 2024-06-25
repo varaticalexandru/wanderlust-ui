@@ -28,12 +28,18 @@ import { ItineraryService } from 'src/app/services/itinerary/itinerary.service';
 import { DailyComponent } from '../../itinerary/daily/daily.component';
 import { SummaryComponent } from '../../itinerary/summary/summary.component';
 import { Itinerary, Recommendation } from 'src/app/models/itinerary.model';
-import { Observable, ReplaySubject, shareReplay, tap } from 'rxjs';
+import { Observable, ReplaySubject, pipe, shareReplay, tap } from 'rxjs';
 import { DayColorSvgCompositeMap } from 'src/app/models/svg.model';
 import { SvgService } from 'src/app/services/svg/svg.service';
 import { daysNumberInRange } from 'src/app/utils/distance-in-days';
 import { convertToLatLngLiteral } from 'src/app/utils/maps-utils';
 import { getBounds } from 'src/app/utils/maps-utils';
+import { FooterComponent } from '../../footer/footer.component';
+import {
+  MatProgressSpinnerModule,
+  ProgressSpinnerMode,
+} from '@angular/material/progress-spinner';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-itinerary-view',
@@ -53,6 +59,8 @@ import { getBounds } from 'src/app/utils/maps-utils';
     MatDialogModule,
     RouterOutlet,
     GoogleMapsModule,
+    FooterComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './itinerary-view.component.html',
   styleUrl: './itinerary-view.component.scss',
@@ -60,6 +68,7 @@ import { getBounds } from 'src/app/utils/maps-utils';
 export class ItineraryViewComponent
   implements OnInit, OnDestroy, AfterViewInit
 {
+  isLoading: boolean = true;
   itineraryId!: string;
 
   @ViewChild(GoogleMap) map!: GoogleMap;
@@ -69,36 +78,19 @@ export class ItineraryViewComponent
   dayColorSvgStringMap!: DayColorSvgCompositeMap;
   parser = new DOMParser();
 
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'determinate';
+  value: number = 0;
+  diameter: number = 150;
+  strokeWidth: number = 20;
+
   private itinerarySubject = new ReplaySubject<Itinerary>(1);
-  itinerary$ = this.itinerarySubject.asObservable().pipe(
-    tap((itinerary) => {
-      if (itinerary) {
-        this.center = {
-          lat: itinerary.latitude,
-          lng: itinerary.longitude,
-        };
-
-        this.itinerary = itinerary;
-
-        this.dayColorSvgStringMap =
-          this.svgSerivce.getRandomDayColorSvgStringCompositeMap(
-            itinerary.tripLength
-          );
-
-        this.markers = [];
-        itinerary.schedule?.forEach((dailyPlan, i) => {
-          dailyPlan?.recommendations.forEach((recommendation) => {
-            this.markers.push(convertToLatLngLiteral(recommendation.location));
-            recommendation.content = this.getSvg(i);
-          });
-
-          dailyPlan.color = this.getColor(dailyPlan.day);
-        });
-
-        if (this.map) this.map.fitBounds(getBounds(this.markers));
-      }
-    })
-  );
+  itinerary$ = this.itinerarySubject
+    .asObservable()
+    .pipe(
+      tap((itinerary) => this.setupItinerary(itinerary)),
+      tap(() => (this.isLoading = false))
+    );
 
   center!: google.maps.LatLngLiteral;
 
@@ -123,11 +115,7 @@ export class ItineraryViewComponent
   ) {
     this.activatedRoute.params.subscribe((params) => {
       this.itineraryId = params['id'];
-      this.itineraryService
-        .getItineraryById(this.itineraryId)
-        .subscribe((itinerary) => {
-          this.itinerarySubject.next(itinerary);
-        });
+      this.loadItinerary();
     });
   }
 
@@ -136,9 +124,53 @@ export class ItineraryViewComponent
   ngOnInit(): void {
     this.center = { lat: 0, lng: 0 };
     this.markers = [];
+
+    this.value = 25;
   }
 
   ngAfterViewInit(): void {}
+
+  private loadItinerary(): void {
+    this.itineraryService
+      .getItineraryById(this.itineraryId)
+      .subscribe((itinerary) => {
+        this.itinerarySubject.next(itinerary);
+        this.value = 50;
+      });
+  }
+
+  private setupItinerary(itinerary: Itinerary): void {
+
+    this.value = 75;
+
+    if (itinerary) {
+      this.center = {
+        lat: itinerary.latitude,
+        lng: itinerary.longitude,
+      };
+
+      this.itinerary = itinerary;
+
+      this.dayColorSvgStringMap =
+        this.svgSerivce.getRandomDayColorSvgStringCompositeMap(
+          itinerary.tripLength
+        );
+
+      this.markers = [];
+      itinerary.schedule?.forEach((dailyPlan, i) => {
+        dailyPlan?.recommendations.forEach((recommendation) => {
+          this.markers.push(convertToLatLngLiteral(recommendation.location));
+          recommendation.content = this.getSvg(i);
+        });
+
+        dailyPlan.color = this.getColor(dailyPlan.day);
+      });
+
+      if (this.map) this.map.fitBounds(getBounds(this.markers));
+
+      this.value = 100;
+    }
+  }
 
   getColor(day: number): string {
     return this.dayColorSvgStringMap.dayColorMap[day] as string;
@@ -185,5 +217,5 @@ export class ItineraryViewComponent
 
   backToItineraryList() {
     this.router.navigate(['/itineraries']);
-    }
+  }
 }
