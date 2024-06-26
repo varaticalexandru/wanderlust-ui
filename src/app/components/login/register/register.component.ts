@@ -145,16 +145,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  submit2() {
-    if (this.registerForm.valid) {
-      this.snackBar.open('User registered successfully ✅', 'Close', {
-        duration: 5000,
-        politeness: 'assertive',
-      });
-      this.router.navigate(['/login']);
-    }
-  }
-
   passwordsMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
     const password = formGroup.get('password')?.value;
     const repeatedPassword = formGroup.get('repeatedPassword')?.value;

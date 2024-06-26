@@ -8,7 +8,7 @@ import { check } from '@igniteui/material-icons-extended';
 import { backend_api, environment } from 'src/environments/environment';
 import { FailedAuthComponent } from 'src/app/components/login/failed-auth/failed-auth.component';
 import { LogOutComponent } from 'src/app/components/login/log-out/log-out.component';
-import { UserLogin, AuthResponse, UserRegister, RegisterResponse, UserDetails } from 'src/app/models/user/user.model';
+import { UserLogin, AuthResponse, UserRegister, RegisterResponse, UserDetails, UserUpdate } from 'src/app/models/user/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -58,6 +58,13 @@ export class AuthService {
 
   registerUser(user: UserRegister): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(this.register_uri, user);
+  }
+
+  updateUser(user: UserUpdate): Observable<RegisterResponse> {
+    return this.http.put<RegisterResponse>(
+      `${environment.auth.user_uri}/${user.id}`,
+      user
+    );
   }
 
   logout() {

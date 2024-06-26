@@ -27,11 +27,12 @@ import {
   UserRegister,
   RegisterResponse,
   UserDetails,
+  UserUpdate,
 } from 'src/app/models/user/user.model';
 import { AuthService } from 'src/app/services/auth/auth-service/auth.service';
 import { MyErrorStateMatcher } from '../login/login.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -64,6 +65,7 @@ export class UserProfileComponent implements OnInit {
   changePassword: boolean = false;
 
   user: UserDetails = {};
+  userId: string = '';
 
   constructor(
     private router: Router,
@@ -96,17 +98,14 @@ export class UserProfileComponent implements OnInit {
           Validators.maxLength(320),
         ]),
         currentPassword: new FormControl('', [
-          Validators.required,
           Validators.minLength(8),
           Validators.maxLength(128),
         ]),
         newPassword: new FormControl('', [
-          Validators.required,
           Validators.minLength(8),
           Validators.maxLength(128),
         ]),
         repeatedNewPassword: new FormControl('', [
-          Validators.required,
           Validators.minLength(8),
           Validators.maxLength(128),
         ]),
@@ -119,6 +118,7 @@ export class UserProfileComponent implements OnInit {
     this.authService
       .getCurrentUserId()
       .pipe(
+        tap((userId: string) => this.userId = userId),
         switchMap(
           (userId: string): Observable<UserDetails> =>
             this.authService.fetchUserById(userId)
@@ -131,39 +131,45 @@ export class UserProfileComponent implements OnInit {
           lastName: user.lastName,
           email: user.email,
         });
-        console.log(this.userForm.value);
       });
   }
 
   submit() {
     console.log(this.userForm.value);
 
-    const user: UserRegister = {
-      firstName: this.userForm.get('firstName')?.value,
-      lastName: this.userForm.get('lastName')?.value,
-      email: this.userForm.get('email')?.value,
-      password: this.userForm.get('password')?.value,
+    const user: UserUpdate = {
+      id: this.userId,
+      ...this.userForm.value,
     };
 
     if (this.userForm.valid) {
-      this.authService.registerUser(this.userForm.value).subscribe({
+      this.authService.updateUser(user).subscribe({
         next: (data: RegisterResponse) => {
-          this.snackBar.open('User registered successfully ✅', 'Close', {
+          this.snackBar.open('User updated successfully ✅', 'Close', {
             duration: 5000,
             politeness: 'assertive',
           });
-          this.router.navigate(['/login']);
+          this.loadUserDetails();
+          this.userForm.patchValue({
+            currentPassword: '',
+            newPassword: '',
+            repeatedNewPassword: '',
+          });
         },
         error: (error: any) => {
           const errorMsg: string = error.error.detail;
-          if (
-            error.status === 400 &&
-            errorMsg.includes('User with this email already exists')
-          ) {
-            this.snackBar.open('Email is already taken! ❌', 'Close', {
-              duration: 5000,
-              politeness: 'assertive',
-            });
+          if (error.status === 400) {
+            if (errorMsg.includes('User with this email already exists')) {
+              this.snackBar.open('Email is already taken! ❌', 'Close', {
+                duration: 5000,
+                politeness: 'assertive',
+              });
+            } else if (errorMsg.includes('Invalid current password')) {
+              this.snackBar.open('Invalid current password! ❌', 'Close', {
+                duration: 5000,
+                politeness: 'assertive',
+              });
+            }
             return;
           } else {
             this.snackBar.open(
@@ -178,17 +184,6 @@ export class UserProfileComponent implements OnInit {
         },
       });
     }
-  }
-
-  submit2 () {
-    if (this.userForm.valid) {
-      this.snackBar.open('User updated successfully ✅', 'Close', {
-        duration: 5000,
-        politeness: 'assertive',
-      });
-      this.router.navigate(['/itineraries']);
-    }
-  
   }
 
   passwordsMatchValidator(formGroup: AbstractControl): ValidationErrors | null {

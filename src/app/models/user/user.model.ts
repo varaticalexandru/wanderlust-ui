@@ -10,11 +10,22 @@ export interface AuthResponse {
 }
 
 export interface UserRegister {
+    id?: string;
     firstName: string;
     lastName: string;
     email: string;
     password: string;
 }
+
+export interface UserUpdate {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    currentPassword?: string;
+    newPassword?: string;
+}
+
 
 export interface UserDetails {
     firstName?: string;
