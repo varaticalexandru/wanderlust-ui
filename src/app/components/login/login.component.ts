@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import {
   FormControl,
   FormGroup,
@@ -52,6 +53,52 @@ import { FooterComponent } from '../footer/footer.component';
   ],
 })
 export class LoginComponent implements OnInit {
+=======
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login/login.service';
+import { UserLogin } from '../../models/user-login.model';
+import { MatDialog } from '@angular/material/dialog';
+import { FailedAuthComponent } from './failed-auth/failed-auth.component';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
+import { CommonModule, NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatSuffix, MatError } from '@angular/material/form-field';
+import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+
+
+@Component({
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: true,
+    imports: [
+        CommonModule,
+        MatCard,
+        MatCardTitle,
+        MatCardContent,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatIcon,
+        MatSuffix,
+        NgIf,
+        MatError,
+        MatButton,
+        MatCardFooter,
+        MatProgressBar,
+    ],
+})
+export class LoginComponent implements OnInit {
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   hide: boolean = true;
   loginForm!: FormGroup;
   user!: UserLogin;
@@ -61,6 +108,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+<<<<<<< HEAD
     private authService: AuthService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
@@ -70,6 +118,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['itineraries']);
       }
     });
+=======
+    private loginService: LoginService,
+    private dialog: MatDialog,
+  ) {
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   }
 
   ngOnInit(): void {
@@ -78,6 +132,7 @@ export class LoginComponent implements OnInit {
 
   initLoginForm() {
     this.loginForm = new FormGroup({
+<<<<<<< HEAD
       email: new FormControl('', [
         Validators.required,
         Validators.email,
@@ -90,6 +145,10 @@ export class LoginComponent implements OnInit {
         Validators.minLength(8),
         Validators.maxLength(128),
       ]),
+=======
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     });
   }
 
@@ -98,6 +157,7 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       this.user = this.loginForm.value;
+<<<<<<< HEAD
       this.authService.login(this.user);
     }
 
@@ -131,3 +191,30 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     );
   }
 }
+=======
+      this.loginService.login(this.user).subscribe(
+        (data: boolean) => {
+
+          this.isLoading = false;
+
+          if (data) {
+            this.router.navigate(['/preferences/destination']);
+          }
+          else {
+            this.error = true;
+            this.dialog.open(FailedAuthComponent);
+          }
+        }
+      );
+    }
+  }
+}
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b

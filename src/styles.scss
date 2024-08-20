@@ -58,7 +58,12 @@ body {
   height: 100%;
   margin: 0;
   font-family: "Open Sans";
+<<<<<<< HEAD
   // overflow: hidden;
+=======
+  height: 100%;
+  overflow: hidden;
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }
 
 .map-container {
@@ -71,6 +76,18 @@ body {
   box-shadow: 0px 8px 20px rgba(5, 2, 179, 0.3) !important;
 }
 
+<<<<<<< HEAD
 .mdc-switch .mdc-switch__handle-track {
   width: calc(100% - 52px) !important;
+=======
+app-root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.router-outlet + * {
+  flex: 1 1 auto;
+  overflow: auto;
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }

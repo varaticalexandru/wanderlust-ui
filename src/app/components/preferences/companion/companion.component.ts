@@ -17,7 +17,10 @@ import { budgets } from 'src/app/data/budget.data';
 import { BudgetCardComponent } from './budget-card/budget-card.component';
 import { KeyValuePipe } from '@angular/common';
 import { Budget } from 'src/app/models/budget.model';
+<<<<<<< HEAD
 import { FooterComponent } from '../../footer/footer.component';
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
 @Component({
   selector: 'app-companion',
@@ -33,7 +36,10 @@ import { FooterComponent } from '../../footer/footer.component';
     SurveyQuestionComponent,
     BudgetCardComponent,
     KeyValuePipe,
+<<<<<<< HEAD
     FooterComponent,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   ],
   templateUrl: './companion.component.html',
   styleUrl: './companion.component.scss',

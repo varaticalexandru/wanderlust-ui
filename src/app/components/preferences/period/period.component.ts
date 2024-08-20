@@ -13,8 +13,11 @@ import { daysNumberInRange } from 'src/app/utils/distance-in-days';
 import { MatButton } from '@angular/material/button';
 import { Subscription, debounceTime, fromEvent } from 'rxjs';
 import { PreferencesService } from 'src/app/services/preferences/preferences.service';
+<<<<<<< HEAD
 import { FooterComponent } from '../../footer/footer.component';
 import { MyErrorStateMatcher } from '../../login/login.component';
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
 @Component({
   selector: 'app-period',
@@ -43,8 +46,12 @@ import { MyErrorStateMatcher } from '../../login/login.component';
       MatInputModule,
       MatFormFieldModule,
       MatIconModule,
+<<<<<<< HEAD
       MatButton,
       FooterComponent,
+=======
+      MatButton
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     ]
 })
 export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -149,3 +156,13 @@ export class PeriodComponent implements OnInit, OnDestroy, AfterViewInit {
 
 }
 
+<<<<<<< HEAD
+=======
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl): boolean {
+    return control && control.invalid;
+  }
+
+}
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b

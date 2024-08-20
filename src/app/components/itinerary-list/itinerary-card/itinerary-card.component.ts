@@ -30,6 +30,10 @@ export class ItineraryCardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
+<<<<<<< HEAD
+=======
+    console.log(this.itinerary);
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     
   }
 

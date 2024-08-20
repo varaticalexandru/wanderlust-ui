@@ -19,12 +19,15 @@
     <a class="open-sans-400" mat-raised-button routerLink="/preferences"
       ><mat-icon>add_circle_outline</mat-icon> New Itinerary</a
     >
+<<<<<<< HEAD
     <a class="open-sans-400" mat-raised-button (click)="myProfile()"
       ><mat-icon>person</mat-icon> My Profile </a
     >
     <a class="logout-button open-sans-400" mat-raised-button (click)="logout()"
       ><mat-icon>exit_to_app</mat-icon> Log out</a
     >
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   </nav>
   <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
     <mat-icon>menu</mat-icon>
@@ -32,6 +35,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
+<<<<<<< HEAD
   <mat-sidenav
     #sidenav
     [opened]="false"
@@ -39,6 +43,9 @@
     position="end"
     class="sidenav"
   >
+=======
+  <mat-sidenav #sidenav mode="over" position="end" class="sidenav">
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     <mat-nav-list>
       <a
         class="open-sans-400"
@@ -46,10 +53,15 @@
         routerLink="/home"
         (click)="sidenav.close()"
       >
+<<<<<<< HEAD
         <span class="entry">
           <mat-icon>home</mat-icon>
           <span class="open-sans-400">Home</span>
         </span>
+=======
+        <mat-icon>home</mat-icon>
+        <span class="open-sans-400">Home</span>
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
       </a>
       <a
         class="open-sans-400"
@@ -57,10 +69,15 @@
         routerLink="/preferences"
         (click)="sidenav.close()"
       >
+<<<<<<< HEAD
         <span class="entry">
           <mat-icon>add_circle_outline</mat-icon>
           <span class="open-sans-400">New Itinerary</span>
         </span>
+=======
+        <mat-icon>add_circle_outline</mat-icon>
+        <span class="open-sans-400">New Itinerary</span>
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
       </a>
       <a
         class="open-sans-400"
@@ -68,6 +85,7 @@
         routerLink="/itineraries"
         (click)="sidenav.close()"
       >
+<<<<<<< HEAD
         <span class="entry">
           <mat-icon>list</mat-icon>
           <span class="open-sans-400">My Itineraries</span>
@@ -94,11 +112,18 @@
           <mat-icon>exit_to_app</mat-icon>
           <span class="open-sans-400">Log out</span>
         </span>
+=======
+        <mat-icon>list</mat-icon>
+        <span class="open-sans-400">My Itineraries</span>
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
       </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content #sidenavContent class="sidenav-content">
+<<<<<<< HEAD
     <!-- <h2>Content</h2> -->
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

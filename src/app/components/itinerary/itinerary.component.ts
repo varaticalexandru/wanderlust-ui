@@ -31,13 +31,19 @@ import {
 import {
   Observable,
   ObservableInput,
+<<<<<<< HEAD
   catchError,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   forkJoin,
   map,
   mergeMap,
   of,
   switchMap,
+<<<<<<< HEAD
   tap,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 } from 'rxjs';
 import { SummaryComponent } from './summary/summary.component';
 import { AsyncPipe } from '@angular/common';
@@ -56,6 +62,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SaveItineraryDialogComponent } from './save-itinerary-dialog/save-itinerary-dialog.component';
 import { Router } from '@angular/router';
 import { convertToLatLngLiteral, getBounds } from 'src/app/utils/maps-utils';
+<<<<<<< HEAD
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   MatProgressSpinner,
@@ -63,6 +70,8 @@ import {
   ProgressSpinnerMode,
 } from '@angular/material/progress-spinner';
 import { ThemePalette } from '@angular/material/core';
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
 @Component({
   selector: 'app-itinerary',
@@ -80,7 +89,10 @@ import { ThemePalette } from '@angular/material/core';
     DailyComponent,
     AsyncPipe,
     MatDialogModule,
+<<<<<<< HEAD
     MatProgressSpinnerModule,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './itinerary.component.html',
@@ -93,6 +105,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
 
   parser = new DOMParser();
 
+<<<<<<< HEAD
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
   value: number = 25;
@@ -105,22 +118,43 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   _convertToLatLngLiteral = convertToLatLngLiteral;
 
   currentUsedId: string | null = null;
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   api_key = environment.googleMaps.api_key;
   page_size: number = 1;
   preferences!: Preferences;
   _itinerary!: Itinerary;
   itinerary$!: Observable<Itinerary | null>;
+<<<<<<< HEAD
   dayColorSvgStringMap!: DayColorSvgCompositeMap;
 
   center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
+=======
+  _placeDetails: Array<Recommendation> = [];
+  dayColorSvgStringMap!: DayColorSvgCompositeMap;
+
+  _convertToLatLngLiteral = convertToLatLngLiteral;
+
+  center!: google.maps.LatLngLiteral;
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   options: google.maps.MapOptions = {
     mapId: 'DEMO_MAP_ID',
     gestureHandling: 'greedy',
   };
+<<<<<<< HEAD
   width: number | null = null;
   height: number | null = null;
   zoom: number = 13;
   markers: Array<google.maps.LatLngLiteral> = [];
+=======
+
+  width: number | null = null;
+  height: number | null = null;
+  zoom: number = 13;
+
+  markers!: Array<google.maps.LatLngLiteral>;
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
   constructor(
     private preferencesService: PreferencesService,
@@ -133,6 +167,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.isLoading = true;
     this.currentUsedId = localStorage.getItem('userId');
     this.preferences = this.loadPreferences();
@@ -151,6 +186,12 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private initializeDayColorSvgStringMap(): void {
+=======
+    this.preferences = this.loadPreferences();
+
+    this.center = { lat: 0, lng: 0 };
+    this.markers = [];
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     this.dayColorSvgStringMap =
       this.svgService.getRandomDayColorSvgStringCompositeMap(
         daysNumberInRange(
@@ -158,6 +199,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
           new Date(this.preferences.period.endDate)
         )
       );
+<<<<<<< HEAD
   }
 
   private loadItineraryWithDetails(): Observable<Itinerary> {
@@ -197,6 +239,35 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private loadDestinationPlaceId(
+=======
+
+    console.log(this.dayColorSvgStringMap);
+
+    this.itinerary$ = this.loadItineraryWithDetails();
+  }
+
+  ngOnDestroy(): void {}
+
+  ngAfterViewInit(): void {
+    this.itinerary$.subscribe((itinerary: Itinerary | null) => {
+      itinerary?.schedule?.forEach((dailyPlan) =>
+        dailyPlan?.recommendations.forEach((recommendation) => {
+          this.markers.push(
+            convertToLatLngLiteral(recommendation.location)
+          );
+        })
+      );
+
+      if (this.map) this.map.fitBounds(getBounds(this.markers));
+    });
+  }
+
+  loadPreferences(): Preferences {
+    return this.preferencesService.getPreferences();
+  }
+
+  loadDestinationPlaceId(
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     cityName: string,
     countryName: string
   ): Observable<PlaceDetailsResponse> {
@@ -204,6 +275,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
       textQuery: `${cityName}, ${countryName}`,
       pageSize: this.page_size,
     };
+<<<<<<< HEAD
     return this.textSearchService.fetchPlaceDetailsByQuery(placeDetailsReq);
   }
 
@@ -309,6 +381,80 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
     marker: MapAdvancedMarker,
     recommendation: Recommendation
   ): void {
+=======
+
+    return this.textSearchService.fetchPlaceDetailsByQuery(placeDetailsReq);
+  }
+
+  loadItineraryWithDetails(): Observable<Itinerary> {
+    return this.itineraryService
+      .generateItineraryByPreferences(this.preferences)
+      .pipe(
+        switchMap((itinerary: Itinerary): Observable<Itinerary> => {
+          return this.loadDestinationPlaceId(
+            itinerary.cityName,
+            itinerary.countryName
+          ).pipe(
+            map((placeDetails: PlaceDetailsResponse) => {
+              itinerary.placeId = placeDetails.places[0].id;
+              console.log(itinerary);
+              return itinerary;
+            })
+          );
+        }),
+        mergeMap((itinerary: Itinerary): Observable<Itinerary> => {
+          const detailsRequests$: Observable<PlaceDetailsResponse>[] =
+            itinerary.schedule.flatMap((dailyPlan) =>
+              dailyPlan.recommendations.map((place) =>
+                this.textSearchService.fetchPlaceDetailsByQuery({
+                  textQuery: `${place.name}, ${itinerary.cityName}, ${itinerary.countryName}`,
+                  pageSize: this.page_size,
+                })
+              )
+            );
+
+          return forkJoin(detailsRequests$).pipe(
+            map((placeDetails: PlaceDetailsResponse[]): Itinerary => {
+              this.center = {
+                lat: itinerary.latitude,
+                lng: itinerary.longitude,
+              };
+
+              let idx = 0;
+              itinerary.schedule.forEach((dailyPlan: DailyPlan, i: number) => {
+                dailyPlan.color = this.getColor(i);
+
+                dailyPlan.recommendations.forEach(
+                  (recommendation: Recommendation) => {
+                    this._placeDetails.push(recommendation);
+
+                    recommendation.name =
+                      placeDetails[idx].places[0].displayName.text;
+                    recommendation.id = placeDetails[idx].places[0].id;
+                    recommendation.location =
+                      placeDetails[idx].places[0].location;
+
+                    idx++;
+
+                    recommendation.content = this.getSvg(i);
+                  }
+                );
+              });
+
+              this._itinerary = itinerary;
+              console.log(itinerary);
+              return itinerary;
+            })
+          );
+        })
+      );
+  }
+
+  
+
+
+  openInfoWindow(marker: MapAdvancedMarker, recommendation: Recommendation) {
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     const containerDiv = document.createElement('div');
     containerDiv.setAttribute('class', 'container');
 
@@ -323,6 +469,10 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
     directionsButton.textContent = 'Directions';
 
     placeOverview.appendChild(directionsButton);
+<<<<<<< HEAD
+=======
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     containerDiv.appendChild(placeOverview);
 
     this.infoWindow.openAdvancedMarkerElement(
@@ -332,6 +482,11 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   focusOnMarker(recommendation: Recommendation): void {
+<<<<<<< HEAD
+=======
+    console.log('FOCUSED');
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     const markerPosition = convertToLatLngLiteral(recommendation.location);
     this.map.panTo(markerPosition);
     this.zoom = 16;
@@ -345,21 +500,35 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getColor(day: number): string {
+<<<<<<< HEAD
     return this.dayColorSvgStringMap.dayColorMap[day];
   }
 
   saveItinerary(): void {
+=======
+    return this.dayColorSvgStringMap.dayColorMap[day] as string;
+  }
+
+  saveItinerary() {
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     const dialogRef = this.dialog.open(SaveItineraryDialogComponent, {
       maxWidth: '1200px',
       maxHeight: '800px',
       width: '800px',
       height: '250px',
+<<<<<<< HEAD
       data: { itinerary: this._itinerary },
+=======
+      data: {
+        itinerary: this._itinerary,
+      },
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     });
 
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result.trim() !== '') {
         this._itinerary.name = result;
+<<<<<<< HEAD
         this.saveItineraryToService();
       }
     });
@@ -376,4 +545,20 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
         this.router.navigate(['/itineraries']);
       });
   }
+=======
+        this.itineraryService
+          .createItinerary(this._itinerary)
+          .subscribe((itinerary: Itinerary) => {
+            console.log(itinerary);
+            this.snackBar.open('Itinerary saved successfully ✅', 'Close', {
+              duration: 5000,
+              politeness: 'assertive',
+            });
+
+            this.router.navigate(['/itineraries']);
+          });
+      }
+    });
+  }
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }
