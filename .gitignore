@@ -43,3 +43,6 @@ Thumbs.db
 
 # environment files
 **/environment*.ts
+
+# large files
+**/background_long.mp4
