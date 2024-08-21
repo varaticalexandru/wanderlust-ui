@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+<<<<<<< HEAD
+<<<<<<< HEAD
 import { Itinerary, ItineraryList } from 'src/app/models/itinerary.model';
 import { ItineraryCardComponent } from './itinerary-card/itinerary-card.component';
 import { ItineraryService } from 'src/app/services/itinerary/itinerary.service';
@@ -13,11 +15,29 @@ import {
   PlacePhotoUriResponse,
   PlacePhotosResponse,
 } from 'src/app/models/google-maps/place-photo.model';
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Itinerary, ItineraryList } from 'src/app/models/itinerary.model';
+import { ItineraryCardComponent } from './itinerary-card/itinerary-card.component';
+import { ItineraryService } from 'src/app/services/itinerary/itinerary.service';
+import { Observable, forkJoin, map, mergeMap, switchMap } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { PhotoSearchService } from 'src/app/services/google-maps/photo-search/photo-search.service';
+import { TextSearchService } from 'src/app/services/google-maps/text-search/text-search.service';
+import { PlacePhotoUriResponse, PlacePhotosResponse } from 'src/app/models/google-maps/place-photo.model';
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { Router, RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
+<<<<<<< HEAD
+<<<<<<< HEAD
 import { AuthService } from 'src/app/services/auth/auth-service/auth.service';
 import { LogOutComponent } from '../login/log-out/log-out.component';
 import {
@@ -25,6 +45,10 @@ import {
   ProgressSpinnerMode,
 } from '@angular/material/progress-spinner';
 import { ThemePalette } from '@angular/material/core';
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
 @Component({
   selector: 'app-itinerary-list',
@@ -34,25 +58,47 @@ import { ThemePalette } from '@angular/material/core';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    MatProgressBarModule,
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+    MatProgressBarModule,
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     ItineraryCardComponent,
     AsyncPipe,
     MatDialogModule,
     RouterOutlet,
     FooterComponent,
+<<<<<<< HEAD
+<<<<<<< HEAD
     MatProgressSpinnerModule,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   ],
   templateUrl: './itinerary-list.component.html',
   styleUrl: './itinerary-list.component.scss',
 })
 export class ItineraryListComponent implements OnInit {
+<<<<<<< HEAD
+<<<<<<< HEAD
 
   noItineraries: boolean = false;
   isLoading: boolean = true;
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   photoIds: Array<string> = [];
   photos: Array<string> = [];
   itineraryList$!: Observable<ItineraryList | null>;
   itineraryList!: ItineraryList;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
   currentUserId: string | null = null;
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
@@ -122,10 +168,64 @@ export class ItineraryListComponent implements OnInit {
           (photosResponse) => photosResponse.photos[0].name
         );
         return this.loadPhotoUris(itineraryList);
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+  constructor(
+    private itineraryService: ItineraryService,
+    private photoService: PhotoSearchService,
+    private textSearchService: TextSearchService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.itineraryList$ = this.itineraryService.getAllItineraries().pipe(
+      mergeMap((itineraryList: ItineraryList) => {
+        const photoIdsRequests$: Observable<PlacePhotosResponse>[] =
+          itineraryList.itineraries.map((itinerary) => {
+            return this.textSearchService.fetchPlacePhotoIds(
+              itinerary.placeId as string
+            );
+          });
+
+        return forkJoin(photoIdsRequests$).pipe(
+          map((photosResponses: PlacePhotosResponse[]) => {
+            const photoIds: Array<string> = photosResponses.map(
+              (photosResponse) => photosResponse.photos[0].name
+            );
+            this.photoIds = photoIds;
+
+            const photoUrisRequests$: Observable<PlacePhotoUriResponse>[] = photoIds.map(photoId =>
+              this.photoService.fetchPhotoById(photoId)
+            );
+
+            return forkJoin(photoUrisRequests$).pipe(
+              map((photoUris: Array<PlacePhotoUriResponse>) => {
+                const photoUrisArr: Array<string> = photoUris.map(photoUri => photoUri.photoUri); 
+                this.photos = photoUrisArr;
+
+                this.itineraryList = itineraryList;
+                return itineraryList;
+              })
+            );
+          }),
+
+          switchMap(itineraryList => {
+            return itineraryList;
+          })
+        );
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
       })
     );
   }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
   private loadPhotoUris(
     itineraryList: ItineraryList
   ): Observable<ItineraryList> {
@@ -152,21 +252,68 @@ export class ItineraryListComponent implements OnInit {
   }
 
   deleteItinerary(itineraryId: string): void {
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+  goToNewItinerary() {
+    this.router.navigate(['/preferences']);
+  }
+
+  deleteItinerary(itineraryId: string) {
+
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
       maxWidth: '1200px',
       maxHeight: '800px',
       width: '500px',
       height: '200px',
+<<<<<<< HEAD
+<<<<<<< HEAD
       data: { itinerary: this.findItineraryById(itineraryId) },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.executeDeleteItinerary(itineraryId);
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+      data: {
+        itinerary: this.findItineraryById(itineraryId),
+      },
+    })
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.itineraryService.deleteItinerary(itineraryId).subscribe({
+          next: () => {
+            this.itineraryList$ = this.itineraryService.getAllItineraries();
+            this.snackBar.open('Itinerary deleted successfully ! ✅', 'Close', {
+              duration: 5000,
+              politeness: 'assertive',
+            });
+          },
+          error: (error) => {
+            console.error(`Error deleting itinerary: {itineraryId}` + error);
+            this.snackBar.open('Error deleting itinerary. ❌', 'Close', {
+              duration: 5000,
+              politeness: 'assertive',
+            });
+          }
+        });
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
       }
     });
   }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
   private executeDeleteItinerary(itineraryId: string): void {
     this.itineraryService.deleteItinerary(itineraryId).subscribe({
       next: () => {
@@ -197,6 +344,18 @@ export class ItineraryListComponent implements OnInit {
   }
 
   private findItineraryById(itineraryId: string): Itinerary {
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+  viewItinerary(itineraryId: string) {
+    this.router.navigate(['/itineraries', itineraryId]);
+  }
+
+  findItineraryById(itineraryId: string): Itinerary {
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     const foundItinerary = this.itineraryList.itineraries.find(
       (itinerary) => itinerary.id === itineraryId
     );

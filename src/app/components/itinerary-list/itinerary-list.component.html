@@ -1,10 +1,20 @@
 <div class="mat-card-container open-sans-400">
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  @if (itineraryList$ | async; as itineraryList) {
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+  @if (itineraryList$ | async; as itineraryList) {
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   <mat-card class="itinerary-list-card">
     <mat-card-title class="itineraries-title open-sans-400">
       My Travel Itineraries 🧭
     </mat-card-title>
 
     <mat-card-content class="content-container">
+<<<<<<< HEAD
+<<<<<<< HEAD
       @if (isLoading) {
       <mat-progress-spinner
         class="progress-spinner"
@@ -25,15 +35,34 @@
       
       @if (itineraryList$ | async; as itineraryList) { @for (itinerary of
       itineraryList.itineraries; track $index) {
+=======
+      @for (itinerary of itineraryList.itineraries; track $index) {
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+      @for (itinerary of itineraryList.itineraries; track $index) {
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
       <app-itinerary-card
         [itinerary]="itinerary"
         [image]="photos[$index]"
         (viewItinerary)="viewItinerary($event)"
         (deleteItinerary)="deleteItinerary($event)"
       ></app-itinerary-card>
+<<<<<<< HEAD
+<<<<<<< HEAD
       }}
     </mat-card-content>
   </mat-card>
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+      }
+    </mat-card-content>
+  </mat-card>
+  }
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 </div>
 
 <button
@@ -45,6 +74,20 @@
   <mat-icon>add</mat-icon>
 </button>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 <router-outlet></router-outlet>
 
 <app-footer></app-footer>
+=======
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b

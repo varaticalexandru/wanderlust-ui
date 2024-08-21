@@ -1,9 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
+<<<<<<< HEAD
+<<<<<<< HEAD
 import { DailyPlan, Recommendation } from 'src/app/models/itinerary.model';
 import { makeColorPale } from 'src/app/utils/colors';
 import {MatExpansionModule} from '@angular/material/expansion';
+=======
+import { DailyPlan, Itinerary, Recommendation } from 'src/app/models/itinerary.model';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+import { DailyPlan, Itinerary, Recommendation } from 'src/app/models/itinerary.model';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 import '@googlemaps/extended-component-library/place_overview.js';
 import '@googlemaps/extended-component-library/place_building_blocks/place_directions_button.js';
 
@@ -12,8 +20,16 @@ import '@googlemaps/extended-component-library/place_building_blocks/place_direc
   standalone: true,
   imports: [
     MatCardModule,
+<<<<<<< HEAD
+<<<<<<< HEAD
     MatStepperModule,
     MatExpansionModule,
+=======
+    MatStepperModule  
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+    MatStepperModule  
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
@@ -28,8 +44,14 @@ export class DailyComponent implements OnInit, OnDestroy {
   
   @Output() recommendationClicked = new EventEmitter<Recommendation>;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
   makeColorPale = makeColorPale;
 
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   constructor() {}
 
   ngOnInit(): void {}

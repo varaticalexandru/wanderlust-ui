@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
 @if (isLoading) {
 <div class="spinner-container">
   <mat-progress-spinner
@@ -13,6 +15,19 @@
   <div class="loading-text open-sans-400">{{ loadingStatus }}</div>
 </div>
 } @if (itinerary$ | async; as itinerary) {
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+<!-- <gmpx-api-loader
+  [key]="api_key"
+  solution-channel="GMP_GCC_placeoverview_v1_xl"
+/> -->
+
+@if (itinerary$ | async; as itinerary) {
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 <mat-card class="header-card">
   <mat-card-header>
     <mat-card-title class="itinerary-title open-sans-400">
@@ -39,6 +54,16 @@
   </div>
 
   <div class="right-container">
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <!-- <img [width]="width" height="height" class="map" src="../../../assets/media/map.png" alt="map"> -->
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+    <!-- <img [width]="width" height="height" class="map" src="../../../assets/media/map.png" alt="map"> -->
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     <div class="gmap-container">
       <google-map
         class="gmap"
@@ -65,6 +90,8 @@
 </div>
 
 <div class="save-container">
+<<<<<<< HEAD
+<<<<<<< HEAD
   <button
     class="save-btn"
     mat-raised-button
@@ -72,6 +99,12 @@
     [disabled]="false"
     (click)="saveItinerary()"
   >
+=======
+  <button class="save-btn" mat-raised-button color="primary" [disabled]="false" (click)="saveItinerary()">
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+  <button class="save-btn" mat-raised-button color="primary" [disabled]="false" (click)="saveItinerary()">
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     Save itinerary
   </button>
 </div>

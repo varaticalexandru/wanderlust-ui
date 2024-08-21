@@ -69,9 +69,19 @@ mat-card.header-card {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
+<<<<<<< HEAD
   margin-top: 40px;
   margin-bottom: 5px;
   background-color: #efefff;
+=======
+  margin-top: 100px;
+  margin-bottom: 5px;
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+  margin-top: 100px;
+  margin-bottom: 5px;
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }
 
 mat-card-title.itinerary-title {
@@ -106,7 +116,15 @@ mat-card-title.itinerary-title {
   .gmap-container {
     position: -webkit-sticky;
     position: sticky;
+<<<<<<< HEAD
+<<<<<<< HEAD
     top: 130px;
+=======
+    top: 160px;
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+    top: 160px;
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     height: 400px; 
     z-index: 100; 
   }
@@ -116,6 +134,8 @@ gmap-container .map-container {
   border-radius: 20px !important;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 .spinner-container {
   margin-top: 60px;
   display: flex;
@@ -131,3 +151,7 @@ gmap-container .map-container {
     font-weight: 500;
   }
 }
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b

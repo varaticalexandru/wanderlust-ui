@@ -13,16 +13,36 @@
 }
 
 .navbar {
+<<<<<<< HEAD
+<<<<<<< HEAD
   position: fixed;
   z-index: 2;
   top: 10px;
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   padding-left: 60px;
   padding-right: 60px;
   border-radius: 20px !important;
   width: 96%;
   justify-self: center !important;
+<<<<<<< HEAD
+<<<<<<< HEAD
   left: 0;
   right: 0;
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+  position: fixed;
+  top: 10px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   background-color: rgba(63, 81, 181, 0.2);
   backdrop-filter: blur(10px);
   display: flex;
@@ -47,10 +67,16 @@
   .nav-links {
     display: flex;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
     .logout-button {
       color: rgb(255, 0, 0);
     }
 
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     a {
       color: #2930cc;
       text-decoration: none;
@@ -66,6 +92,14 @@
         background-color: rgba(255, 255, 255, 0.2);
       }
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   }
 
   .menu-button {
@@ -73,7 +107,15 @@
     color: #2930cc;
   }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
   @media (max-width: 1156px) {
+=======
+  @media (max-width: 848px) {
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+  @media (max-width: 848px) {
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     .nav-links {
       display: none;
     }
@@ -84,6 +126,8 @@
   }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 mat-sidenav-container {
   height: 100%;
 }
@@ -121,8 +165,60 @@ mat-sidenav-content {
   @media screen and (min-width: 600px) {
     padding-top: 4rem;
   }
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+.sidenav-container {
+  height: 100vh;
+  margin-top: 64px;
+  border-radius: 20px;
+}
+
+.sidenav {
+  width: 250px;
+
+  mat-nav-list {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      display: flex;
+      align-items: center;
+
+      span {
+        font-weight: 500;
+      }
+
+      mat-icon {
+        margin-right: 16px;
+        color: #2930cc;
+        padding-top: 5px;
+      }
+    }
+  }
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 64px);
+  overflow: auto;
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }
 
 .blurred {
   backdrop-filter: blur(10px);
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b

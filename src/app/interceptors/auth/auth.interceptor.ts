@@ -1,6 +1,8 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
+<<<<<<< HEAD
+<<<<<<< HEAD
 
   console.log(req);  
 
@@ -22,4 +24,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   console.log(authReq);
   
   return next(authReq);
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+  
+  // console.log('Request');
+  // console.log(req);
+  
+  
+  return next(req);
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 };

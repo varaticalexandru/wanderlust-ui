@@ -1,4 +1,6 @@
 .open-sans-400 {
+<<<<<<< HEAD
+<<<<<<< HEAD
   font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -94,3 +96,99 @@ mat-card:hover {
 app-footer {
   width: 100%;
 }
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+.mat-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+mat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px;
+    padding: 10px;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+igx-calendar {
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+igx-calendar:hover {
+    box-shadow: 0px 8px 20px rgba(5, 2, 179, 0.3);
+}
+
+.period-title {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0px 40px 0px;
+    font-size: 2em;
+}
+
+.date-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.daily-recommendations-number-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.full-width {
+    width: 80%;
+}
+
+.error {
+    color: #ba1a1a;
+}
+
+.error-label {
+    color: #ba1a1a;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 40px 40px;
+}
+
+button {
+    font-size: 1.2em;
+    padding: 20px 60px;
+}
+
+mat-card:hover {
+    box-shadow: 0px 8px 20px rgba(5, 2, 179, 0.3);
+<<<<<<< HEAD
+}
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+}
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
