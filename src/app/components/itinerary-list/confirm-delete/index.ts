@@ -1,0 +1,1 @@
+export { ConfirmDeleteComponent } from './confirm-delete.component';

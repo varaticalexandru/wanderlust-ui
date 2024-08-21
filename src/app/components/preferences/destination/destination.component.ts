@@ -3,7 +3,25 @@ import { Router, RouterOutlet } from '@angular/router';
 import { PopularDestination } from 'src/app/models/popular-destination.model';
 import { Destination } from 'src/app/models/user-destination.model';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
+<<<<<<< HEAD
+<<<<<<< HEAD
+import {
+  Observable,
+  Subject,
+  catchError,
+  forkJoin,
+  map,
+  mergeMap,
+  of,
+  switchMap,
+  tap,
+} from 'rxjs';
+=======
 import { Observable, Subject, forkJoin, map, mergeMap, of, switchMap, tap } from 'rxjs';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+import { Observable, Subject, forkJoin, map, mergeMap, of, switchMap, tap } from 'rxjs';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 import { liveSearch } from 'src/app/utils/operators/live-search';
 import { CountryMappingService } from 'src/app/services/country-mapping/country-mapping.service';
 import { PopularDestinationsService } from 'src/app/services/popular-destinations/popular-destinations.service';
@@ -15,7 +33,15 @@ import { Medias } from 'src/app/models/pixabay/medias.model';
 import { MediaService } from 'src/app/services/media/media.service';
 import { toSentenceTitleCase, toTitleCase } from 'src/app/utils/to-title-case';
 import { randomInt } from 'src/app/utils/random-int';
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { getRandomElements } from 'src/app/utils/random-arr-elements';
+=======
 import { getRandomElements } from 'src/app/utils/random-arr-elements'
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+import { getRandomElements } from 'src/app/utils/random-arr-elements'
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 import { AmadeusDestinations } from 'src/app/models/amadeus/amadeus-destinations.model';
 import { MatButton } from '@angular/material/button';
 import { MatProgressBar } from '@angular/material/progress-bar';
@@ -25,9 +51,32 @@ import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
+<<<<<<< HEAD
+<<<<<<< HEAD
+import {
+  MatFormField,
+  MatLabel,
+  MatPrefix,
+} from '@angular/material/form-field';
+import {
+  MatCard,
+  MatCardTitle,
+  MatCardContent,
+  MatCardFooter,
+} from '@angular/material/card';
+import { PreferencesService } from 'src/app/services/preferences/preferences.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FooterComponent } from '../../footer/footer.component';
+=======
 import { MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field';
 import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
 import { PreferencesService } from 'src/app/services/preferences/preferences.service';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+import { MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field';
+import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
+import { PreferencesService } from 'src/app/services/preferences/preferences.service';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
 @Component({
   selector: 'app-destination',
@@ -52,17 +101,58 @@ import { PreferencesService } from 'src/app/services/preferences/preferences.ser
     MatProgressBar,
     MatButton,
     RouterOutlet,
+<<<<<<< HEAD
+<<<<<<< HEAD
+    AsyncPipe,
+    FooterComponent,
+  ],
+})
+export class DestinationComponent implements OnInit {
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     AsyncPipe
   ]
 })
 export class DestinationComponent implements OnInit {
 
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   private searchTerm = new Subject<string>();
   searchTermString: string = '';
   destinations: Array<Destination> = [];
   popularDestinations$!: Observable<PopularDestination[]>;
   selectedDestination!: Destination;
   popularDestinationsNumber: number = 3;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  isLoading: boolean = true;
+
+  readonly destinations$ = this.searchTerm.pipe(
+    liveSearch((term: string) =>
+      this.destinationService.searchDestinations(term)
+    ),
+    switchMap(
+      (destinations: AmadeusDestinations): Observable<Destination[]> =>
+        this.mapDestinations(destinations)
+    ),
+    catchError((error: any) => {
+      console.error('Error fetching destinations: ', error);
+      this.snackBar.open('Error fetching destinations ❌', 'Retry', {
+        duration: 5000,
+        politeness: 'assertive',
+      }).onAction().subscribe(() => {
+        this.search(this.searchTermString);
+      });
+      return of([]);
+    })
+  );
+
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   isLoading: boolean;
 
   readonly destinations$ = this.searchTerm.pipe(
@@ -82,6 +172,10 @@ export class DestinationComponent implements OnInit {
   );
 
 
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   constructor(
     private router: Router,
     private amadeusAuthService: AmadeusAuthService,
@@ -90,6 +184,109 @@ export class DestinationComponent implements OnInit {
     private popularDestinationsService: PopularDestinationsService,
     private airportCityMappingService: AirportCityMappingService,
     private mediaService: MediaService,
+<<<<<<< HEAD
+<<<<<<< HEAD
+    private preferencesService: PreferencesService,
+    private snackBar: MatSnackBar,
+  ) {}
+
+  ngOnInit(): void {
+    this.popularDestinations$ = this.getPopularDestinations();
+  }
+
+  private fetchPopularDestinations(): void {
+    this.isLoading = true;
+    this.popularDestinations$ = this.getPopularDestinations().pipe(
+      tap(() => (this.isLoading = false))
+    );
+  }
+
+  private getPopularDestinations(): Observable<PopularDestination[]> {
+    return this.popularDestinationsService.popularDestinations$.pipe(
+      switchMap((popularDestinations: PopularDestinations) =>
+        this.fetchAirportDetails(popularDestinations)
+      ),
+      switchMap((destinations: Airports[]) =>
+        this.fetchDestinationImages(destinations)
+      ),
+      catchError((error: any) => {
+        console.error('Error fetching popular destinations: ', error);
+        this.snackBar.open('Error fetching popular destinations ❌', 'Retry', {
+          duration: 5000,
+          politeness: 'assertive',
+        }).onAction().subscribe(() => {
+          this.fetchPopularDestinations();
+        });
+        return of([]);
+      }),
+      tap(() => (this.isLoading = false))
+    );
+  }
+
+  private fetchAirportDetails(
+    popularDestinations: PopularDestinations
+  ): Observable<Airports[]> {
+    const randomPopularDestinations = getRandomElements(
+      popularDestinations.data,
+      this.popularDestinationsNumber
+    );
+    const destinationNames$ = randomPopularDestinations.map(
+      (destination: any) =>
+        this.airportCityMappingService.getAirportDetailsByCode(
+          destination.destination
+        )
+    );
+    return forkJoin(destinationNames$);
+  }
+
+  private fetchDestinationImages(
+    destinations: Airports[]
+  ): Observable<PopularDestination[]> {
+    const destinationsImages$ = destinations.map((destination: Airports) =>
+      this.mediaService
+        .fetchMediaByQuery(destination.data[0].address.cityName)
+        .pipe(
+          map((medias: Medias) =>
+            this.createPopularDestination(destination, medias)
+          )
+        )
+    );
+    return forkJoin(destinationsImages$);
+  }
+
+  private createPopularDestination(
+    destination: Airports,
+    medias: Medias
+  ): PopularDestination {
+    const randomIndex = randomInt(medias.hits.length);
+    return {
+      cityName: toSentenceTitleCase(destination.data[0].address.cityName),
+      countryName: toSentenceTitleCase(destination.data[0].address.countryName),
+      image: medias.hits[randomIndex].webformatURL,
+    };
+  }
+
+  private mapDestinations(
+    destinations: AmadeusDestinations
+  ): Observable<Destination[]> {
+    return destinations.data
+      ? of(
+          destinations.data.map((destination) => ({
+            cityName: destination.name,
+            countryName: this.getCountryName(destination.address.countryCode),
+          }))
+        )
+      : of([]);
+  }
+
+  search(searchTerm: string) {
+    const normalizedTerm = searchTerm.trim().toLowerCase();
+    if (normalizedTerm !== '' && normalizedTerm.length >= 3) {
+      this.searchTerm.next(normalizedTerm);
+    }
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     private preferencesService: PreferencesService
   ) {
 
@@ -136,6 +333,10 @@ export class DestinationComponent implements OnInit {
     let normalizedTerm = searchTerm.trim().toLowerCase();
 
     normalizedTerm !== '' && normalizedTerm.length >= 3 ? this.searchTerm.next(normalizedTerm) : null;
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   }
 
   getCountryName(code: string): string {
@@ -145,11 +346,39 @@ export class DestinationComponent implements OnInit {
   handleDestinationSelect(destination: any) {
     this.selectedDestination = {
       cityName: destination.cityName,
+<<<<<<< HEAD
+<<<<<<< HEAD
+      countryName: destination.countryName,
+=======
       countryName: destination.countryName
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+      countryName: destination.countryName
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     };
   }
 
   isEqual(dest1: any, dest2: any): boolean {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    return (
+      dest1.countryName === dest2.countryName &&
+      dest1.cityName === dest2.cityName
+    );
+  }
+
+  back() {
+    // Implement back navigation logic if needed
+  }
+
+  next() {
+    this.preferencesService.setPreference(
+      'destination',
+      this.selectedDestination
+    );
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     return dest1.countryName == dest2.countryName &&
       dest1.cityName == dest2.cityName;
   }
@@ -160,6 +389,10 @@ export class DestinationComponent implements OnInit {
 
   next() {
     this.preferencesService.setPreference('destination', this.selectedDestination);
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     this.router.navigate(['/preferences/period']);
   }
 }

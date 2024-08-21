@@ -1,0 +1,139 @@
+.open-sans-400 {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.header-card {
+  margin-top: 40px;
+  margin-bottom: 5px;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  background-color: #efefff;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+}
+
+mat-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s ease-in-out;
+  margin: 40px;
+  padding: 10px;
+}
+
+mat-card:hover {
+  box-shadow: 0px 8px 20px rgba(5, 2, 179, 0.3);
+}
+
+.itinerary-container {
+  display: flex;
+  // flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  // gap: 10 px;
+}
+
+.left-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  // gap: 50px;
+  flex: 1;
+  padding: 50px;
+  padding-top: 10px;
+}
+
+.right-container {
+  justify-content: center;
+  flex: 1;
+  padding: 50px;
+}
+
+// .right-container img {
+//     margin-left: 100px;
+// }
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  // gap: 50px;
+}
+
+.gmap {
+  .map-container {
+    height: 600px;
+  }
+}
+
+@media (max-width: 1304px) {
+  .itinerary-container {
+    flex-direction: column-reverse;
+  }
+}
+
+mat-card.header-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-title.itinerary-title {
+  // display: flex;
+  // flex-wrap: wrap;
+  text-align: center;
+  font-weight: bold !important;
+  margin: 0px 0px 20px 0px !important;
+  font-size: 2em !important;
+}
+
+.save-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+
+.save-btn {
+  // display: block;
+  width: 80%;
+  // max-width: 300px;
+  // min-width: 600px;
+  font-size: 1.5em;
+  font-weight: 500;
+  padding: 30px;
+}
+
+@media (min-width: 1304px) {
+  .gmap-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 160px;
+    height: 400px;
+    z-index: 100;
+  }
+}
+
+gmap-container .map-container {
+  border-radius: 20px !important;
+}
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b

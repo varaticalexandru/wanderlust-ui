@@ -1,0 +1,21 @@
+<section class="header open-sans-400">
+  <video [autoplay]="true" [muted]="'muted'" loop class="blur opacity" id="background-video">
+    <source src="../../../assets/media/background.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="text-box">
+    <h1 class="open-sans-400 title">
+      <strong>Wanderlust</strong> : travel itinerary planner and manager.
+    </h1>
+    <p class="description">
+      Traveling can be an incredibly enriching and enjoyable experience,
+      offering the opportunity to explore new cultures,
+      <br />
+      taste exotic cuisines, meet interesting people, and create unforgettable
+      memories that last a lifetime.
+    </p>
+    <br>
+    <a (click)="handleGetStartedClick()" class="hero-btn">Get started</a>
+  </div>
+</section>

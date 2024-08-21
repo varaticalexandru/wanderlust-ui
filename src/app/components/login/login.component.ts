@@ -1,4 +1,62 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
+<<<<<<< HEAD
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { CommonModule, NgIf } from '@angular/common';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import {
+  MatFormField,
+  MatLabel,
+  MatSuffix,
+  MatError,
+} from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { UserLogin } from 'src/app/models/user/user.model';
+import { AuthService } from 'src/app/services/auth/auth-service/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FooterComponent } from '../footer/footer.component';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatIcon,
+    MatSuffix,
+    NgIf,
+    MatError,
+    MatButtonModule,
+    MatProgressBar,
+    MatIconModule,
+    FooterComponent,
+  ],
+})
+export class LoginComponent implements OnInit {
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -43,6 +101,10 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class LoginComponent implements OnInit {
 
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   hide: boolean = true;
   loginForm!: FormGroup;
   user!: UserLogin;
@@ -52,10 +114,28 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+<<<<<<< HEAD
+<<<<<<< HEAD
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
+    this.authService.isLoggedIn.subscribe((loggedIn) => {
+      if (loggedIn) {
+        this.router.navigate(['itineraries']);
+      }
+    });
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     private loginService: LoginService,
     private dialog: MatDialog,
   ) {
 
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   }
 
   ngOnInit(): void {
@@ -64,8 +144,28 @@ export class LoginComponent implements OnInit {
 
   initLoginForm() {
     this.loginForm = new FormGroup({
+<<<<<<< HEAD
+<<<<<<< HEAD
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.email,
+        Validators.minLength(3),
+        Validators.maxLength(320),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(128),
+      ]),
+=======
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     });
   }
 
@@ -74,6 +174,44 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       this.user = this.loginForm.value;
+<<<<<<< HEAD
+<<<<<<< HEAD
+      this.authService.login(this.user);
+    }
+
+    this.authService.isLoggedIn.subscribe((loggedIn) => {
+      this.isLoading = false;
+
+      if (loggedIn) {
+        this.snackBar.open('Logged in successful ✅', 'Close', {
+          duration: 5000,
+          politeness: 'assertive',
+        });
+      }
+    });
+  }
+
+  handleRegisterClick() {
+    this.router.navigate(['register']);
+  }
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
+  }
+}
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
       this.loginService.login(this.user).subscribe(
         (data: boolean) => {
 
@@ -98,4 +236,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
+<<<<<<< HEAD
 }
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+}
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b

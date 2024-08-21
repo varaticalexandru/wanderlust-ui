@@ -7,17 +7,23 @@ import { Companion } from 'src/app/models/companion.model';
 import { companions } from 'src/app/data/companion.data';
 import { CompanionCardComponent } from './companion-card/companion-card.component';
 import { PreferencesService } from 'src/app/services/preferences/preferences.service';
-import { Preferences } from 'src/app/models/preferences.model';
 import { SurveyQuestionComponent } from './survey-question/survey-question.component';
 import {
   QuestionAnswer,
   SurveyQuestion,
 } from 'src/app/models/survey-question.model';
 import { questionnaire } from 'src/app/data/companion-questionnaire.data';
-import { priceLevels } from 'src/app/data/budget.data';
+import { budgets } from 'src/app/data/budget.data';
 import { BudgetCardComponent } from './budget-card/budget-card.component';
 import { KeyValuePipe } from '@angular/common';
-import { PriceLevel } from 'src/app/models/price-level.model';
+import { Budget } from 'src/app/models/budget.model';
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { FooterComponent } from '../../footer/footer.component';
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
 @Component({
   selector: 'app-companion',
@@ -33,6 +39,13 @@ import { PriceLevel } from 'src/app/models/price-level.model';
     SurveyQuestionComponent,
     BudgetCardComponent,
     KeyValuePipe,
+<<<<<<< HEAD
+<<<<<<< HEAD
+    FooterComponent,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   ],
   templateUrl: './companion.component.html',
   styleUrl: './companion.component.scss',
@@ -40,10 +53,10 @@ import { PriceLevel } from 'src/app/models/price-level.model';
 export class CompanionComponent implements OnInit {
   companions!: Array<Companion>;
   selectedCompanion!: Companion;
-  selectedPriceLevel!: PriceLevel;
+  selectedBudget!: Budget;
   questionAnswerMap = new Map<string, boolean>();
   questionnaire!: Array<SurveyQuestion>;
-  priceLevels: Array<PriceLevel>;
+  budgets: Array<Budget>;
 
   constructor(
     private router: Router,
@@ -51,7 +64,7 @@ export class CompanionComponent implements OnInit {
   ) {
     this.companions = companions;
     this.questionnaire = questionnaire;
-    this.priceLevels = priceLevels;
+    this.budgets = budgets;
   }
 
   ngOnInit(): void {}
@@ -67,8 +80,8 @@ export class CompanionComponent implements OnInit {
     );
   }
 
-  handlePriceClick(priceLevel: PriceLevel) {
-    this.selectedPriceLevel = priceLevel; 
+  handleBudgetClick(budget: Budget) {
+    this.selectedBudget = budget; 
   }
 
   next() {
@@ -85,8 +98,8 @@ export class CompanionComponent implements OnInit {
       this.questionAnswerMap.get('children') as boolean
     );
     this.preferencesService.setPreference(
-      'priceLevel',
-      this.selectedPriceLevel.name
+      'budget',
+      this.selectedBudget.name
     );
 
     console.log(this.preferencesService.getPreferences());

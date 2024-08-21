@@ -58,7 +58,17 @@ body {
   height: 100%;
   margin: 0;
   font-family: "Open Sans";
+<<<<<<< HEAD
+<<<<<<< HEAD
+  // overflow: hidden;
+=======
   height: 100%;
+  overflow: hidden;
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+  height: 100%;
+  overflow: hidden;
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }
 
 .map-container {
@@ -69,4 +79,26 @@ body {
 
 .map-container:hover {
   box-shadow: 0px 8px 20px rgba(5, 2, 179, 0.3) !important;
+}
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+.mdc-switch .mdc-switch__handle-track {
+  width: calc(100% - 52px) !important;
+=======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+app-root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.router-outlet + * {
+  flex: 1 1 auto;
+  overflow: auto;
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }

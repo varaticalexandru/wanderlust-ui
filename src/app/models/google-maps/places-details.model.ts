@@ -16,5 +16,10 @@ export interface Place {
     },
     displayName: {
         text: string
-    }
+    },
+    photos: Array<Photo>
 };
+
+export interface Photo {
+    name: string;
+}
