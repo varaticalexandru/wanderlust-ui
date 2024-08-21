@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
+=======
+import { Component, OnInit } from '@angular/core';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 import { Component, OnInit } from '@angular/core';
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
@@ -10,13 +14,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { SaveItineraryDialogComponent } from '../../itinerary/save-itinerary-dialog/save-itinerary-dialog.component';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
 @Component({
   selector: 'app-test',
   standalone: true,
+<<<<<<< HEAD
 <<<<<<< HEAD
   imports: [
     DailyComponent,
@@ -27,10 +35,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 =======
   imports: [DailyComponent, SummaryComponent, MatButtonModule],
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+  imports: [DailyComponent, SummaryComponent, MatButtonModule],
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   templateUrl: './test.component.html',
   styleUrl: './test.component.scss',
 })
 export class TestComponent implements OnInit {
+<<<<<<< HEAD
 <<<<<<< HEAD
   itinerary!: Itinerary;
 
@@ -47,6 +59,8 @@ export class TestComponent implements OnInit {
 
   
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
   itinerary!: Itinerary;
 
@@ -286,5 +300,8 @@ Quae excepturi quia veritatis nostrum voluptas dolorum ullam, placeat tempore.`;
       },
     });
   }
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }

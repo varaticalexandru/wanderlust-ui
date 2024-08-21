@@ -29,7 +29,11 @@ import { DailyComponent } from '../../itinerary/daily/daily.component';
 import { SummaryComponent } from '../../itinerary/summary/summary.component';
 import { Itinerary, Recommendation } from 'src/app/models/itinerary.model';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Observable, ReplaySubject, pipe, shareReplay, tap } from 'rxjs';
+=======
+import { Observable, ReplaySubject, shareReplay, tap } from 'rxjs';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 import { Observable, ReplaySubject, shareReplay, tap } from 'rxjs';
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
@@ -39,12 +43,15 @@ import { daysNumberInRange } from 'src/app/utils/distance-in-days';
 import { convertToLatLngLiteral } from 'src/app/utils/maps-utils';
 import { getBounds } from 'src/app/utils/maps-utils';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { FooterComponent } from '../../footer/footer.component';
 import {
   MatProgressSpinnerModule,
   ProgressSpinnerMode,
 } from '@angular/material/progress-spinner';
 import { ThemePalette } from '@angular/material/core';
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
@@ -67,8 +74,11 @@ import { ThemePalette } from '@angular/material/core';
     RouterOutlet,
     GoogleMapsModule,
 <<<<<<< HEAD
+<<<<<<< HEAD
     FooterComponent,
     MatProgressSpinnerModule,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   ],
@@ -79,7 +89,10 @@ export class ItineraryViewComponent
   implements OnInit, OnDestroy, AfterViewInit
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   isLoading: boolean = true;
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   itineraryId!: string;
@@ -91,6 +104,7 @@ export class ItineraryViewComponent
   dayColorSvgStringMap!: DayColorSvgCompositeMap;
   parser = new DOMParser();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
@@ -106,6 +120,8 @@ export class ItineraryViewComponent
       tap(() => (this.isLoading = false))
     );
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   private itinerarySubject = new ReplaySubject<Itinerary>(1);
   itinerary$ = this.itinerarySubject.asObservable().pipe(
     tap((itinerary) => {
@@ -136,6 +152,9 @@ export class ItineraryViewComponent
       }
     })
   );
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
   center!: google.maps.LatLngLiteral;
@@ -162,13 +181,19 @@ export class ItineraryViewComponent
     this.activatedRoute.params.subscribe((params) => {
       this.itineraryId = params['id'];
 <<<<<<< HEAD
+<<<<<<< HEAD
       this.loadItinerary();
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
       this.itineraryService
         .getItineraryById(this.itineraryId)
         .subscribe((itinerary) => {
           this.itinerarySubject.next(itinerary);
         });
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     });
   }
@@ -179,14 +204,18 @@ export class ItineraryViewComponent
     this.center = { lat: 0, lng: 0 };
     this.markers = [];
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     this.value = 25;
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   }
 
   ngAfterViewInit(): void {}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   private loadItinerary(): void {
     this.itineraryService
@@ -230,6 +259,8 @@ export class ItineraryViewComponent
     }
   }
 
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   getColor(day: number): string {
@@ -278,7 +309,11 @@ export class ItineraryViewComponent
   backToItineraryList() {
     this.router.navigate(['/itineraries']);
 <<<<<<< HEAD
+<<<<<<< HEAD
   }
+=======
+    }
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
     }
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b

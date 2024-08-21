@@ -4,6 +4,7 @@ import { PopularDestination } from 'src/app/models/popular-destination.model';
 import { Destination } from 'src/app/models/user-destination.model';
 import { SearchDestinationService } from 'src/app/services/search/search-destination.service';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {
   Observable,
   Subject,
@@ -15,6 +16,9 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
+=======
+import { Observable, Subject, forkJoin, map, mergeMap, of, switchMap, tap } from 'rxjs';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 import { Observable, Subject, forkJoin, map, mergeMap, of, switchMap, tap } from 'rxjs';
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
@@ -30,7 +34,11 @@ import { MediaService } from 'src/app/services/media/media.service';
 import { toSentenceTitleCase, toTitleCase } from 'src/app/utils/to-title-case';
 import { randomInt } from 'src/app/utils/random-int';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { getRandomElements } from 'src/app/utils/random-arr-elements';
+=======
+import { getRandomElements } from 'src/app/utils/random-arr-elements'
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 import { getRandomElements } from 'src/app/utils/random-arr-elements'
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
@@ -43,6 +51,7 @@ import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
+<<<<<<< HEAD
 <<<<<<< HEAD
 import {
   MatFormField,
@@ -58,6 +67,11 @@ import {
 import { PreferencesService } from 'src/app/services/preferences/preferences.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FooterComponent } from '../../footer/footer.component';
+=======
+import { MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field';
+import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
+import { PreferencesService } from 'src/app/services/preferences/preferences.service';
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 import { MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field';
 import { MatCard, MatCardTitle, MatCardContent, MatCardFooter } from '@angular/material/card';
@@ -88,17 +102,23 @@ import { PreferencesService } from 'src/app/services/preferences/preferences.ser
     MatButton,
     RouterOutlet,
 <<<<<<< HEAD
+<<<<<<< HEAD
     AsyncPipe,
     FooterComponent,
   ],
 })
 export class DestinationComponent implements OnInit {
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     AsyncPipe
   ]
 })
 export class DestinationComponent implements OnInit {
 
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   private searchTerm = new Subject<string>();
   searchTermString: string = '';
@@ -106,6 +126,7 @@ export class DestinationComponent implements OnInit {
   popularDestinations$!: Observable<PopularDestination[]>;
   selectedDestination!: Destination;
   popularDestinationsNumber: number = 3;
+<<<<<<< HEAD
 <<<<<<< HEAD
   isLoading: boolean = true;
 
@@ -130,6 +151,8 @@ export class DestinationComponent implements OnInit {
   );
 
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   isLoading: boolean;
 
   readonly destinations$ = this.searchTerm.pipe(
@@ -149,6 +172,9 @@ export class DestinationComponent implements OnInit {
   );
 
 
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   constructor(
     private router: Router,
@@ -158,6 +184,7 @@ export class DestinationComponent implements OnInit {
     private popularDestinationsService: PopularDestinationsService,
     private airportCityMappingService: AirportCityMappingService,
     private mediaService: MediaService,
+<<<<<<< HEAD
 <<<<<<< HEAD
     private preferencesService: PreferencesService,
     private snackBar: MatSnackBar,
@@ -258,6 +285,8 @@ export class DestinationComponent implements OnInit {
       this.searchTerm.next(normalizedTerm);
     }
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     private preferencesService: PreferencesService
   ) {
 
@@ -304,6 +333,9 @@ export class DestinationComponent implements OnInit {
     let normalizedTerm = searchTerm.trim().toLowerCase();
 
     normalizedTerm !== '' && normalizedTerm.length >= 3 ? this.searchTerm.next(normalizedTerm) : null;
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   }
 
@@ -315,7 +347,11 @@ export class DestinationComponent implements OnInit {
     this.selectedDestination = {
       cityName: destination.cityName,
 <<<<<<< HEAD
+<<<<<<< HEAD
       countryName: destination.countryName,
+=======
+      countryName: destination.countryName
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
       countryName: destination.countryName
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
@@ -323,6 +359,7 @@ export class DestinationComponent implements OnInit {
   }
 
   isEqual(dest1: any, dest2: any): boolean {
+<<<<<<< HEAD
 <<<<<<< HEAD
     return (
       dest1.countryName === dest2.countryName &&
@@ -340,6 +377,8 @@ export class DestinationComponent implements OnInit {
       this.selectedDestination
     );
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     return dest1.countryName == dest2.countryName &&
       dest1.cityName == dest2.cityName;
   }
@@ -350,6 +389,9 @@ export class DestinationComponent implements OnInit {
 
   next() {
     this.preferencesService.setPreference('destination', this.selectedDestination);
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     this.router.navigate(['/preferences/period']);
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -62,6 +63,27 @@ import { FooterComponent } from './components/footer/footer.component';
     ]
 })
 export class AppComponent implements OnInit {
+=======
+// import { AmadeusAuthService } from './services/amadeus-auth/amadeus-auth.service';
+// import { Subscription } from 'rxjs';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+@Component({
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: true,
+    imports: [
+      RouterModule,
+      RouterOutlet,
+      NavbarComponent,
+      FooterComponent,
+    ]
+})
+export class AppComponent implements OnInit {
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
   constructor(
     // private amadeusAuthService: AmadeusAuthService
@@ -74,5 +96,8 @@ export class AppComponent implements OnInit {
   ngOnDestroy() {
     
   }
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }

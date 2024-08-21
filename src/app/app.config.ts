@@ -25,9 +25,14 @@ export const appConfig: ApplicationConfig = {
       FormsModule,
       ReactiveFormsModule,
 <<<<<<< HEAD
+<<<<<<< HEAD
       BrowserAnimationsModule,
     ),
     
+=======
+      BrowserAnimationsModule
+    ),
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
       BrowserAnimationsModule
     ),

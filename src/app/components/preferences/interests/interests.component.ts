@@ -12,7 +12,10 @@ import { CategoryInterests } from 'src/app/models/interests.model';
 import { MatDividerModule } from '@angular/material/divider';
 import { InterestSelection } from 'src/app/models/itinerary.model';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { FooterComponent } from '../../footer/footer.component';
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
@@ -28,7 +31,10 @@ import { FooterComponent } from '../../footer/footer.component';
     ChipsInputComponent,
     MatDividerModule,
 <<<<<<< HEAD
+<<<<<<< HEAD
     FooterComponent,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   ],

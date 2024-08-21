@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {
   FormControl,
   FormGroup,
@@ -54,6 +55,8 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class LoginComponent implements OnInit {
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -98,6 +101,9 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class LoginComponent implements OnInit {
 
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   hide: boolean = true;
   loginForm!: FormGroup;
@@ -109,6 +115,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
 <<<<<<< HEAD
+<<<<<<< HEAD
     private authService: AuthService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
@@ -119,10 +126,15 @@ export class LoginComponent implements OnInit {
       }
     });
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     private loginService: LoginService,
     private dialog: MatDialog,
   ) {
 
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   }
 
@@ -132,6 +144,7 @@ export class LoginComponent implements OnInit {
 
   initLoginForm() {
     this.loginForm = new FormGroup({
+<<<<<<< HEAD
 <<<<<<< HEAD
       email: new FormControl('', [
         Validators.required,
@@ -149,6 +162,10 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     });
   }
 
@@ -157,6 +174,7 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       this.user = this.loginForm.value;
+<<<<<<< HEAD
 <<<<<<< HEAD
       this.authService.login(this.user);
     }
@@ -192,6 +210,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
       this.loginService.login(this.user).subscribe(
         (data: boolean) => {
 
@@ -216,5 +236,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
+<<<<<<< HEAD
+}
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 }
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b

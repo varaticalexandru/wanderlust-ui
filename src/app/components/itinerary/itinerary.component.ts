@@ -32,7 +32,10 @@ import {
   Observable,
   ObservableInput,
 <<<<<<< HEAD
+<<<<<<< HEAD
   catchError,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   forkJoin,
@@ -41,7 +44,10 @@ import {
   of,
   switchMap,
 <<<<<<< HEAD
+<<<<<<< HEAD
   tap,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 } from 'rxjs';
@@ -63,6 +69,7 @@ import { SaveItineraryDialogComponent } from './save-itinerary-dialog/save-itine
 import { Router } from '@angular/router';
 import { convertToLatLngLiteral, getBounds } from 'src/app/utils/maps-utils';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   MatProgressSpinner,
@@ -70,6 +77,8 @@ import {
   ProgressSpinnerMode,
 } from '@angular/material/progress-spinner';
 import { ThemePalette } from '@angular/material/core';
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
@@ -90,7 +99,10 @@ import { ThemePalette } from '@angular/material/core';
     AsyncPipe,
     MatDialogModule,
 <<<<<<< HEAD
+<<<<<<< HEAD
     MatProgressSpinnerModule,
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   ],
@@ -106,6 +118,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   parser = new DOMParser();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
   value: number = 25;
@@ -120,16 +133,21 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   currentUsedId: string | null = null;
 =======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   api_key = environment.googleMaps.api_key;
   page_size: number = 1;
   preferences!: Preferences;
   _itinerary!: Itinerary;
   itinerary$!: Observable<Itinerary | null>;
 <<<<<<< HEAD
+<<<<<<< HEAD
   dayColorSvgStringMap!: DayColorSvgCompositeMap;
 
   center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   _placeDetails: Array<Recommendation> = [];
   dayColorSvgStringMap!: DayColorSvgCompositeMap;
 
@@ -137,23 +155,32 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
 
   center!: google.maps.LatLngLiteral;
 
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
   options: google.maps.MapOptions = {
     mapId: 'DEMO_MAP_ID',
     gestureHandling: 'greedy',
   };
 <<<<<<< HEAD
+<<<<<<< HEAD
   width: number | null = null;
   height: number | null = null;
   zoom: number = 13;
   markers: Array<google.maps.LatLngLiteral> = [];
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
   width: number | null = null;
   height: number | null = null;
   zoom: number = 13;
 
   markers!: Array<google.maps.LatLngLiteral>;
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
   constructor(
@@ -167,6 +194,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+<<<<<<< HEAD
 <<<<<<< HEAD
     this.isLoading = true;
     this.currentUsedId = localStorage.getItem('userId');
@@ -187,10 +215,15 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private initializeDayColorSvgStringMap(): void {
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     this.preferences = this.loadPreferences();
 
     this.center = { lat: 0, lng: 0 };
     this.markers = [];
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     this.dayColorSvgStringMap =
       this.svgService.getRandomDayColorSvgStringCompositeMap(
@@ -199,6 +232,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
           new Date(this.preferences.period.endDate)
         )
       );
+<<<<<<< HEAD
 <<<<<<< HEAD
   }
 
@@ -240,6 +274,8 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private loadDestinationPlaceId(
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
     console.log(this.dayColorSvgStringMap);
 
@@ -267,6 +303,9 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   loadDestinationPlaceId(
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     cityName: string,
     countryName: string
@@ -275,6 +314,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
       textQuery: `${cityName}, ${countryName}`,
       pageSize: this.page_size,
     };
+<<<<<<< HEAD
 <<<<<<< HEAD
     return this.textSearchService.fetchPlaceDetailsByQuery(placeDetailsReq);
   }
@@ -382,6 +422,8 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
     recommendation: Recommendation
   ): void {
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 
     return this.textSearchService.fetchPlaceDetailsByQuery(placeDetailsReq);
   }
@@ -454,6 +496,9 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   openInfoWindow(marker: MapAdvancedMarker, recommendation: Recommendation) {
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     const containerDiv = document.createElement('div');
     containerDiv.setAttribute('class', 'container');
@@ -470,6 +515,10 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
 
     placeOverview.appendChild(directionsButton);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
 
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
@@ -483,6 +532,11 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
 
   focusOnMarker(recommendation: Recommendation): void {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    console.log('FOCUSED');
+
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
     console.log('FOCUSED');
 
@@ -501,15 +555,21 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getColor(day: number): string {
 <<<<<<< HEAD
+<<<<<<< HEAD
     return this.dayColorSvgStringMap.dayColorMap[day];
   }
 
   saveItinerary(): void {
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     return this.dayColorSvgStringMap.dayColorMap[day] as string;
   }
 
   saveItinerary() {
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
     const dialogRef = this.dialog.open(SaveItineraryDialogComponent, {
       maxWidth: '1200px',
@@ -517,7 +577,13 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
       width: '800px',
       height: '250px',
 <<<<<<< HEAD
+<<<<<<< HEAD
       data: { itinerary: this._itinerary },
+=======
+      data: {
+        itinerary: this._itinerary,
+      },
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 =======
       data: {
         itinerary: this._itinerary,
@@ -528,6 +594,7 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result.trim() !== '') {
         this._itinerary.name = result;
+<<<<<<< HEAD
 <<<<<<< HEAD
         this.saveItineraryToService();
       }
@@ -546,6 +613,8 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 =======
+=======
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
         this.itineraryService
           .createItinerary(this._itinerary)
           .subscribe((itinerary: Itinerary) => {
@@ -560,5 +629,8 @@ export class ItineraryComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
   }
+<<<<<<< HEAD
+>>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
+=======
 >>>>>>> f3b8e49dd56df145f298594f58854a11e8b0e04b
 }
