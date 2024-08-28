@@ -1,3 +1,6 @@
+# Frontend Architecture (Angular)
+![frontend_architecture_bold](https://github.com/user-attachments/assets/581e601a-7ea4-4146-ba9c-85cbc1a3dcbd)
+
 # WanderlustFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
